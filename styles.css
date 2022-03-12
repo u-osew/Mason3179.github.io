@@ -1,12 +1,18 @@
 h1{
+    
     color:lawngreen;
     
 }
 
+li {
+    float:left;
+    display:block;
+    padding: 10px;
+}
 ul{
     font-family:monospace;
     color:red;
-    background: pink;
+    background-color: pink;
     font-size:20px;
     list-style: none;
 }
@@ -34,10 +40,26 @@ body{
     animation: gradient 29s ease infinite;
 }
 
+.hero-image {
+  background-color: #000;
+  height: 500px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+
 @keyframes gradient {
     0%{background-position:74% 0%}
     50%{background-position:27% 100%}
     100%{background-position:74% 0%}
+    
+@font-face {
+    font-family: 'Open Sans', sans-serif;
+    src:url(MKDS.ttf);
+    }
+    
 }
 
 .background {
