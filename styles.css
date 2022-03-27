@@ -1,3 +1,52 @@
+@font-face {
+    src: url(./font/Daydream.ttf);
+    font-family: daydream;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+
+.flexbox-container {
+    min-height: 600px;
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+}
+
+.flexbox-item {
+    
+    width:200px;
+    margin: 10px;
+    border: 3px solid #333;
+    background-color: #fff000;
+    
+}
+
+.flexbox-item-1 {
+    min-height:;
+}
+/*wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww*/
+
+
+.paragraph {
+    font-size: 25px;
+    line-height: 62px;
+    font-family: daydream;
+}
+
+
+
+
+
+
+
+/*wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww*/
+
 h1{
     
     color:lawngreen;
@@ -5,15 +54,17 @@ h1{
 }
 
 li {
-    float:left;
-    display:block;
+    float:none;
+    display:inline-block;
     padding: 10px;
+    text-align: center;
 }
 ul{
     font-family:monospace;
+    vertical-align:middle;
     color:red;
     background-color: pink;
-    font-size:20px;
+    font-size:30px;
     list-style: none;
 }
 
@@ -42,7 +93,6 @@ body{
 
 .hero-image {
   background-color: #000;
-  height: 500px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -55,13 +105,56 @@ body{
     50%{background-position:27% 100%}
     100%{background-position:74% 0%}
     
-@font-face {
-    font-family: 'Open Sans', sans-serif;
-    src:url(MKDS.ttf);
-    }
-    
 }
 
 .background {
      background:"./media/didgeri.gif";
 }
+
+.button {
+  display: flex;
+  height: 50px;
+  padding: 0;
+  background: #009578;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  overflow: hidden;
+  font-family: "daydream";
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: #008168;
+}
+
+.button:active {
+  background: #006e58;
+}
+
+.button__text,
+.button__icon {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 24px;
+  color: #fff;
+  height: 100%;
+}
+
+.button__icon {
+  font-size: 1.5em;
+  background: rgba(0, 0, 0, 0.08);
+}
+
+
+
+
+
+
+
+
+
+
+

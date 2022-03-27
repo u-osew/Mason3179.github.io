@@ -2,30 +2,61 @@
 
 <html lang="en">
 <head>
-    <title>a+!s s,uosew</title>
+    <title>uosew</title>
+     <link rel="shortcut icon" href="./media/squid.ico">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href = "https://cdnjs.cloudfare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
 </head>
     
-    <body background="./media/didgeri.gif" height=900px>
-        <h1 id="yellowhighlight">hello</h1>
+    <body background="./media/melancholypurple.png" height=900px>
+        
+        
+        <button id="close-image"><a href = "nightmode.html">🌙</a></button>
         
         <ul>
-        <li class="gradient"><a href = "index.html">Home</a></li>
-        <li><a href = "about.html">About</a></li>
+        <li class = "gradient"><a href = "index.html">Home</a></li>
+        <li><a href = "./gallery/gallery.html">Gallery</a></li>
+        <li><a href = "about.html">About</a></li>    
         <li><a href = "shop.html">Shop</a></li>
         <li><a href = "stream.html">Stream</a></li>
         </ul>
-        <h1>Loading... Loading... Loading... </h1>
-        <h1>Loading...</h1>
-        <h1>Loading...</h1>
-        <h1>Loading...</h1>
-        <h1>(Aheheh.. it may be a while. Go explore the other pages!)</h1>
         
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/3acb8ESON60" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        <video src="./media/barf.mp4" controls width="400" loop>bleh!</video>
-        <p>hihi</p>
-        <img src ="./media/prettybluebubble.png" alt="bueatufilbubblessssss" height=400 width=1200>
+        <br>
+        <br>
+        <br>
+        
+            <button id="ASong" onClick="playPause()" class="button">
+
+        <audio src="./media/bubbles.mp3" autoplay loop>
+        </audio>
+
+        <span class="button__text">
+        </span>
+
+        <span class="button__icon">
+            hi
+        </span>
+
+    </button>
+
+    <script>
+      var aud = document.getElementById("ASong").children[0];
+      var isPlaying = false;
+      aud.pause();
+
+      function playPause() {
+        if (isPlaying) {
+          aud.pause();
+        } else {
+          aud.play();
+        }
+        isPlaying = !isPlaying;
+      }
+    </script>
+    
         
     </body>
     
-   https://youtu.be/3acb8ESON60
+    
+    
+    
