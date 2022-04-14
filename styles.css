@@ -3,11 +3,6 @@
     font-family: daydream;
 }
 
-a {
-    color: black;
-    text-decoration: none;
-}
-
 
 .flexbox-container {
     min-height: 600px;
@@ -58,6 +53,8 @@ li {
     display:inline-block;
     padding: 10px;
     text-align: center;
+    
+    
 }
 ul{
     font-family:monospace;
@@ -124,6 +121,7 @@ body{
   font-size: 16px;
   font-weight: 500;
   cursor: pointer;
+    position:absolute;
 }
 
 .button:hover {
@@ -149,11 +147,41 @@ body{
 }
 
 
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: auto;
+}
 
 
+body {margin:0;}
 
+.icon-bar {
+  width: 100%;
+  background-color: #555;
+  overflow: auto;
+}
 
+.icon-bar a {
+  text-decoration:none;
+  float: left;
+  width: 20%;
+  text-align: center;
+  padding: 12px 0;
+  transition: all 0.3s ease;
+  color: black;
+  font-size: 25px;
+      font-family: daydream;  
+}
 
+.icon-bar a:hover {
+  background-color: pink;
+}
+
+.active {
+  background-color: purple;
+}
 
 
 
