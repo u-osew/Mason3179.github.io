@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="styles.css">
+<button id="close-image"><a href = "nightmode.html">🌙</a></button>
+<img src="./media/title.gif" class="center">
+<div class="icon-bar">
+  <a  href="index.html" >home</a> 
+  <a href="about.html">about</a> 
+  <a href="shop.html">shop</a> 
+  <a class="active" onClick="playAudio('./media/nuhuh.mp3')" href="#">gallery</a>
+  <a  href="contact.html">contact</a> 
+</div>
+
+<img src="media/images/fulls/01.jpg" class="center">
+<img src="media/images/fulls/02.jpg" class="center">
+<img src="media/images/fulls/03.jpg" class="center">
+<img src="media/images/fulls/04.jpg" class="center">
+<img src="media/images/fulls/05.jpg" class="center">
+<img src="media/images/fulls/06.jpg" class="center">
+<img src="media/images/fulls/07.jpg" class="center">
+<img src="media/images/fulls/08.jpg" class="center">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+      var aud = document.getElementById("ASong").children[0];
+      var isPlaying = false;
+      aud.pause();
+
+      function playPause() {
+        if (isPlaying) {
+          aud.pause();
+        } else {
+          aud.play();
+        }
+        isPlaying = !isPlaying;
+      }
+        
+        function playAudio(url) {
+        new Audio(url).play();
+        }
+        
+        
+    </script>

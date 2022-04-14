@@ -5,31 +5,28 @@
     <title>masonuosew</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+    <button id="close-image"><a href = "nightmode.html">🌙</a></button>
     
     <body>
-        <h1>Sh☺p !</h1>
-        <ul>
-        <li><a href = "index.html">Home</a></li>
-        <li><a href = "about.html">About</a></li>
-        <li class="gradient"><a href = "shop.html">Shop</a></li>
-        <li><a href = "stream.html">Stream</a></li>
-        </ul>
+        <img src="./media/title.gif" class="center">
+        
+        <div class="icon-bar">
+  <a  href="index.html">home</a> 
+  <a href="about.html">about</a> 
+  <a class="active" href="#" onClick="playAudio('./media/nuhuh.mp3')">shop</a> 
+  <a href="gallery.html">gallery</a>
+  <a href="contact.html">contact</a> 
+</div>
+
+        
+        
+        
+        
         <body class=hero-image background="./media/schematics.png">
         
     </body>
         
     <body>
-        
-        
-        <ul>
-        <li><a href = "">Home</a></li>
-        <li><a href = "">About</a></li>
-        <li class="gradient"><a href = "">Shop</a></li>
-        <li><a href = "">Stream</a></li>
-        </ul>
-        
-        <br>
-        <br>
         
         
         
@@ -44,5 +41,33 @@
         </ul>
         
     <body class=hero-image background="./media/schematics.png">
+        
+        
+        
+        
+        
+        
+        
+    <script>
+      var aud = document.getElementById("ASong").children[0];
+      var isPlaying = false;
+      aud.pause();
+
+      function playPause() {
+        if (isPlaying) {
+          aud.pause();
+        } else {
+          aud.play();
+        }
+        isPlaying = !isPlaying;
+      }
+        
+        function playAudio(url) {
+        new Audio(url).play();
+        }
+        
+        
+    </script>
+        
     </body>
         

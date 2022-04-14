@@ -5,26 +5,63 @@
     <title>masonuosew</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+    <button id="close-image"><a href = "nightmode.html">🌙</a></button>
     
-    <body class=hero-image background="./media/thinkingfinally.png">
+    
+    <body background="./media/thinkingfinally.png">
     <body>
-        <h1>hello</h1>
+        <img src="./media/title.gif" class="center">
         
-        <ul>
-        <li><a href = "index.html">Home</a></li>
-        <li class="gradient"><a href = "about.html">About</a></li>
-        <li><a href = "shop.html">Shop</a></li>
-        <li><a href = "stream.html">Stream</a></li>
-        </ul>
+    <div class="icon-bar">
+      <a href="index.html">home</a> 
+      <a class="active"  href="#" onClick="playAudio('./media/nuhuh.mp3')">about</a> 
+      <a href="shop.html">shop</a> 
+      <a href="gallery.html">gallery</a>
+      <a href="contact.html">contact</a> 
+     </div>
         
         <br>
         <br>
         <h2>
-            Iaaaaaaaaaa
+            Everything on this site was made by me me MEEE!!!!
             <br>
-            I'd rather aaaaaaaaaaaaaaaaaaaaaaaaaaa
+            (Unless stated otherwise)
             <br>
-            aaaaaaaaaaaaaaAAAAAAAAAAAAAAAAAAAAA
+            Enjoy or something ☺
         </h2>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    <script>
+      var aud = document.getElementById("ASong").children[0];
+      var isPlaying = false;
+      aud.pause();
+
+      function playPause() {
+        if (isPlaying) {
+          aud.pause();
+        } else {
+          aud.play();
+        }
+        isPlaying = !isPlaying;
+      }
+        
+        function playAudio(url) {
+        new Audio(url).play();
+        }
+        
+        
+    </script>
         
     </body>

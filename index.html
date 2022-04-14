@@ -3,43 +3,74 @@
 <html lang="en">
 <head>
     <title>uosew</title>
-     <link rel="shortcut icon" href="./media/squid.ico">
+    <link rel="shortcut icon" href="./media/0124.ico">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href = "https://cdnjs.cloudfare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
 </head>
     
+            <button id="close-image"><a href = "nightmode.html">🌙</a></button>
     <body background="./media/melancholypurple.png" height=900px>
         
         
-        <button id="close-image"><a href = "nightmode.html">🌙</a></button>
+        <img src="./media/title.gif" class="center">
         
-        <ul>
-        <li class = "gradient"><a href = "index.html">Home</a></li>
-        <li><a href = "./gallery/gallery.html">Gallery</a></li>
-        <li><a href = "about.html">About</a></li>    
-        <li><a href = "shop.html">Shop</a></li>
-        <li><a href = "stream.html">Stream</a></li>
-        </ul>
+
         
-        <br>
-        <br>
-        <br>
+        
+        
+        
+        
+<body>
+
+<div class="icon-bar">
+  <a class="active" href="#" onClick="playAudio('./media/nuhuh.mp3')">home</a> 
+  <a href="about.html">about</a> 
+  <a href="shop.html">shop</a> 
+  <a href="gallery.html">gallery</a>
+  <a href="contact.html">contact</a> 
+</div>
+
+</body>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
             <button id="ASong" onClick="playPause()" class="button">
 
         <audio src="./media/bubbles.mp3" autoplay loop>
         </audio>
 
-        <span class="button__text">
-        </span>
 
         <span class="button__icon">
             hi
         </span>
 
     </button>
-
-           <img src="./media/sillyalien.gif">
+    <img src="./media/sillyalien.gif" class="center">
+    
         
     <script>
       var aud = document.getElementById("ASong").children[0];
@@ -54,8 +85,15 @@
         }
         isPlaying = !isPlaying;
       }
+        
+        function playAudio(url) {
+        new Audio(url).play();
+        }
+        
+        
     </script>
     
+
         
     </body>
     
