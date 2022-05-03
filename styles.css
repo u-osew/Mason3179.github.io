@@ -45,7 +45,6 @@
 h1{
     
     color:lawngreen;
-    font-size: 25px;
 }
 
 li {
@@ -67,6 +66,7 @@ ul{
 
 body{
     color:green;
+    font-size: 1px;
 }
 
 
