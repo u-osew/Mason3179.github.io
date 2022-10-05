@@ -8,7 +8,7 @@
     <link rel="stylesheet" href = "https://cdnjs.cloudfare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
 </head>
     
-            <button id="close-image"><a href = "nightmode.html">🌙</a></button>
+            <button id="close-image" onClick="playVideo('./media/godessss0001-0300.mp4')">🌙</button>
     <body background="./media/melancholypurple.png" height=900px>
         
         
@@ -75,11 +75,12 @@
         }
     
 //////////////////////
-        var video = document.getElementById('./media/bubbles.mp3');
-
+        var video = document.getElementById('./media/godessss0001-0300.mp4');
+        
         video.addEventListener('ended',function(){
         location.href = 'nightmode.html';
         });
+        video.play();
         
     </script>
     
