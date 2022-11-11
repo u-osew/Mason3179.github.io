@@ -200,7 +200,7 @@ body {margin:0;}
 }
 
 .d-icon-bar a:hover {
-  background-color: #ff00d4;
+  background-color: #fff200;
 }
 
 
@@ -213,7 +213,7 @@ body {margin:0;}
 
 
 .active {
-  background-color: purple;
+  background-color: #ff00d4;
 }
 
 background-image: linear-gradient(
