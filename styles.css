@@ -59,7 +59,7 @@ ul{
     font-family:monospace;
     vertical-align:middle;
     color:red;
-    background-color: pink;
+    background-color: radial-gradient(#e51bcf, #171ec5, #00e0ff, #b917c5);
     font-size:30px;
     list-style: none;
 }
