@@ -181,7 +181,8 @@ body {margin:0;}
 }
 
 .active {
-  background-color: #27167C; /*current page*/
+  background-color: #AA1596; /*current page*/
+    color: #C2BB48;
 }
 
 
