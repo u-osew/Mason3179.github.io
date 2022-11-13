@@ -176,7 +176,7 @@ body {margin:0;}
 }
 
 .icon-bar a:hover {
-  background-color: #C2BB48;
+  background-color: #C2BB48; /*Hover*/
 }
 
 
@@ -206,7 +206,7 @@ body {margin:0;}
 }
 
 .d-icon-bar a:hover {
-  background-color: #fff200;
+  background-color: #C2BB48;
 }
 
 
