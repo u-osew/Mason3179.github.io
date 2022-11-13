@@ -160,6 +160,7 @@ body {margin:0;}
 .icon-bar {
   width: 100%;
   background-color: #27167C; /*Inactive*/
+  color: #AA1596;
   overflow: auto;
 }
 
