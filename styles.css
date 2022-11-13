@@ -179,7 +179,9 @@ body {margin:0;}
   background-color: #C2BB48; /*Hover*/
 }
 
-
+.active {
+  background-color: #AA1596; /*current page*/
+}
 
 
 /////////////////////////////////////
@@ -209,16 +211,7 @@ body {margin:0;}
   background-color: #C2BB48;
 }
 
-
-
-
-
-
-
-
-
-
-.active {
+.d-active {
   background-color: #cd00b3;
 }
 
