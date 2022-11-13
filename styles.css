@@ -170,7 +170,7 @@ body {margin:0;}
   text-align: center;
   padding: 12px 0;
   transition: all 0.3s ease;
-  color: #C2BB48; /*Text Color*/
+  color: #27167C; /*Text Color*/
   font-size: 25px;
       font-family: daydream;  
 }
@@ -182,7 +182,7 @@ body {margin:0;}
 
 .active {
   background-color: #AA1596; /*current page*/
-  color: #27167C;
+  color: #C2BB48;
 }
 
 
