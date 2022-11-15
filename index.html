@@ -1,65 +1,50 @@
 <!DOCTYPE html>
 
 <html lang="en">
-<head>
-    <title>uosew</title>
-    <link rel="shortcut icon" href="./media/0124.ico">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href = "https://cdnjs.cloudfare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
-</head>
+
+<!--Header (title, icon, style)-->
+    <head>
+        <title>uosew</title>
+        <link rel="shortcut icon" href="./media/0124.ico">
+        <link rel="stylesheet" href="styles.css">
+    </head>
     
-            <button id="close-image"><a href = "nightmode.html">🌙</a></button>
-    
+<!--Night Mode Button-->    
+    <button id="close-image"><a href = "nightmode.html">🌙</a></button>
+
+<!--Background and Title-->
     <body background="./media/melancholypurple.png" height=900px>
+    <img src="./media/title.gif" class="center">
         
-        
-        <img src="./media/title.gif" class="center">
-        
-        
-        
-<body>
+<!--NavBar-->     
+    <body>
+        <div class="icon-bar">
+          <a class="active" href="#" onClick="playAudio('./media/nuhuh.mp3')">home</a> 
+          <a href="about.html">emotes</a> 
+          <a href="shop.html">shop</a> 
+          <a href="gallery.html">3D Art</a>
+          <a href="contact.html">2D Art</a> 
+        </div>
+    </body>
 
-
-    
-    
-<div class="icon-bar">
-  <a class="active" href="#" onClick="playAudio('./media/nuhuh.mp3')">home</a> 
-  <a href="about.html">emotes</a> 
-  <a href="shop.html">shop</a> 
-  <a href="gallery.html">3D Art</a>
-  <a href="contact.html">2D Art</a> 
-</div>
-
-</body>
-        
-        
-        
-        
-        
-            <button id="ASong" onClick="playPause()" class="button">
-
-        <audio src="./media/bubbles.mp3" autoplay loop>
-        </audio>
-
-
-        <span class="button__icon">
-        </span>
-
+<!--Bubbles-->
+    <button id="ASong" onClick="playPause()" class="button">
+        <audio src="./media/bubbles.mp3" autoplay loop></audio>
+     <span class="button__icon"></span>
     </button>
+    
+<!--GIFs-->    
     <img src="./media/sillyalien.gif" class="center">
     <img src="./media/gdss.gif" class="center">
         
-                <h2>
-            Hi! My name is ¿uosew
-            <br>
-            All the art here is made by ME!
-            <br>
-            Enjoy ☺
-            <br>
-        </h2>
+<!--Writing-->
+    <h2>
+        Hi! My name is ¿uosew<br>
+        All the art here is made by ME!<br>
+        Enjoy ☺<br>
+    </h2>
         
-    
-        
+<!--Button Audio Script-->
     <script>
       var aud = document.getElementById("ASong").children[0];
       var isPlaying = false;
@@ -79,8 +64,6 @@
         }
     </script>
     
-
-        
     </body>
     
     

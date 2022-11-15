@@ -34,19 +34,6 @@
     font-family: daydream;
 }
 
-
-
-
-
-
-
-/*wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww*/
-
-h1{
-    font-family: daydream;  
-    color:#27167C;
-}
-
 li {
     float:none;
     display:inline-block;
@@ -55,44 +42,15 @@ li {
     
     
 }
-ul{
-    font-family:monospace;
-    vertical-align:middle;
-    color:red;
-    background-color: radial-gradient(#e51bcf, #171ec5, #00e0ff, #b917c5);
-    font-size:30px;
-    list-style: none;
-}
-
-body{
-    color:green;
-}
 
 
-#yellowhighlight{
-    background: yellow;
-    color: black;
-}
 
- .bluepaint {
-    color:blue;
-    font-size: 1px;
-    }
 
- .gradient {
-    background: radial-gradient(#e51bcf, #171ec5, #00e0ff, #b917c5);
-    background-size: 800% 800%;
 
-    animation: gradient 29s ease infinite;
-}
+/*wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww*/
 
-.hero-image {
-  background-color: #000;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
-}
+
+
 
 
 @keyframes gradient {
@@ -102,15 +60,11 @@ body{
     
 }
 
-.background {
-     background:"./media/didgeri.gif";
-}
-
 .button {
   display: flex;
   height: 50px;
   padding: 0;
-  background: #009578;
+  background: #C2BB48;
   border: none;
   outline: none;
   border-radius: 5px;
@@ -123,11 +77,11 @@ body{
 }
 
 .button:hover {
-  background: #008168;
+  background: #C2BB48;
 }
 
 .button:active {
-  background: #006e58;
+  background: #C2BB48;
 }
 
 .button__text,
@@ -171,19 +125,19 @@ body {margin:0;}
   text-align: center;
   padding: 12px 0;
   transition: all 0.3s ease;
-  /* color: #AA1596; /*Text Color*/
+  color: #AA1596; /*Text Color*/
   font-size: 25px;
       font-family: daydream;  
 }
 
 .icon-bar a:hover {
-  background-color: #C2BB48; /*Hover*/
-  color: #AA1596;
+  background-color: #C2BB48 !important; /*Hover*/
+  color: #AA1596 !important;
 }
 
 .active {
-  background-color: #AA1596; /*current page*/
-  color: #C2BB48;
+  background-color: #AA1596 !important; /*current page*/
+  color: #C2BB48 !important;
 }
 
 
@@ -205,7 +159,7 @@ body {margin:0;}
   text-align: center;
   padding: 12px 0;
   transition: all 0.3s ease;
-  /* color: #AA1596; /*Text Color*/
+  color: #AA1596;
   font-size: 25px;
       font-family: daydream;  
 }
@@ -219,21 +173,5 @@ body {margin:0;}
   background-color: #AA1596; /*current page*/
   color: #C2BB48;
 }
-
-
-background-image: linear-gradient(
-  45deg,
-  hsl(240deg 100% 20%) 0%,
-  hsl(289deg 100% 21%) 11%,
-  hsl(315deg 100% 27%) 22%,
-  hsl(329deg 100% 36%) 33%,
-  hsl(337deg 100% 43%) 44%,
-  hsl(357deg 91% 59%) 56%,
-  hsl(17deg 100% 59%) 67%,
-  hsl(34deg 100% 53%) 78%,
-  hsl(45deg 100% 50%) 89%,
-  hsl(55deg 100% 50%) 100%
-);
-
 
 
