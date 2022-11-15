@@ -190,11 +190,11 @@ body {margin:0;}
 /////////////////////////////////////
 
 
-
-
+/*Dark Bar*/
 .d-icon-bar {
   width: 100%;
-  background-color: black;
+  background-color: #27167C; /*Inactive*/
+  color: #AA1596;
   overflow: auto;
 }
 
@@ -205,18 +205,21 @@ body {margin:0;}
   text-align: center;
   padding: 12px 0;
   transition: all 0.3s ease;
-  color: #090354;
+  /* color: #AA1596; /*Text Color*/
   font-size: 25px;
       font-family: daydream;  
 }
 
 .d-icon-bar a:hover {
-  background-color: #C2BB48;
+  background-color: #C2BB48; /*Hover*/
+  color: #AA1596;
 }
 
 .d-active {
-  background-color: #cd00b3;
+  background-color: #AA1596; /*current page*/
+  color: #C2BB48;
 }
+
 
 background-image: linear-gradient(
   45deg,
