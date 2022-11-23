@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <title>masonuosew</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" href="./media/night.ico">
+</head>
+    
+    <body background="./media/rafters.gif">  
+        
+ <button><a href = "index.html">🌞</a></button>
+        
+        <img src="./media/nighttitle.gif" class="center">
+    
+        
+ <!--NavBar-->        
+    <div class="d-icon-bar">
+      <a href="nightmode.html">home</a>
+      <a href="about.html">about</a> 
+      <a class="d-active" href="#" onClick="playAudio('./media/goddessnoise.mp3')">goddess</a>
+      <a href="gallery.html">iterations</a>
+      <a href="contact.html">exit</a> 
+    </div>
+        
+        
+
+        
+        
+    <img src="./media/gdss.gif" class="center">
+
+        <video src="./media/forest.mp4" muted width="400" loop autoplay class="center" height="600"></video>       
+        
+    <img src="./media/gdss.gif" class="center">
+        why do we worship?
+        what do we worship?
+        why do we worship?
+        why do we worship?<br><br><br><br><br><br><br>self<br>worship...<br>is<br>a<br>sin<br>
+        
+    </body>
+
+            <video src="./media/411090__inspectorj__wind-chime-gamelan-gong-a.wav" controls height="1" width="1" loop autoplay></video>
+    
+    
+    
+    
+    <script>
+      var aud = document.getElementById("ASong").children[0];
+      var isPlaying = false;
+      aud.pause();
+
+      function playPause() {
+        if (isPlaying) {
+          aud.pause();
+        } else {
+          aud.play();
+        }
+        isPlaying = !isPlaying;
+      }
+        
+        function playAudio(url) {
+        new Audio(url).play();
+        }
+        
+        
+    </script>
