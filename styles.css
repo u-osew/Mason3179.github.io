@@ -44,7 +44,7 @@ li {
 }
 
 h2 {
-    color:rebeccapurple
+    color:rebeccapurple;
 }
 
 
@@ -65,9 +65,9 @@ h2 {
 
 .button {
   display: flex;
-  height: 50px;
+  height: 0px;
   padding: 0;
-  background: #C2BB48;
+  background: transparent;
   border: none;
   outline: none;
   border-radius: 5px;
@@ -77,14 +77,17 @@ h2 {
   font-weight: 500;
   cursor: pointer;
     position:absolute;
+    opacity:0.1;
 }
 
 .button:hover {
-  background: #C2BB48;
+  background: transparent;
+  border:none;
 }
 
 .button:active {
-  background: #C2BB48;
+  background: transparent;
+    border:none;
 }
 
 .button__text,
