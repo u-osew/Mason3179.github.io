@@ -38,9 +38,9 @@
     <h2>
         Welcome! Around here I go by ¿uosew<br>
         Every piece of art here is made by me!<br>
-        Most images are compressed for ease of access.<br>
+        Most images have been compressed for ease of access.<br>
         If you have any questions or comments,<br>
-        or would like higher resolution images,<br> 
+        or would like higher resolution versions of these pics,<br> 
         contact me at 0uosew@gmail.com! <br>
         Enjoy! ☺<br>
         
@@ -48,8 +48,8 @@
         
         
         
-        
-
+    <img src="./media/bubble.png" class="left" height = 100 width = 100 style="translate: 0px -30px"><br>
+    <img src="./media/zealot.gif" class="left" style="translate: -30px -70px; transform:rotate(0.15turn)">
         
         
 <!--Bubbles-->
@@ -96,5 +96,26 @@ src="./media/bubb.gif" onclick="playPause()" audio="./media/bubbles.mp3">
     </body>
     
     
-    
+    <style>
+    img:hover {
+  /* Start the shake animation and make the animation last for 0.5 seconds */
+  animation: shake 0.5s;
+
+  /* When the animation is finished, start again */
+  animation-iteration-count: infinite;
+}
+
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  20% { transform: translate(-3px, 0px) rotate(1deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
+}</style>
     
