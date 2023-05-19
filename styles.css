@@ -44,7 +44,7 @@ li {
 }
 
 h2 {
-    color:rebeccapurple;
+    color: #C2BB48;
 }
 
 h3 {
@@ -88,6 +88,7 @@ h3 {
 .button:hover {
   background: transparent;
   border:none;
+    
 }
 
 .button:active {
@@ -192,3 +193,5 @@ body {margin:0;}
 }
 
 .floatRight{float:right;margin-left:20px}
+
+
