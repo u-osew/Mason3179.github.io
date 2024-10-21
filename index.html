@@ -1,124 +1,131 @@
 <!DOCTYPE html>
-
 <html lang="en">
-    
 
 <!--Header (title, icon, style)-->
-    <head>
-        <title>uosew</title>
-        <link rel="shortcut icon" href="./media/0124.ico">
-        <link rel="stylesheet" href="styles.css">
-    </head>
-    
+<head>
+    <title>uosew</title>
+    <link rel="shortcut icon" href="./media/0124.ico">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .icon-bar a {
+            padding: 10px;
+        }
+        
+        img:hover {
+            animation: shake 0.5s;
+            animation-iteration-count: infinite;
+        }
+
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            30% { transform: translate(3px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            70% { transform: translate(3px, 1px) rotate(-1deg); }
+            80% { transform: translate(-1px, -1px) rotate(1deg); }
+            90% { transform: translate(1px, 2px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
+    </style>
+</head>
+
 <!--Night Mode Button-->
-    <input type="image" src="./media/nightlight.gif" onclick="location.href='nightmode.html'" height="20">
+<input type="image" src="./media/nightlight.gif" onclick="location.href='nightmode.html'" height="20">
 
 <!--Background and Title-->
-    <body background="./media/JumpEnvironment.webm" height=900px>
-    <img src="./media/title.gif" class="center">
+<body>
+    <!-- Video Background -->
+    <video autoplay muted loop class="video-background">
+        <source src="./media/JumpEnvironment.webm" type="video/webm">
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- Content Section -->
+    <div class="content">
+        <img src="./media/title.gif" class="center">
         
-<!--NavBar-->     
-    <body>
+        <!-- NavBar -->
         <div class="icon-bar">
-          <a class="active" href="#" onClick="playAudio('./media/nuhuh.mp3')">home</a> 
-          <a href="about.html">emotes</a> 
-          <a href="shop.html">shop</a> 
-          <a href="gallery.html">3D Art</a>
-          <a href="contact.html">2D Art</a> 
+            <a class="active" href="#" onClick="playAudio('./media/nuhuh.mp3')">home</a>
+            <a href="about.html">emotes</a> 
+            <a href="shop.html">shop</a> 
+            <a href="gallery.html">3D Art</a>
+            <a href="contact.html">2D Art</a> 
         </div>
-    </body>
-<center>
-        <div class="sketchfab-embed-wrapper"> <iframe title="weaɹp s,uosew" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share width=1920 height="720" src="https://sketchfab.com/models/ff12553fc92a4b3e9209db536149db36/embed?autostart=1&camera=0&ui_hint=0&ui_theme=dark"> </iframe> </div>
-</center>       
-<!--GIFs-->    
 
-    <img src="./media/gdss.gif" class="center">
-        
-    <img src="./media/sillyalien.gif" class="center">    
-        
-<!--Writing
-    <img src="./media/looker.gif" class="left">
-        
-    <h2>
-        Welcome! Around here I go by ¿uosew<br>
-        Every piece of art here is made by me!<br>
-        Most images have been compressed for ease of access.<br>
-        If you have any questions or comments,<br>
-        or would like higher resolution versions of these pics,<br> 
-        contact me at 0uosew@gmail.com! <br>
-        Enjoy! ☺<br>
-        
-    </h2>
-        
--->        
-        
+        <!-- 3D Art Embed -->
+        <center>
+            <div class="sketchfab-embed-wrapper">
+                <iframe title="weaɹp s,uosew" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share width=1920 height="720" src="https://sketchfab.com/models/ff12553fc92a4b3e9209db536149db36/embed?autostart=1&camera=0&ui_hint=0&ui_theme=dark"> 
+                </iframe> 
+            </div>
+        </center>
 
-        
-        
-<!--Bubbles-->
+        <!-- GIFs -->
+        <img src="./media/gdss.gif" class="center">
+        <img src="./media/sillyalien.gif" class="center">    
 
-        
-    
+        <!-- Bubbles -->
         <button id="ASong" onClick="playPause()" class="button">
-        <audio src="./media/bubbles.mp3" autoplay loop></audio>
-     <span class="button__icon"></span>
-    </button>
-    <input id="ASong" type="image" 
-style="opacity:0.25; translate:800px -930px; transform: rotate(0.5turn)scale(.5);)"
-src="./media/bubb.gif" onclick="playPause()" audio="./media/bubbles.mp3"> 
+            <audio src="./media/bubbles.mp3" autoplay loop></audio>
+            <span class="button__icon"></span>
+        </button>
+        <input id="ASong" type="image" 
+        style="opacity:0.25; translate:800px -930px; transform: rotate(0.5turn)scale(.5);"
+        src="./media/bubb.gif" onclick="playPause()" audio="./media/bubbles.mp3"> 
         
-        
-    <button id="ASong" onClick="playPause()" class="button">
-        <audio src="./media/bubbles.mp3" autoplay loop></audio>
-     <span class="button__icon"></span>
-    </button>
-    <input id="ASong" type="image" 
-style="opacity:0.2; translate:-50px 300px; transform: scale(1.25);"
-src="./media/bubb.gif" onclick="playPause()" audio="./media/bubbles.mp3"> 
-        
-<!--Button Audio Script-->
-    <script>
-      var aud = document.getElementById("ASong").children[0];
-      var isPlaying = false;
-      aud.pause();
+        <button id="ASong" onClick="playPause()" class="button">
+            <audio src="./media/bubbles.mp3" autoplay loop></audio>
+            <span class="button__icon"></span>
+        </button>
+        <input id="ASong" type="image" 
+        style="opacity:0.2; translate:-50px 300px; transform: scale(1.25);"
+        src="./media/bubb.gif" onclick="playPause()" audio="./media/bubbles.mp3">
+    </div>
 
-      function playPause() {
-        if (isPlaying) {
-          aud.pause();
-        } else {
-          aud.play();
+    <!-- Button Audio Script -->
+    <script>
+        var aud = document.getElementById("ASong").children[0];
+        var isPlaying = false;
+        aud.pause();
+
+        function playPause() {
+            if (isPlaying) {
+                aud.pause();
+            } else {
+                aud.play();
+            }
+            isPlaying = !isPlaying;
         }
-        isPlaying = !isPlaying;
-      }
         
         function playAudio(url) {
-        new Audio(url).play();
+            new Audio(url).play();
         }
     </script>
-    
-    </body>
-    
-    
-    <style>
-    img:hover {
-  /* Start the shake animation and make the animation last for 0.5 seconds */
-  animation: shake 0.5s;
-
-  /* When the animation is finished, start again */
-  animation-iteration-count: infinite;
-}
-
-@keyframes shake {
-  0% { transform: translate(1px, 1px) rotate(0deg); }
-  10% { transform: translate(-1px, -2px) rotate(-1deg); }
-  20% { transform: translate(-3px, 0px) rotate(1deg); }
-  30% { transform: translate(3px, 2px) rotate(0deg); }
-  40% { transform: translate(1px, -1px) rotate(1deg); }
-  50% { transform: translate(-1px, 2px) rotate(-1deg); }
-  60% { transform: translate(-3px, 1px) rotate(0deg); }
-  70% { transform: translate(3px, 1px) rotate(-1deg); }
-  80% { transform: translate(-1px, -1px) rotate(1deg); }
-  90% { transform: translate(1px, 2px) rotate(0deg); }
-  100% { transform: translate(1px, -2px) rotate(-1deg); }
-}</style>
-    
+</body>
+</html>
