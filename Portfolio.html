@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio Gallery</title>
+<style>
+
+body { font-family: Arial, sans-serif; margin:0; padding:0; background:#000; color:#fff; }
+header { text-align:center; padding:1.5rem; background:#27167C; color:white; }
+
+
+
+
+
+.filters { display:flex; justify-content:center; flex-wrap:wrap; gap:1rem; margin:1rem; }
+.filters select { padding:0.5rem 1rem; border-radius:8px; border:none; cursor:pointer; transition:background 0.3s ease; color:white; background:#AA1596; }
+.filters select:hover { background:#C2BB48; color:#222; }
+.gallery { display:grid; grid-template-columns:repeat(auto-fill, minmax(250px,1fr)); gap:1rem; padding:1rem; transition: opacity 0.4s ease; }
+.card { border-radius:12px; overflow:hidden; box-shadow:0 2px 5px rgba(0,0,0,0.2); cursor:pointer; opacity:0; transform:scale(0.95); visibility:hidden; transition:opacity 0.4s ease, transform 0.4s ease, visibility 0.4s ease; color:white; }
+.card.show { opacity:1; transform:scale(1); visibility:visible; }
+.card img { width:100%; height:200px; object-fit:cover; transition: transform 0.3s ease; }
+.card:hover img { transform:scale(1.05); }
+.card-content { padding:1rem; color:white; }
+.card-content h3 { margin:0 0 0.3rem 0; }
+.card-content p { margin:0; font-size:0.9rem; }
+.modal { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); display:flex; justify-content:center; align-items:center; opacity:0; pointer-events:none; transition:opacity 0.3s ease; z-index:4; }
+.modal.show { opacity:1; pointer-events:all; }
+.modal-content { background:#111; color:white; max-width:80%; width:80%; max-height:85vh; overflow-y:auto; border-radius:12px; position:relative; padding:1.5rem; animation: fadeIn 0.3s ease; }
+.modal h2 { margin-top:0; color:#C2BB48; }
+.media-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1.25rem; margin-top:1rem; }
+.media-item { width:100%; aspect-ratio:16/9; background:#222; display:flex; justify-content:center; align-items:center; overflow:hidden; border-radius:8px; }
+.media-item img, .media-item iframe { max-width:100%; max-height:100%; object-fit:contain; }
+/* Fix video scaling in modal */
+.media-item iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  aspect-ratio: 16 / 9;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* Fix video scaling in zoom view */
+.zoom-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  object-fit: contain;
+}
+
+.zoom-overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); display:flex; flex-direction:column; justify-content:center; align-items:center; opacity:0; pointer-events:none; transition:opacity 0.3s ease; z-index:1000; }
+.zoom-overlay.show { opacity:1; pointer-events:all; }
+.zoom-container { width:90vw; max-width:1200px; aspect-ratio:16/9; position:relative; display:flex; justify-content:center; align-items:center; margin-bottom:1rem; }
+.zoom-container img, .zoom-container iframe { width:100%; height:100%; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.4); cursor:zoom-out; object-fit:contain; }
+.zoom-info { color:white; text-align:center; max-width:90%; margin-bottom:20px; }
+.zoom-info h3 { margin-bottom:0.3rem; color:#C2BB48; }
+.zoom-info p { margin:0; font-size:1.1rem; }
+/* Ensure zoom arrows are visible and layered above media */
+.zoom-arrow {
+  position: absolute;
+  z-index: 9999;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 3rem;
+  color: #ff8dd8; /* nice pinkish tone for visibility */
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 50%;
+  width: 55px;
+  height: 55px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+  z-index: 8; /* ensures arrows appear above the media */
+}
+
+.zoom-arrow:hover {
+  background: rgba(0, 0, 0, 0.7);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.zoom-arrow.left { left: 20px; }
+.zoom-arrow.right { right: 20px; }
+
+@keyframes fadeIn { from {opacity:0; transform:translateY(10px);} to {opacity:1; transform:translateY(0);} }
+
+
+
+
+
+/* Type-based card colors */
+.card.environment { background:#27167C; }
+.card.character { background:#A89F3A; color:#222; }
+.card.prop { background:#AA1596; }
+.card.physical { background:#1abc9c; color:#222; }
+
+/* Smooth fade animation for zoomed media */
+.zoom-container > * {
+  opacity: 0;
+  transform: scale(0.98);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.zoom-container > *.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+
+
+
+
+
+</style>
+</head>
+<body>
+
+<header><h1>My Project Gallery</h1></header>
+
+<div class="filters">
+<select id="filterCategory">
+<option value="default">Filter By...</option>
+<option value="date">Date</option>
+<option value="type">Type</option>
+</select>
+<select id="filterOption"><option value="default">Default</option></select>
+</div>
+
+<div class="gallery" id="gallery"></div>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true">
+  <div class="modal-content" id="modalContent"></div>
+</div>
+
+<div class="zoom-overlay" id="zoomOverlay">
+  <div class="zoom-container"></div>
+  <div class="zoom-info">
+    <h3 class="zoom-title"></h3>
+    <p class="zoom-description"></p>
+  </div>
+</div>
+
+<script>
+// Projects array
+const projects=[
+
+  {title:"Onsen Monkeys", yearSemester:"Spring 2025", categories:["Environment"], description:"Macaques at the Onsen. Made in Unreal Engine 5.", thumbnail:"https://i.ytimg.com/vi/cxfMl2EXvro/maxresdefault.jpg",
+  media:[{type:"video",src:"https://www.youtube.com/embed/cxfMl2EXvro",title:"Onsen Monkeys Video",description:"Cinematic sequence of macaques relaxing."},{type:"image",src:"https://i.ytimg.com/vi/cxfMl2EXvro/maxresdefault.jpg",title:"Render Still",description:"Additional render close-up."}]},
+
+   {title:"Darker Days", yearSemester:"Spring 2025", categories:["Environment"], description:"Made in Unreal Engine 5.", thumbnail:"https://i.ytimg.com/vi/t5M_X6TLh4A/maxresdefault.jpg",
+  media:[{type:"video",src:"https://youtube.com/embed/t5M_X6TLh4A",title:"Darker Days",description:"An effigy stands alone in a dark alleyway. Made in Unreal Engine 5."},{type:"image",src:"https://i.ytimg.com/vi/t5M_X6TLh4A/maxresdefault.jpg",title:"Render Still",description:"Additional render close-up."}]},
+
+  {title:"Blender Baby", yearSemester:"Fall 2025", categories:["Character"], description:"A homage to Blender and its design language!", thumbnail:"media/Blender_Baby.png",
+  media:[{type:"image",src:"media/Blender_Baby.png",title:"Render",description:"Early render with base materials!"},{type:"image",src:"media/BB_turnaround_full.png",title:"Costume Design",description:"Gizmo earrings, 3D cursor necklace, view mode piercings, and a grid cloak. Not to mention a shining halo and head piece!"},{type:"image",src:"media/BB_turnaround.png",title:"Costume Design",description:"Gizmo earrings, 3D cursor necklace, view mode piercings, and a grid cloak. Not to mention a shining halo and head piece!"}]},
+
+   {title:"Character Concept Art", yearSemester:"Fall 2025", categories:["Character"], description:"While digital art isn't my primary interest, I still enjoy the process and strive to get better.", thumbnail:"media/mguderian_week3_hw.jpg",
+  media:[{type:"image",src:"media/mguderian_week3_hw.jpg",title:"Concept Homework",description:"My first iterations of Salvador, who I'd end up returning to for our midterm."},
+  {type:"image",src:"media/mguderian_week4_hw.jpg",title:"Concept Homework",description:""},
+  {type:"image",src:"media/mguderian_week5_hw.jpg",title:"Concept Homework",description:""},{type:"image",src:"media/mguderian_week7_hw.png",title:"Concept Homework",description:""}]},
+
+  {title:"Ancient Underground", yearSemester:"Spring 2025", categories:["Environment"], description:"A short environment animation demo.", thumbnail:"https://i.ytimg.com/vi/2tgprrs8rPE/maxresdefault.jpg",
+  media:[{type:"video",src:"https://www.youtube.com/embed/2tgprrs8rPE",title:"Environment Video",description:"Environment video demo."},
+  {type:"image",src:"https://uosew.com/media/images/fulls/02.jpg",title:"Environment Still",description:"Render still image."}]},
+
+  {title:"Early Blender Renders", yearSemester:"Pre-2023", categories:["Environment"], description:"A collection of my earliest 3D renders.", thumbnail:"https://uosew.com/media/images/fulls/01.jpg",
+  media:[
+    {type:"image",src:"https://uosew.com/media/images/fulls/01.jpg",title:"Off the Bubble Coast",description:"Made in the period when I was first learning Blender, I still find a sense of comfort in looking at it. Reminds me of the late nights modeling and listening to DnB, which was also new to me."},
+    {type:"image",src:"https://uosew.com/media/images/fulls/02.jpg",title:"Render 02",description:"An early render of mine."},
+    {type:"image",src:"https://uosew.com/media/images/fulls/03.jpg",title:"Render 03",description:"An early render of mine."},
+    {type:"image",src:"https://uosew.com/media/images/fulls/04.jpg",title:"Render 04",description:"An early render of mine."},
+    {type:"image",src:"https://uosew.com/media/images/fulls/05.jpg",title:"Render 05",description:"An early render of mine."},
+    {type:"image",src:"https://uosew.com/media/images/fulls/06.jpg",title:"Render 06",description:"An early render of mine."},
+    {type:"image",src:"https://uosew.com/media/images/fulls/07.jpg",title:"Render 07",description:"An early render of mine."},
+    {type:"image",src:"https://uosew.com/media/images/fulls/08.jpg",title:"Render 08",description:"An early render of mine."},
+    {type:"image",src:"https://uosew.com/media/images/fulls/09.jpg",title:"Render 09",description:"An early render of mine."},
+    {type:"image",src:"https://uosew.com/media/images/fulls/10.jpg",title:"Render 10",description:"An early render of mine."},
+    {type:"image",src:"https://uosew.com/media/images/fulls/12.jpg",title:"Render 12",description:"An early render of mine."},
+    {type:"image",src:"https://uosew.com/media/images/fulls/13.jpg",title:"Render 13",description:"An early render of mine."}
+  ]},
+
+  {title:"Project Disciple", yearSemester:"Fall 2025", categories:["Character"], description:"A short environment animation demo.", thumbnail:"media/lukki.gif", 
+  media:[
+    {type:"image",src:"media/lukki.gif",title:"Character Render",description:"Bust render close-up."},
+    {type:"image",src:"media/pd_char_design.png",title:"Character Render",description:"Bust render close-up."}
+  ]},  
+
+  {title:"Shadow Avatar: LED Critter", yearSemester:"Fall 2025", categories:["Physical Creation"], description:"A short environment animation demo.", thumbnail:"media/LEDCritterThumb.jpg", 
+  media:[
+    {type:"image",src:"media/LEDCritterThumb.jpg",title:"Character Render",description:"Bust render close-up."},
+    {type:"image",src:"media/LEDCritterThumb.jpg",title:"Character Render",description:"Bust render close-up."}
+  ]},
+
+  {title:"Tropical Vending Machine", yearSemester:"Spring 2025", categories:["Prop"], description:"A little tropical vending machine. Made to be the centerpiece of a nighttime scene.", thumbnail:"media/TVM/TVM_Turnaround.gif", 
+  media:[
+    {type:"image",src:"media//TVM/TVM_Turnaround.gif",title:"Turnaround Render",description:"Finalized render. Could use some decals in UE5 to spruce it up."},
+    {type:"image",src:"media/TVM/TVM_Concept.png",title:"Concept Art",description:"Waves ended up a bit more stylized. It would've been nice to figure out the opening function a bit better."},
+    {type:"image",src:"media/TVM/TVM_Day.png",title:"Daytime Render",description:""},
+    {type:"image",src:"media/TVM/TVM_Night.png",title:"Nighttime Render",description:""},
+
+
+  ]},
+
+];
+
+const gallery=document.getElementById("gallery");
+const modal=document.getElementById("modal");
+const modalContent=document.getElementById("modalContent");
+const zoomOverlay=document.getElementById("zoomOverlay");
+const zoomContainer=zoomOverlay.querySelector(".zoom-container");
+const zoomTitle=zoomOverlay.querySelector(".zoom-title");
+const zoomDescription=zoomOverlay.querySelector(".zoom-description");
+const filterCategory=document.getElementById("filterCategory");
+const filterOption=document.getElementById("filterOption");
+
+const dateOptions=["Default","Spring 2025","Fall 2024","Spring 2024","Pre-2023"];
+const typeOptions=["Default","Character","Environment","Prop","Physical Creation"];
+
+let renderedCount = 0;
+const BATCH_SIZE = 2; 
+let filteredProjects = [];
+
+// Filter update
+function updateFilterOptions(){
+  const category = filterCategory.value;
+  const previousSelection = filterOption.value;
+  filterOption.innerHTML = "";
+  if(category === "default"){
+    const opt = document.createElement("option");
+    opt.value = "Default"; opt.textContent = "Default"; filterOption.appendChild(opt);
+  } else {
+    const options = category === "date" ? dateOptions : typeOptions;
+    options.forEach(optVal=>{
+      const o = document.createElement("option"); o.value = optVal; o.textContent = optVal;
+      if(optVal === previousSelection) o.selected = true;
+      filterOption.appendChild(o);
+    });
+  }
+  renderedCount=0;
+  filteredProjects=filterProjects();
+  gallery.innerHTML="";
+  loadMoreProjects();
+}
+
+// Card type class
+function typeClass(type){
+  switch(type.toLowerCase()){
+    case "environment": return "environment";
+    case "character": return "character";
+    case "prop": return "prop";
+    case "physical creation": return "physical";
+    default: return "";
+  }
+}
+
+// Filter projects
+function filterProjects(){
+  const category=filterCategory.value;
+  const option=filterOption.value;
+  if(category==="default" || option==="Default") return [...projects];
+  return projects.filter(p=>{
+    if(category==="date") return p.yearSemester.toLowerCase()===option.toLowerCase();
+    return p.categories.map(c=>c.toLowerCase()).includes(option.toLowerCase());
+  });
+}
+
+// Load projects with infinite scroll
+function loadMoreProjects(){
+  const nextBatch = filteredProjects.slice(renderedCount, renderedCount+BATCH_SIZE);
+  nextBatch.forEach((p,index)=>{
+    const card=document.createElement("div");
+    card.className="card "+typeClass(p.categories[0]);
+    const img=new Image(); img.src=p.thumbnail; img.alt=p.title; img.loading="lazy";
+    const content=document.createElement("div"); content.className="card-content";
+    let displayCategories = [...p.categories];
+    if(displayCategories.join(", ").length>25){ displayCategories = displayCategories.map(c=>c.length>10?c.slice(0,10)+"…":c); }
+    content.innerHTML=`<h3>${p.title}</h3><p>${p.yearSemester} • ${displayCategories.join(", ")}</p>`;
+    card.appendChild(img); card.appendChild(content); gallery.appendChild(card);
+    img.addEventListener("load",()=>{ requestAnimationFrame(()=>{ setTimeout(()=>card.classList.add("show"),index*100); }); });
+    img.addEventListener("error",()=>card.classList.add("show"));
+    card.addEventListener("click",()=>openModal(p));
+  });
+  renderedCount+=nextBatch.length;
+  requestAnimationFrame(()=>{
+    if(renderedCount<filteredProjects.length && document.body.scrollHeight <= window.innerHeight+50){
+      loadMoreProjects();
+    }
+  });
+}
+
+// Scroll listener
+window.addEventListener("scroll", ()=>{
+  if(window.innerHeight+window.scrollY >= document.body.offsetHeight-300){
+    if(renderedCount<filteredProjects.length) loadMoreProjects();
+  }
+});
+
+// Filter listeners
+filterCategory.addEventListener("change", updateFilterOptions);
+filterOption.addEventListener("change", updateFilterOptions);
+
+// Zoom & Modal
+let currentProject=null, currentMediaIndex=0;
+
+function openModal(project){
+  modal.classList.add("show");
+  modalContent.innerHTML=`
+    <h2>${project.title}</h2>
+    <p><em>${project.yearSemester} • ${project.categories.join(", ")}</em></p>
+    <p>${project.description}</p>
+    <div class="media-grid ${project.media.length===1?'single':''}">
+      ${project.media.map((m,idx)=>`<div class="media-item" data-index="${idx}">${m.type==='image'?`<img loading="lazy" src="${m.src}" alt="${m.title}"/>`:`<iframe src="${m.src}" frameborder="0" allowfullscreen title="${m.title}"></iframe>`}</div>`).join("")}
+    </div>
+  `;
+  modalContent.querySelectorAll(".media-item").forEach(el=>{
+    const idx=el.dataset.index; el.addEventListener("click",()=>openZoom(Number(idx),project));
+  });
+}
+
+function openZoom(index,project){
+  currentProject=project; currentMediaIndex=index;
+  updateZoomMedia(); zoomOverlay.classList.add("show");
+  zoomOverlay.addEventListener("click",closeZoom);
+}
+
+function updateZoomMedia(){
+  const media = currentProject.media[currentMediaIndex];
+  zoomContainer.innerHTML = "";
+
+  // Create media element
+  let el;
+  if (media.type === "image") {
+    el = document.createElement("img");
+    el.src = media.src;
+    el.alt = media.title;
+    el.loading = "lazy";
+  } else if (media.type === "video") {
+    el = document.createElement("iframe");
+    el.src = media.src;
+    el.title = media.title;
+    el.frameBorder = "0";
+    el.allowFullscreen = true;
+  }
+
+  // Add media and fade it in
+  zoomContainer.appendChild(el);
+  requestAnimationFrame(() => el.classList.add("show"));
+
+  // Update text
+  zoomTitle.textContent = media.title;
+  zoomDescription.textContent = media.description;
+
+  // Add arrows *after* media so they layer above it
+  if (currentProject.media.length > 1) {
+    const left = document.createElement("div");
+    left.className = "zoom-arrow left";
+    left.innerHTML = "&#10094;";
+    left.addEventListener("click", e => {
+      e.stopPropagation();
+      fadeTransition(-1);
+    });
+
+    const right = document.createElement("div");
+    right.className = "zoom-arrow right";
+    right.innerHTML = "&#10095;";
+    right.addEventListener("click", e => {
+      e.stopPropagation();
+      fadeTransition(1);
+    });
+
+    zoomContainer.appendChild(left);
+    zoomContainer.appendChild(right);
+  }
+}
+
+
+// Add smooth fade transition helper
+function fadeTransition(direction) {
+  const current = zoomContainer.querySelector("img, iframe");
+  if(!current) return;
+
+  current.classList.remove("show");
+  setTimeout(() => {
+    currentMediaIndex = (currentMediaIndex + direction + currentProject.media.length) % currentProject.media.length;
+    updateZoomMedia();
+  }, 300);
+}
+
+
+
+
+
+function closeZoom(){ zoomOverlay.classList.remove("show"); zoomContainer.innerHTML=""; zoomTitle.textContent=""; zoomDescription.textContent=""; }
+modal.addEventListener("click", e=>{ if(e.target===modal) modal.classList.remove("show"); });
+
+// Keyboard navigation
+document.addEventListener("keydown", e=>{
+  if(!zoomOverlay.classList.contains("show")) return;
+  if(e.key==="ArrowLeft"){ currentMediaIndex=(currentMediaIndex-1+currentProject.media.length)%currentProject.media.length; updateZoomMedia(); }
+  else if(e.key==="ArrowRight"){ currentMediaIndex=(currentMediaIndex+1)%currentProject.media.length; updateZoomMedia(); }
+  else if(e.key==="Escape"){ closeZoom(); }
+});
+
+// Init
+filteredProjects=[...projects];
+loadMoreProjects();
+</script>
+</body>
+</html>
