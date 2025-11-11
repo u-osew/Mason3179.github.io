@@ -6,8 +6,47 @@
 <title>Portfolio Gallery</title>
 <style>
 
-body { font-family: Arial, sans-serif; margin:0; padding:0; background:#000; color:#fff; }
-header { text-align:center; padding:1.5rem; background:#27167C; color:white; }
+/* Sleek custom scrollbar styling */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #AA1596;
+  border-radius: 5px;
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #C2BB48;
+}
+
+/* Firefox scrollbar styling */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #AA1596 rgba(0, 0, 0, 0.2);
+}
+
+body { 
+  font-family: Arial, sans-serif; 
+  margin:0; 
+  padding:0; 
+  background:#000; 
+  color:#fff;
+}
+
+header { 
+  text-align:center; 
+  padding:1.5rem; 
+  background:#27167C; 
+  color:white; 
+}
 
 
 
@@ -26,7 +65,36 @@ header { text-align:center; padding:1.5rem; background:#27167C; color:white; }
 .card-content p { margin:0; font-size:0.9rem; }
 .modal { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); display:flex; justify-content:center; align-items:center; opacity:0; pointer-events:none; transition:opacity 0.3s ease; z-index:4; }
 .modal.show { opacity:1; pointer-events:all; }
-.modal-content { background:#111; color:white; max-width:80%; width:80%; max-height:85vh; overflow-y:auto; border-radius:12px; position:relative; padding:1.5rem; animation: fadeIn 0.3s ease; }
+.modal-content { 
+  background:#111; 
+  color:white; 
+  max-width:80%; 
+  width:80%; 
+  max-height:85vh; 
+  overflow-y:auto; 
+  border-radius:12px; 
+  position:relative; 
+  padding:1.5rem; 
+  animation: fadeIn 0.3s ease;
+  /* Custom modal scrollbar */ 
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  &::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #AA1596;
+    border-radius: 4px;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: #C2BB48;
+  }
+  scrollbar-width: thin;
+  scrollbar-color: #AA1596 rgba(0, 0, 0, 0.3);
+}
+
 .modal h2 { margin-top:0; color:#C2BB48; }
 .media-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1.25rem; margin-top:1rem; }
 .media-item { width:100%; aspect-ratio:16/9; background:#222; display:flex; justify-content:center; align-items:center; overflow:hidden; border-radius:8px; }
@@ -53,39 +121,41 @@ header { text-align:center; padding:1.5rem; background:#27167C; color:white; }
 
 .zoom-overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); display:flex; flex-direction:column; justify-content:center; align-items:center; opacity:0; pointer-events:none; transition:opacity 0.3s ease; z-index:1000; }
 .zoom-overlay.show { opacity:1; pointer-events:all; }
-.zoom-container { width:90vw; max-width:1200px; aspect-ratio:16/9; position:relative; display:flex; justify-content:center; align-items:center; margin-bottom:1rem; }
-.zoom-container img, .zoom-container iframe { width:100%; height:100%; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.4); cursor:zoom-out; object-fit:contain; }
+.zoom-container { width:90vw; max-width:1200px; aspect-ratio:16/9; position:relative; z-index: 2; display:flex; justify-content:center; align-items:center; margin-bottom:1rem;  overflow: visible;}
+.zoom-container img, .zoom-container iframe { width:100%; height:100%; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.4); cursor:zoom-out; object-fit:contain; pointer-events: none;}
 .zoom-info { color:white; text-align:center; max-width:90%; margin-bottom:20px; }
 .zoom-info h3 { margin-bottom:0.3rem; color:#C2BB48; }
 .zoom-info p { margin:0; font-size:1.1rem; }
 /* Ensure zoom arrows are visible and layered above media */
 .zoom-arrow {
+  /* position relative to the .zoom-overlay so arrows reliably layer above media */
   position: absolute;
-  z-index: 9999;
+  z-index: 10002;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 3rem;
-  color: #ff8dd8; /* nice pinkish tone for visibility */
-  background: rgba(0, 0, 0, 0.4);
+  font-size: 2.25rem;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.65);
   border-radius: 50%;
-  width: 55px;
-  height: 55px;
+  width: 56px;
+  height: 56px;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
   user-select: none;
-  transition: background 0.2s ease, transform 0.2s ease;
-  z-index: 8; /* ensures arrows appear above the media */
+  box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+  transition: background 0.15s ease, transform 0.15s ease, opacity 0.15s ease;
+  opacity: 0.98;
 }
 
 .zoom-arrow:hover {
-  background: rgba(0, 0, 0, 0.7);
-  transform: translateY(-50%) scale(1.1);
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-50%) scale(1.08);
 }
 
-.zoom-arrow.left { left: 20px; }
-.zoom-arrow.right { right: 20px; }
+.zoom-arrow.left { left: 2.5%; }
+.zoom-arrow.right { right: 2.5%; }
 
 @keyframes fadeIn { from {opacity:0; transform:translateY(10px);} to {opacity:1; transform:translateY(0);} }
 
@@ -119,7 +189,7 @@ header { text-align:center; padding:1.5rem; background:#27167C; color:white; }
 </head>
 <body>
 
-<header><h1>My Project Gallery</h1></header>
+<header><h1>Projects</h1></header>
 
 <div class="filters">
 <select id="filterCategory">
@@ -151,6 +221,9 @@ const projects=[
   {title:"Onsen Monkeys", yearSemester:"Spring 2025", categories:["Environment"], description:"Macaques at the Onsen. Made in Unreal Engine 5.", thumbnail:"https://i.ytimg.com/vi/cxfMl2EXvro/maxresdefault.jpg",
   media:[{type:"video",src:"https://www.youtube.com/embed/cxfMl2EXvro",title:"Onsen Monkeys Video",description:"Cinematic sequence of macaques relaxing."},{type:"image",src:"https://i.ytimg.com/vi/cxfMl2EXvro/maxresdefault.jpg",title:"Render Still",description:"Additional render close-up."}]},
 
+  {title:"Eclipse Park", yearSemester:"Fall 2025", categories:["Environment"], description:"Blender Baby's day out at the park! Designed to be an introductory game level, where different mechanics are explored.", thumbnail:"/media/EP/EP_ForestView.png",
+  media:[{type:"image",src:"/media/EP/EP_ForestView.png",title:"A peek through the Forest",description:""},{type:"image",src:"/media/EP/EP_FountainView.png",title:"Fountain View",description:""}, {type:"image",src:"/media/EP/EP_Thumbnail.png",title:"Early Thumbnail",description:""},]},
+
    {title:"Darker Days", yearSemester:"Spring 2025", categories:["Environment"], description:"Made in Unreal Engine 5.", thumbnail:"https://i.ytimg.com/vi/t5M_X6TLh4A/maxresdefault.jpg",
   media:[{type:"video",src:"https://youtube.com/embed/t5M_X6TLh4A",title:"Darker Days",description:"An effigy stands alone in a dark alleyway. Made in Unreal Engine 5."},{type:"image",src:"https://i.ytimg.com/vi/t5M_X6TLh4A/maxresdefault.jpg",title:"Render Still",description:"Additional render close-up."}]},
 
@@ -166,38 +239,46 @@ const projects=[
   media:[{type:"video",src:"https://www.youtube.com/embed/2tgprrs8rPE",title:"Environment Video",description:"Environment video demo."},
   {type:"image",src:"https://uosew.com/media/images/fulls/02.jpg",title:"Environment Still",description:"Render still image."}]},
 
-  {title:"Early Blender Renders", yearSemester:"Pre-2023", categories:["Environment"], description:"A collection of my earliest 3D renders.", thumbnail:"https://uosew.com/media/images/fulls/01.jpg",
+  {title:"Early Blender Renders", yearSemester:"Pre-2024", categories:["Environment"], description:"A collection of my earliest 3D renders.", thumbnail:"https://uosew.com/media/images/fulls/01.jpg",
   media:[
     {type:"image",src:"https://uosew.com/media/images/fulls/01.jpg",title:"Off the Bubble Coast",description:"Made in the period when I was first learning Blender, I still find a sense of comfort in looking at it. Reminds me of the late nights modeling and listening to DnB, which was also new to me."},
-    {type:"image",src:"https://uosew.com/media/images/fulls/02.jpg",title:"Render 02",description:"An early render of mine."},
-    {type:"image",src:"https://uosew.com/media/images/fulls/03.jpg",title:"Render 03",description:"An early render of mine."},
-    {type:"image",src:"https://uosew.com/media/images/fulls/04.jpg",title:"Render 04",description:"An early render of mine."},
-    {type:"image",src:"https://uosew.com/media/images/fulls/05.jpg",title:"Render 05",description:"An early render of mine."},
-    {type:"image",src:"https://uosew.com/media/images/fulls/06.jpg",title:"Render 06",description:"An early render of mine."},
-    {type:"image",src:"https://uosew.com/media/images/fulls/07.jpg",title:"Render 07",description:"An early render of mine."},
-    {type:"image",src:"https://uosew.com/media/images/fulls/08.jpg",title:"Render 08",description:"An early render of mine."},
-    {type:"image",src:"https://uosew.com/media/images/fulls/09.jpg",title:"Render 09",description:"An early render of mine."},
-    {type:"image",src:"https://uosew.com/media/images/fulls/10.jpg",title:"Render 10",description:"An early render of mine."},
-    {type:"image",src:"https://uosew.com/media/images/fulls/12.jpg",title:"Render 12",description:"An early render of mine."},
-    {type:"image",src:"https://uosew.com/media/images/fulls/13.jpg",title:"Render 13",description:"An early render of mine."}
+    {type:"image",src:"https://uosew.com/media/images/fulls/02.jpg",title:"Eternal Eye",description:"Lots of fun with procedural texturing in this one. I've had it as my background for the longest time!"},
+    {type:"image",src:"https://uosew.com/media/images/fulls/03.jpg",title:"Mini Desert",description:""},
+    {type:"image",src:"https://uosew.com/media/images/fulls/04.jpg",title:"School Yard",description:""},
+    {type:"image",src:"https://uosew.com/media/images/fulls/05.jpg",title:"Stop & Watch Canyon",description:""},
+    {type:"image",src:"https://uosew.com/media/images/fulls/06.jpg",title:"Fish Tank ^2",description:""},
+    {type:"image",src:"https://uosew.com/media/images/fulls/07.jpg",title:"Ant Poker",description:""},
+    {type:"image",src:"https://uosew.com/media/images/fulls/08.jpg",title:"Blender Blender",description:"I think this one turned out really fun. Very cutesy!"},
+    {type:"image",src:"https://uosew.com/media/images/fulls/09.jpg",title:"Alien's Beach Day",description:""},
+    {type:"image",src:"https://uosew.com/media/images/fulls/10.jpg",title:"Light-headed Dance Off",description:""},
+    {type:"image",src:"https://uosew.com/media/images/fulls/12.jpg",title:"Morphous",description:""},
+    {type:"image",src:"https://uosew.com/media/images/fulls/13.jpg",title:"Nightmare King",description:""},
+    {type:"image",src:"https://uosew.com/media/melancholypurple.png",title:"melancholypurple.png",description:""},
+    {type:"image",src:"https://uosew.com/media/images/fulls/21.png",title:"melancholypurple.png",description:""}
   ]},
 
-  {title:"Project Disciple", yearSemester:"Fall 2025", categories:["Character"], description:"A short environment animation demo.", thumbnail:"media/lukki.gif", 
+  {title:"Project Disciple", yearSemester:"Fall 2025", categories:["Character"], description:"", thumbnail:"media/lukki.gif", 
   media:[
-    {type:"image",src:"media/lukki.gif",title:"Character Render",description:"Bust render close-up."},
-    {type:"image",src:"media/pd_char_design.png",title:"Character Render",description:"Bust render close-up."}
+    {type:"image",src:"media/lukki.gif",title:"Character Render",description:""},
+    {type:"image",src:"media/pd_char_design.png",title:"Character Render",description:""}
   ]},  
 
   {title:"Shadow Avatar: LED Critter", yearSemester:"Fall 2025", categories:["Physical Creation"], description:"A short environment animation demo.", thumbnail:"media/LEDCritterThumb.jpg", 
   media:[
-    {type:"image",src:"media/LEDCritterThumb.jpg",title:"Character Render",description:"Bust render close-up."},
-    {type:"image",src:"media/LEDCritterThumb.jpg",title:"Character Render",description:"Bust render close-up."}
+    {type:"image",src:"media/LEDCritterThumb.jpg",title:"Character Render",description:""},
+    {type:"image",src:"media/LEDCritterThumb.jpg",title:"Character Render",description:""}
+  ]},
+
+    {title:"Goddess", yearSemester:"Pre-2024", categories:["Physical Creation"], description:"", thumbnail:"media/LEDCritterThumb.jpg", 
+  media:[
+    {type:"image",src:"media/LEDCritterThumb.jpg",title:"Character Render",description:""},
+    {type:"image",src:"media/LEDCritterThumb.jpg",title:"Character Render",description:""}
   ]},
 
   {title:"Tropical Vending Machine", yearSemester:"Spring 2025", categories:["Prop"], description:"A little tropical vending machine. Made to be the centerpiece of a nighttime scene.", thumbnail:"media/TVM/TVM_Turnaround.gif", 
   media:[
     {type:"image",src:"media//TVM/TVM_Turnaround.gif",title:"Turnaround Render",description:"Finalized render. Could use some decals in UE5 to spruce it up."},
-    {type:"image",src:"media/TVM/TVM_Concept.png",title:"Concept Art",description:"Waves ended up a bit more stylized. It would've been nice to figure out the opening function a bit better."},
+    {type:"image",src:"media/TVM/TVM_Concept.png",title:"Concept Art",description:"Waves ended up a bit more stylized."},
     {type:"image",src:"media/TVM/TVM_Day.png",title:"Daytime Render",description:""},
     {type:"image",src:"media/TVM/TVM_Night.png",title:"Nighttime Render",description:""},
 
@@ -216,7 +297,7 @@ const zoomDescription=zoomOverlay.querySelector(".zoom-description");
 const filterCategory=document.getElementById("filterCategory");
 const filterOption=document.getElementById("filterOption");
 
-const dateOptions=["Default","Spring 2025","Fall 2024","Spring 2024","Pre-2023"];
+const dateOptions=["Default","Fall 2025","Spring 2025","Fall 2024","Spring 2024","Pre-2024"];
 const typeOptions=["Default","Character","Environment","Prop","Physical Creation"];
 
 let renderedCount = 0;
@@ -354,9 +435,13 @@ function updateZoomMedia(){
   zoomDescription.textContent = media.description;
 
   // Add arrows *after* media so they layer above it
+  // Remove any previous arrows and add new arrows attached to the overlay so
+  // they reliably appear above media regardless of the container stacking
+  zoomOverlay.querySelectorAll('.zoom-arrow').forEach(n => n.remove());
   if (currentProject.media.length > 1) {
     const left = document.createElement("div");
     left.className = "zoom-arrow left";
+    left.setAttribute('role','button'); left.setAttribute('aria-label','Previous');
     left.innerHTML = "&#10094;";
     left.addEventListener("click", e => {
       e.stopPropagation();
@@ -365,14 +450,15 @@ function updateZoomMedia(){
 
     const right = document.createElement("div");
     right.className = "zoom-arrow right";
+    right.setAttribute('role','button'); right.setAttribute('aria-label','Next');
     right.innerHTML = "&#10095;";
     right.addEventListener("click", e => {
       e.stopPropagation();
       fadeTransition(1);
     });
 
-    zoomContainer.appendChild(left);
-    zoomContainer.appendChild(right);
+    zoomOverlay.appendChild(left);
+    zoomOverlay.appendChild(right);
   }
 }
 
@@ -393,7 +479,14 @@ function fadeTransition(direction) {
 
 
 
-function closeZoom(){ zoomOverlay.classList.remove("show"); zoomContainer.innerHTML=""; zoomTitle.textContent=""; zoomDescription.textContent=""; }
+function closeZoom(){
+  zoomOverlay.classList.remove("show");
+  zoomContainer.innerHTML = "";
+  // remove any arrow controls so they don't persist after closing
+  zoomOverlay.querySelectorAll('.zoom-arrow').forEach(n => n.remove());
+  zoomTitle.textContent = "";
+  zoomDescription.textContent = "";
+}
 modal.addEventListener("click", e=>{ if(e.target===modal) modal.classList.remove("show"); });
 
 // Keyboard navigation
