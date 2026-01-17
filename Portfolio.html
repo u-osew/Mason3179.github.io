@@ -265,10 +265,183 @@ header {
   transform: scale(1);
 }
 
+/* Mobile Responsive Styles */
+@media screen and (max-width: 768px) {
+  /* Gallery cards - make single column on small screens */
+  .gallery { 
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    padding: 0.75rem;
+  }
+  
+  /* Cards - adjust sizing and hover */
+  .card {
+    max-width: 100%;
+  }
+  
+  .card:hover {
+    transform: scale(1.02); /* Less dramatic hover on mobile */
+  }
+  
+  /* Modal content - full width on mobile */
+  .modal-content {
+    max-width: 95%;
+    width: 95%;
+    max-height: 90vh;
+    padding: 1rem;
+  }
+  
+  /* Media grid in modal - single column */
+  .media-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  /* Zoom overlay - optimize for mobile */
+  .zoom-container {
+    width: 98vw;
+    max-width: 98vw;
+    aspect-ratio: auto;
+    height: auto;
+    max-height: 60vh;
+  }
+  
+  .zoom-container img,
+  .zoom-container iframe {
+    width: 100%;
+    height: auto;
+    max-height: 60vh;
+  }
+  
+  .zoom-info {
+    max-width: 95%;
+    padding: 0 1rem;
+    margin-bottom: 10px;
+  }
+  
+  .zoom-info h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .zoom-info p {
+    font-size: 0.9rem;
+  }
+  
+  /* Zoom arrows - make smaller and closer on mobile */
+  .zoom-arrow {
+    width: 44px;
+    height: 44px;
+    font-size: 1.75rem;
+  }
+  
+  .zoom-arrow.left {
+    left: 5px;
+  }
+  
+  .zoom-arrow.right {
+    right: 5px;
+  }
+  
+  /* Header adjustments */
+  header {
+    padding: 1rem;
+  }
+  
+  /* Tab navigation - better wrapping */
+  .tabs-container {
+    gap: 0.4rem;
+    margin: 1rem 0.5rem;
+  }
+  
+  .tab-button {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  /* Card content - adjust text size */
+  .card-content {
+    padding: 0.75rem;
+  }
+  
+  .card-content h3 {
+    font-size: 1rem;
+  }
+  
+  .card-content p {
+    font-size: 0.85rem;
+  }
+  
+  /* Year headings */
+  .year-block h2 {
+    font-size: 1.5rem;
+  }
+  
+  /* Media section divider */
+  .media-section-divider-label {
+    font-size: 1rem;
+  }
+}
 
+/* Extra small mobile devices */
+@media screen and (max-width: 480px) {
+  .gallery {
+    padding: 0.5rem;
+  }
+  
+  .modal-content {
+    padding: 0.75rem;
+  }
+  
+  .zoom-container {
+    max-height: 50vh;
+  }
+  
+  .zoom-container img,
+  .zoom-container iframe {
+    max-height: 50vh;
+  }
+  
+  .zoom-arrow {
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+  }
+  
+  .tab-button {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
+  }
+  
+  header {
+    padding: 0.75rem;
+  }
+}
 
-
-
+/* Landscape mobile orientation */
+@media screen and (max-height: 600px) and (orientation: landscape) {
+  .zoom-container {
+    max-height: 75vh;
+  }
+  
+  .zoom-container img,
+  .zoom-container iframe {
+    max-height: 75vh;
+  }
+  
+  .zoom-info {
+    margin-bottom: 5px;
+  }
+  
+  .zoom-info h3 {
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+  }
+  
+  .zoom-info p {
+    font-size: 0.85rem;
+  }
+}
 
 </style>
 </head>
