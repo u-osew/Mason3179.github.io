@@ -44,7 +44,7 @@ li {
 }
 
 h2 {
-    color: #C2BB48;
+    color: #FFAA00;
 }
 
 h3 {
@@ -148,13 +148,13 @@ body {margin:0;}
 }
 
 .icon-bar a:hover {
-  background-color: #C2BB48 !important; /*Hover*/
+  background-color: #FFAA00 !important; /*Hover*/
   color: #AA1596 !important;
 }
 
 .active {
   background-color: #AA1596 !important; /*current page*/
-  color: #C2BB48 !important;
+  color: #FFAA00 !important;
 }
 
 
@@ -189,7 +189,7 @@ body {margin:0;}
 
 .d-active {
   background-color: pink; /*current page*/
-  color: #C2BB48 !important;
+  color: #FFAA00 !important;
 }
 
 .floatRight{float:right;margin-left:20px}

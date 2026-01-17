@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>uosew - Gallery</title>
+<style>
+
+/* Sleek custom scrollbar styling */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #AA1596;
+  border-radius: 5px;
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #FFAA00;
+}
+
+/* Firefox scrollbar styling */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #AA1596 rgba(0, 0, 0, 0.2);
+}
+
+body { 
+  font-family: Arial, sans-serif; 
+  margin:0; 
+  padding:0; 
+  background-color: #000; /* Prevent any white showing at top */
+  color:#fff;
+}
+
+/* Full-viewport animated gradient layer that persists across tabs */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  height: 100vh;
+  background: linear-gradient(to top, #001a4d 0%, #000 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 150%;
+  background-position: center 0px;
+  animation: bottomGradientBounce 6s ease-in-out infinite;
+  will-change: background-position;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Ensure content sits above the gradient layer */
+body > * { position: relative; z-index: 1; }
+
+header { 
+  text-align:center; 
+  padding:1.5rem; 
+  background:#27167C; 
+  color:white; 
+}
+
+
+
+
+
+.filters { display:flex; justify-content:center; flex-wrap:wrap; gap:1rem; margin:1rem; }
+.filters select { padding:0.5rem 1rem; border-radius:8px; border:none; cursor:pointer; transition:background 0.3s ease; color:white; background:#AA1596; }
+.filters select:hover { background:#FFAA00; color:#222; }
+.gallery { display:grid; grid-template-columns:repeat(auto-fill, minmax(250px,1fr)); gap:1rem; padding:1rem; transition: opacity 0.4s ease; }
+.card { border-radius:12px; overflow:hidden; box-shadow:0 2px 5px rgba(0,0,0,0.2); cursor:pointer; opacity:0; transform:scale(0.95); visibility:hidden; transition:opacity 0.4s ease, transform 0.4s ease, visibility 0.4s ease; color:white; }
+.card.show { opacity:1; transform:scale(1); visibility:visible; }
+.card:hover { transform:scale(1.08); }
+.card img { width:100%; aspect-ratio: 1/1; object-fit:cover; transition: transform 0.3s ease; }
+.card:hover img { transform:scale(1.05); }
+.card-content { padding:1rem; color:white; }
+.card-content h3 { margin:0 0 0.3rem 0; }
+.card-content p { margin:0; font-size:0.9rem; }
+.modal { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); display:flex; justify-content:center; align-items:center; opacity:0; pointer-events:none; transition:opacity 0.3s ease; z-index:4; }
+.modal.show { opacity:1; pointer-events:all; }
+.modal-content { 
+  background:#111; 
+  color:white; 
+  max-width:80%; 
+  width:80%; 
+  max-height:85vh; 
+  overflow-y:auto; 
+  border-radius:12px; 
+  position:relative; 
+  padding:1.5rem; 
+  animation: fadeIn 0.1s ease;
+  /* Custom modal scrollbar */ 
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  &::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #AA1596;
+    border-radius: 4px;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: #FFAA00;
+  }
+  scrollbar-width: thin;
+  scrollbar-color: #AA1596 rgba(0, 0, 0, 0.3);
+}
+
+.modal h2 { margin-top:0; color:#FFAA00; }
+.media-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(400px,1fr)); gap:1.25rem; margin-top:1rem; justify-items:center; align-items:start; }
+.media-item.hero { grid-column: 1 / -1; aspect-ratio: 16/9; max-width: 90vh;}
+.media-item { width:100%; aspect-ratio:16/9; background:#222; display:flex; justify-content:center; align-items:center; overflow:hidden; border-radius:8px; cursor:pointer; }
+.media-item img, .media-item iframe { max-width:100%; max-height:100%; object-fit:contain; }
+/* Fix video scaling in modal */
+.media-item iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  aspect-ratio: 16 / 9;
+  border-radius: 8px;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* Fix video scaling in zoom view */
+.zoom-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  object-fit: contain;
+}
+
+.zoom-overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); display:flex; flex-direction:column; justify-content:center; align-items:center; opacity:0; pointer-events:none; transition:opacity 0.3s ease; z-index:1000; overflow:hidden; }
+.zoom-overlay.show { opacity:1; pointer-events:all; }
+.zoom-container { width:95vw; max-width:1600px; aspect-ratio:16/9; position:relative; z-index: 2; display:flex; justify-content:center; align-items:center; margin-bottom:1rem;  overflow: visible;}
+.zoom-container img, .zoom-container iframe { width:100%; height:100%; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.4); cursor:zoom-out; object-fit:contain; }
+.zoom-container iframe { pointer-events: auto; }
+.zoom-info { color:white; text-align:center; max-width:90%; margin-bottom:20px; }
+.zoom-info h3 { margin-bottom:0.3rem; color:#FFAA00; }
+.zoom-info p { margin:0; font-size:1.1rem; }
+/* Ensure zoom arrows are visible and layered above media */
+.zoom-arrow {
+  /* position relative to the .zoom-overlay so arrows reliably layer above media */
+  position: absolute;
+  z-index: 10002;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2.25rem;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.65);
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+  transition: background 0.15s ease, transform 0.15s ease, opacity 0.15s ease;
+  opacity: 0.98;
+}
+
+.zoom-arrow:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-50%) scale(1.08);
+}
+
+.zoom-arrow.left { left: 2.5%; }
+.zoom-arrow.right { right: 2.5%; }
+
+@keyframes fadeIn { from {opacity:0; transform:translateY(10px);} to {opacity:1; transform:translateY(0);} }
+
+/* Subtle vertical bounce for the bottom gradient */
+@keyframes bottomGradientBounce {
+  0%   { background-position: center 0px; }
+  20%  { background-position: center 70px; }
+  35%  { background-position: center 40px; }
+  50%  { background-position: center 100px; }
+  65%  { background-position: center 60px; }
+  80%  { background-position: center 85px; }
+  100% { background-position: center 0px; }
+}
+
+/* Media Section Divider */
+.media-section-divider {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1.5rem 0 1rem 0;
+}
+
+.media-section-divider-label {
+  color: #FFAA00;
+  font-weight: 600;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Tab Navigation Styles */
+.tabs-container {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.tab-button {
+  padding: 0.75rem 1.5rem;
+  border: 2px solid #AA1596;
+  background: transparent;
+  color: #AA1596;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: capitalize;
+}
+
+.tab-button:hover {
+  background: #AA1596;
+  color: white;
+}
+
+.tab-button.active {
+  background: #AA1596;
+  color: white;
+  border-color: #FFAA00;
+}
+
+
+
+/* Type-based card colors */
+.card.environment { background:#27167C; }
+.card.character { background:#CC7722; color:#222; }
+.card.prop { background:#AA1596; }
+.card.physical { background:#0d8060; color:#222; }
+.card.project { background: linear-gradient(135deg, #FF1493 0%, #FFD700 100%); color:#222; }
+
+/* Smooth fade animation for zoomed media */
+.zoom-container > * {
+  opacity: 0;
+  transform: scale(0.98);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.zoom-container > *.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+
+
+
+
+
+</style>
+</head>
+<body>
+<div align='center'><img src="./media/title.gif" class="center"></div>
+
+<!-- Tab Navigation -->
+<div class="tabs-container">
+  <button class="tab-button active" data-category="all">All</button>
+  <button class="tab-button" data-category="project">Project</button>
+  <button class="tab-button" data-category="environment">Environment</button>
+  <button class="tab-button" data-category="character">Character</button>
+  <button class="tab-button" data-category="prop">Prop</button>
+  <button class="tab-button" data-category="physical">Physical</button>
+</div>
+
+<section class="year-block">
+  <h2 style="text-align:center; margin:1rem 0; color:#FFAA00;">2025</h2>
+  <div class="gallery" id="gallery-2025"></div>
+</section>
+<section class="year-block">
+  <h2 style="text-align:center; margin:1rem 0; color:#FFAA00;">2024</h2>
+  <div class="gallery" id="gallery-2024"></div>
+</section>
+<section class="year-block">
+  <h2 style="text-align:center; margin:1rem 0; color:#FFAA00;">Pre-2024</h2>
+  <div class="gallery" id="gallery-pre2024"></div>
+</section>
+<section class="year-block">
+  <h2 style="text-align:center; margin:1rem 0; color:#FFAA00;">2023</h2>
+  <div class="gallery" id="gallery-2023"></div>
+</section>
+
+
+<div class="modal" id="modal" role="dialog" aria-modal="true">
+  <div class="modal-content" id="modalContent"></div>
+</div>
+
+<div class="zoom-overlay" id="zoomOverlay">
+  <div class="zoom-container"></div>
+  <div class="zoom-info">
+    <h3 class="zoom-title"></h3>
+    <p class="zoom-description"></p>
+  </div>
+</div>
+
+<script>
+// Projects array
+const projects=[
+
+  {title:"Estuary", 
+  
+  yearSemester:"Fall 2025", categories:["Project","Character"], description:"A collaborative final project done for a character concept art class! Estuary is a fantasy platformer concept inspired by Japanese Shinto. It takes place in a sleepy, lush grove. I was tasked with character creation. We would later decided that the golems would be the protagonists of the story.", thumbnail:"media/Estuary/Estuary_Thumb.png",
+  media:[
+  {section:"Deliverables"},
+  {type:"image",src:"media/Estuary/Estuary_Deliverable.png",title:"Golem Trio",description:"Rendered concepts of the three golems. With segmented bodies, they were designed to swap at the head. Shape diversity was a primary focus."},
+  {type:"image",src:"media/Estuary/Rock.gif",title:"Rock Golem",description:"3D mockup of the rock golem, the most primal of the bunch. Inspired by suijin's engraved stones."},
+  {type:"image",src:"media/Estuary/Riverstone.gif",title:"Riverstone Golem",description:"3D mockup of the riverstone golem. A more refined figure, formed through flowing water's touch. Inspired by ancient Japanese Dogu statues."},
+  {type:"image",src:"media/Estuary/Clay.gif",title:"Clay Golem",description:"3D mockup of the clay golem, the most malleable of the bunch. Inspired by Japanese Haniwa sculptures."},
+  {type:"image",src:"media/Estuary/Estuary_Golems_Concept.png",title:"Concept Art",description:""},
+  {type:"image",src:"media/Estuary/Estuary_RockGolem_Ref.png",title:"Golem References",description:""},
+
+  
+  {section:"Presentation"},
+  {type:"image",src:"media/Estuary/Estuary_Title.png",title:"",description:""},
+  {type:"image",src:"media/Estuary/Estuary_Background.png",title:"",description:""},
+  {type:"image",src:"media/Estuary/Estuary_Golems.png",title:"",description:""},
+  {type:"image",src:"media/Estuary/Estuary_Golems_powers.png",title:"",description:""},
+  {type:"image",src:"media/Estuary/Estuary_Aki.png",title:"",description:""},
+  {type:"image",src:"media/Estuary/Estuary_Eshizu.png",title:"",description:""},
+  {type:"image",src:"media/Estuary/Estuary_side-by-side.png",title:"",description:""},
+  {type:"image",src:"media/Estuary/Estuary_scale_reference.png",title:"",description:""},
+  {type:"image",src:"media/Estuary/Estuary_Water_Shrine.png",title:"",description:""},
+  {type:"image",src:"media/Estuary/Estuary_Environment.png",title:"",description:""}
+
+]},
+////////////////////////////////////////////////////////////
+  {title:"Project Disciple", 
+  
+  yearSemester:"Fall 2025", categories:["Project"], description:"Project Disciple is a mobile base builder game being developed through a collaboration between Otis College and USC. I worked closely with our art producer in order to provide tasks for my fellow artists and I. \nFor my personal artistic contributions, I primarily worked through the character workflow in order to provide classmates with a strong base model. \nOnce we pivoted, I continued to provide concept art for the game's disciples.", thumbnail:"media/Disciple/PD_Thumb.png", 
+  media:[
+
+    {section:"Early Renders"},
+    {type:"image",src:"media/Disciple/phase_1/pd_Athanasia_Concept.png",title:"Dark Goddess Athanasia",description:"Our narrative team wrote some lore on the primary deities the cults would be following. This is a quick rendition of Athanasia, dark goddess of luxury goods and all things beauty. I incorporated athanasia flowers into her design, as well as a silk dress downloaded online."},
+    {type:"image",src:"media/Disciple/phase_1/pd_sampleoni.gif",title:"Oni Gangnam Style!",description:"To ease off our workload, I made the decision to make the base armature with Mixamo animations in mind, at least for prototyping."},
+    {type:"image",src:"media/Disciple/phase_1/Lukki.gif",title:"Lukki",description:"My favorite personal piece from the project, Lukki! The first character I devised for the game, meant to act as a sort of guide NPC for the player, much like the villager in Clash of Clans"},
+   {type:"image",src:"media/Disciple/phase_1/Disciple_gangnam_style.gif",title:"Unreal Engine Demo",description:"Using some basic toon shaders, this visualizer demonstrates how the models may look in Unreal Engine 5."},
+    {type:"image",src:"media/Disciple/phase_1/pd_Base Model Cultist.gif",title:"Base Model Explorations",description:"The view from an angle more closely representing the game's final perspective. Our second phase's art director believed the giant heads would cover the cultists bodies too much, so model was scrapped."},
+    {type:"image",src:"media/Disciple/phase_1/pd_Cultist Base.png",title:"Base Cultist Sheet",description:"The base proportions for our cultists. We were tasked with creating something 'chibi' for cuteness factor. This is a template I made for the art team to create their work around."},
+    {section:"Phase 1"},
+ 
+    {type:"image",src:"media/Disciple/phase_1/Project Disciple-1.png",title:"Lookbook",description:"Some splash art I made for another class's homework featuring Lukki and his old pal Dino. The entirety of the making is elsewhere in the portfolio."},
+    {type:"image",src:"media/Disciple/phase_1/Project Disciple-3.png",title:"",description:"My earliest concepts for Lukki. He started as a shower thought, as all good art does."},
+    {type:"image",src:"media/Disciple/phase_1/Project Disciple-4.png",title:"",description:""},
+    {type:"image",src:"media/Disciple/phase_1/pd_Athanasia_Ref.png",title:"Athanasia References",description:""},
+    {type:"image",src:"media/Disciple/phase_1/Project Disciple-5.png",title:"",description:""},
+    {type:"image",src:"media/Disciple/phase_1/Project Disciple-6.png",title:"",description:""},
+    {type:"image",src:"media/Disciple/phase_1/Project Disciple-7.png",title:"",description:""},
+    {type:"image",src:"media/Disciple/phase_1/Project Disciple-8.png",title:"",description:""},
+    {type:"image",src:"media/Disciple/phase_1/pd_char_design.png",title:"",description:""},
+    {type:"image",src:"media/Disciple/phase_1/pd_basereferences.png",title:"Base Design Reference",description:"A quick reference collection of how other modular characters are handled and their body types."},
+    {type:"image",src:"media/Disciple/phase_1/Project Disciple-9.png",title:"",description:""},
+    {type:"image",src:"media/Disciple/phase_1/Project Disciple-10.png",title:"",description:""},
+    {type:"image",src:"media/Disciple/phase_1/Project Disciple-11.png",title:"",description:""},
+    {type:"image",src:"media/Disciple/phase_1/Project Disciple-12.png",title:"",description:"I wanted the cultists to be as modular as possible, even supporting different arm and leg variants. You can see some pieces of my team's work interpreted to fit the 3D base."},
+    {type:"image",src:"media/Disciple/phase_1/Project Disciple-14.png",title:"",description:"I envisioned our environment with a beautiful vista in the background, thinking it might help us stand our from the competition. So many isometric games have you staring directly at the ground. A dynamic time and weather system would give us so much freedom for beautiful scenarios."},
+    {type:"image",src:"media/Disciple/phase_1/Project Disciple-15.png",title:"",description:""},
+    {type:"image",src:"media/Disciple/phase_1/Project Disciple-16.png",title:"",description:""},
+    {type:"image",src:"media/Disciple/phase_1/Project Disciple-17.png",title:"",description:""},
+    {type:"image",src:"media/Disciple/phase_1/Project Disciple-18.png",title:"",description:""},
+    {type:"image",src:"media/Disciple/phase_1/Project Disciple-19.png",title:"",description:""},
+    {type:"image",src:"media/Disciple/phase_1/Project Disciple-20.png",title:"",description:""},
+
+    {section:"Phase 2"},
+    {type:"image",src:"media/Disciple/phase_2/Project Disciple-21.png",title:"",description:"I think this is the first big pivot I've experienced working on a team project. As disheartening as it was, I'm so grateful I could experience it in an academic environment. I know that scenarios like this can occur in the industry."},
+    {type:"image",src:"media/Disciple/phase_2/Project Disciple-22.png",title:"",description:""},
+    {type:"image",src:"media/Disciple/phase_2/Project Disciple-23.png",title:"",description:""},
+    {type:"image",src:"media/Disciple/phase_2/PD_Druid.PNG",title:"Close-up",description:""},
+    {type:"image",src:"media/Disciple/phase_2/pd_Mason_Druid_Update.PNG",title:"Isometric Prototyping",description:"I designed the splash art before the isometric view so I could get a good understanding of the druid's character beforehand."},
+    {type:"image",src:"media/Disciple/phase_2/Project Disciple-24.png",title:"",description:""},
+    {type:"image",src:"media/Disciple/phase_2/Project Disciple-25.png",title:"",description:""},
+    {type:"image",src:"media/Disciple/phase_2/Project Disciple-26.png",title:"",description:""},
+    {type:"image",src:"media/Disciple/phase_2/Project Disciple-27.png",title:"",description:""},
+    {type:"image",src:"media/Disciple/phase_2/Project Disciple-28.png",title:"",description:""},
+    {type:"image",src:"media/Disciple/phase_2/Project Disciple-29.png",title:"",description:""},
+    {type:"image",src:"media/Disciple/phase_2/Project Disciple-30.png",title:"",description:""},
+    {type:"image",src:"media/Disciple/phase_2/Project Disciple-31.png",title:"",description:""},
+
+    {section:"Technical"},
+    {type:"image",src:"media/Disciple/phase_1/pd_Too_many_pieces.png",title:"Too many pieces",description:"For some reason I thought this would be the best approach to modularity... later on we combined the limbs so less pieces would have to be dealt with."},
+    {type:"image",src:"media/Disciple/phase_1/pd_UVMapped_Cultist.png",title:"UV Mapping",description:"Despite using toon shaders without texturing, I thought it would be good to future proof the model with proper UV mapping."},
+    {type:"image",src:"media/Disciple/phase_1/pd_MeshWeight.gif",title:"Mesh Weighting",description:"A quick demo of the mesh weights, and a peek at the bones."},
+
+  ]},  
+////////////////////////////////////////////////////////////
+  {title:"Onsen Monkeys", 
+  
+  yearSemester:"Spring 2025", categories:["Environment"], description:"Macaques at the Onsen. Made in Unreal Engine 5.", thumbnail:"https://i.ytimg.com/vi/cxfMl2EXvro/maxresdefault.jpg",
+  media:[{type:"video",src:"https://www.youtube.com/embed/cxfMl2EXvro",title:"Onsen Monkeys Video",description:"Cinematic sequence of macaques relaxing."},
+  {type:"image",src:"https://i.ytimg.com/vi/cxfMl2EXvro/maxresdefault.jpg",title:"Render Still",description:"Additional render close-up."},
+  {type:"embed",src:""}]},
+////////////////////////////////////////////////////////////
+  {title:"Eclipse Park", 
+  
+  yearSemester:"Fall 2025", categories:["Project"], description:"Blender Baby's day out at the park! Designed to be an introductory game level, where different mechanics are explored.", thumbnail:"media/EP/EP_Thumb.png",
+  media:[
+  {section:"Gameplay Demo"},
+  {type:"video",src:"https://www.youtube.com/embed/g-_WP2jangg?si=H_0N3Dy07nOppAzD",title:"Level 0: Eclipse Park",description:"A walk in the park, the perfect start to any journey. Made in Unreal Engine 5.",hero:true},
+
+  {section:"Environment Shots"},
+  {type:"image",src:"media/EP/EP_7.png",title:"",description:""},
+  {type:"image",src:"media/EP/EP_14.png",title:"",description:""},
+  {type:"image",src:"media/EP/EP_15.png",title:"",description:""},
+  {type:"image",src:"media/EP/EP_5.png",title:"",description:""},
+  {type:"image",src:"media/EP/EP_4.png",title:"",description:""},
+  {type:"image",src:"media/EP/EP_6.png",title:"",description:""},
+  {type:"image",src:"media/EP/EP_8.png",title:"",description:""},
+  {type:"image",src:"media/EP/EP_9.png",title:"",description:""},
+  {type:"image",src:"media/EP/EP_10.png",title:"",description:""},
+  {type:"image",src:"media/EP/EP_11.png",title:"",description:""},
+  {type:"image",src:"media/EP/EP_12.png",title:"",description:""},
+  {type:"image",src:"media/EP/EP_13.png",title:"",description:""},
+  {section:"Presentation"},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-3.png",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-4.png",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-5.png",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-6.png",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-7.png",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-9.png",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-10.png",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-11.png",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-13.png",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-15.png",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-16.png",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-17.png",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-19.png",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-20.png",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-21.png",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-22.png",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-23.png",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-24.png",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-26.png",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-27.png",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-31.png",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-32.png",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-33.png",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-36.png",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-37.png",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-38.png",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-39.png",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-40.png",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-41.png",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-42.png",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-43.png",title:"",description:""},
+
+
+
+]},
+////////////////////////////////////////////////////////////
+   {title:"Darker Days", 
+   
+   yearSemester:"Spring 2025", categories:["Environment"], description:"Made in Unreal Engine 5.", thumbnail:"https://i.ytimg.com/vi/t5M_X6TLh4A/maxresdefault.jpg",
+  media:[{type:"video",src:"https://youtube.com/embed/t5M_X6TLh4A",title:"Darker Days",description:"A mysterious effigy stands alone in a dark alleyway. Made in Unreal Engine 5."},{type:"image",src:"https://i.ytimg.com/vi/t5M_X6TLh4A/maxresdefault.jpg",title:"Render Still",description:"Additional render close-up."}]},
+////////////////////////////////////////////////////////////
+  {title:"Blender Baby", 
+  
+  yearSemester:"Fall 2025", categories:["Character"], description:"A young deity reincarnated on the gray plane, Blender Baby is destined to live a life of creation.", thumbnail:"media/BB/BB_Thumb.png",
+  media:[{type:"image",src:"media/BB/BB_Render.png",title:"Render",description:"Early render with base materials!"},
+  {type:"image",src:"media/BB/BB_turnaround_full.png",title:"Costume Design",description:"Gizmo earrings, 3D cursor necklace, view mode piercings, and a grid cloak. Not to mention a shining halo and head piece!"},
+  {type:"image",src:"media/BB/BB_turnaround.png",title:"Costume Design",description:"Gizmo earrings, 3D cursor necklace, view mode piercings, and a grid cloak. Not to mention a shining halo and head piece!"}]},
+////////////////////////////////////////////////////////////
+   {title:"Character Concept Art", 
+   
+   yearSemester:"Fall 2025", categories:["Character"], description:"", thumbnail:"media/character_concepts/Concept_Art_Sal.png",
+  media:[
+  {section:"Character Design Class"},
+  {type:"image",src:"media/character_concepts/mguderian_week3_hw.jpg",title:"Concept Homework",description:"My first iterations of Salvador, who I'd end up returning to for our midterm."},
+  {type:"image",src:"media/character_concepts/mguderian_week4_hw.jpg",title:"Concept Homework",description:""},
+  {type:"image",src:"media/character_concepts/mguderian_week5_hw.jpg",title:"Concept Homework",description:""},{type:"image",src:"media/character_concepts/mguderian_week7_hw.png",title:"Concept Homework",description:""}]},
+////////////////////////////////////////////////////////////
+  {title:"Ancient Underground", 
+  
+  yearSemester:"Spring 2025", categories:["Environment"], description:"A short environment animation demo.", thumbnail:"https://i.ytimg.com/vi/2tgprrs8rPE/maxresdefault.jpg",
+  media:[{type:"video",src:"https://www.youtube.com/embed/2tgprrs8rPE",title:"Environment Video",description:"Environment video demo."},
+  {type:"image",src:"https://uosew.com/media/images/fulls/02.jpg",title:"Environment Still",description:"Render still image."}]},
+////////////////////////////////////////////////////////////
+  {title:"LED Critter", 
+  
+  yearSemester:"Fall 2025", categories:["Physical Creation"], description:"A short environment animation demo.", thumbnail:"media/LEDCritterThumb.jpg", 
+  media:[
+    {type:"image",src:"media/LEDCritterThumb.jpg",title:"Character Render",description:""},
+    {type:"image",src:"media/LEDCritterThumb.jpg",title:"Character Render",description:""}
+  ]},
+////////////////////////////////////////////////////////////
+  {title:"Tropical Temptations", 
+  
+  yearSemester:"Spring 2025", categories:["Project","Prop"], description:"A little tropical vending machine. Made to be the centerpiece of a nighttime scene.", thumbnail:"media/TVM/TVM_Thumb.png", 
+  media:[
+    {section:"Tropical Vending Machine"},
+    {type:"image",src:"media/TVM/TVM_Concept.png",title:"Concept Art",description:""},
+    {type:"image",src:"media/TVM/TVM_Day.png",title:"Daytime Render",description:""},
+    {type:"image",src:"media/TVM/TVM_Night.png",title:"Nighttime Render",description:""},
+    {type:"image",src:"media//TVM/TVM_Turnaround.gif",title:"Turnaround",description:""},
+    {section:"Adrian"},
+    {type:"image",src:"media/TVM/TVM_Adrians.png",title:"Iterations",description:""},
+    {type:"image",src:"media/TVM/TVM_Adrian.png",title:"Final Render",description:""},
+    {type:"image",src:"media/TVM/TVM_Size.png",title:"Size Comparison",description:""},
+    {section:"Environment"},
+    {type:"image",src:"media/TVM/TVM_Tropical Temptations.png",title:"Tropical Temptations",description:"You feel a dull headache after waking up late at night in your beach chair. Everyone must have left a while ago. A glowing machine in the distance seems like your only hope at salvation..."},
+    {type:"image",src:"media/TVM/TVM_Prefinal.png",title:"In-Progress Shot",description:"I actually turned this one for class as my final, and only came back to it nearly a year later to touch it up. I think the newer version captures what I was going for a lot better."},
+  ]},
+ {title:"Early Blender Renders", yearSemester:"Pre-2024", categories:["Environment"], description:"A collection of my earliest 3D renders.", thumbnail:"https://uosew.com/media/images/fulls/01.jpg",
+  media:[
+    {type:"image",src:"https://uosew.com/media/images/fulls/01.jpg",title:"Off the Bubble Coast",description:"Made in the period when I was first learning Blender, I still find a sense of comfort in looking at it. Reminds me of the late nights modeling and listening to DnB, which was also new to me."},
+    {type:"image",src:"https://uosew.com/media/images/fulls/02.jpg",title:"Eternal Eye",description:"Lots of fun with procedural texturing in this one. I've had it as my background for the longest time!"},
+    {type:"image",src:"https://uosew.com/media/images/fulls/03.jpg",title:"Mini Desert",description:""},
+    {type:"image",src:"https://uosew.com/media/images/fulls/04.jpg",title:"School Yard",description:""},
+    {type:"image",src:"https://uosew.com/media/images/fulls/05.jpg",title:"",description:""},
+    {type:"image",src:"https://uosew.com/media/images/fulls/06.jpg",title:"",description:""},
+    {type:"image",src:"https://uosew.com/media/images/fulls/07.jpg",title:"",description:""},
+    {type:"image",src:"https://uosew.com/media/images/fulls/08.jpg",title:"Blender Blender",description:"I think this one turned out really fun. Very cutesy!"},
+    {type:"image",src:"https://uosew.com/media/images/fulls/09.jpg",title:"Alien's Beach Day",description:""},
+    {type:"image",src:"https://uosew.com/media/images/fulls/10.jpg",title:"",description:""},
+    {type:"image",src:"https://uosew.com/media/images/fulls/12.jpg",title:"Morphous",description:""},
+    {type:"image",src:"https://uosew.com/media/images/fulls/13.jpg",title:"Nightmare King",description:""},
+    {type:"image",src:"https://uosew.com/media/melancholypurple.png",title:"melancholypurple.png",description:""},
+    {type:"image",src:"https://uosew.com/media/images/fulls/21.png",title:"",description:""}
+  ]},
+////////////////////////////////////////////////////////////
+
+
+];
+
+
+
+const gallery2025 = document.getElementById("gallery-2025");
+const gallery2024 = document.getElementById("gallery-2024");
+const gallery2023 = document.getElementById("gallery-2023");
+const galleryPre2024 = document.getElementById("gallery-pre2024");
+const modal=document.getElementById("modal");
+const modalContent=document.getElementById("modalContent");
+const zoomOverlay=document.getElementById("zoomOverlay");
+const zoomContainer=zoomOverlay.querySelector(".zoom-container");
+const zoomTitle=zoomOverlay.querySelector(".zoom-title");
+const zoomDescription=zoomOverlay.querySelector(".zoom-description");
+
+// Render all projects grouped into year sections (2025, 2024, 2023)
+function extractYear(p){
+  const ys = (p.yearSemester||"").toString();
+  const m = ys.match(/\b(\d{4})\b/);
+  if(m) return parseInt(m[1],10);
+  // Treat "Pre-2024" and similar as 0 (pre-2024 bucket)
+  if(/pre-?2024/i.test(ys)) return 0;
+  return 0;
+}
+
+function semesterOrder(p){
+  const s = (p.yearSemester||"").toString().toLowerCase();
+  if(s.includes('fall')) return 2; // show Fall before Spring
+  if(s.includes('spring')) return 1;
+  return 0; // unknown / pre / other
+}
+
+function createCardForProject(p, index){
+  const card=document.createElement("div");
+  card.className="card "+(p.categories && p.categories[0] ? typeClass(p.categories[0]) : "");
+  const img=new Image(); img.src=p.thumbnail; img.alt=p.title; img.loading="lazy";
+  const content=document.createElement("div"); content.className="card-content";
+  let displayCategories = [...(p.categories||[])];
+  if(displayCategories.join(", ").length>25){ displayCategories = displayCategories.map(c=>c.length>10?c.slice(0,10)+"…":c); }
+  content.innerHTML=`<h3>${p.title}</h3><p>${p.yearSemester} • ${displayCategories.join(", ")}</p>`;
+  card.appendChild(img); card.appendChild(content);
+
+  img.addEventListener("load",()=>{ requestAnimationFrame(()=>{ setTimeout(()=>card.classList.add("show"),index*80); }); });
+  img.addEventListener("error",()=>card.classList.add("show"));
+  card.addEventListener("click",()=>openModal(p));
+  return card;
+}
+
+function renderProjectsByYear(){
+  // Clear containers
+  gallery2025.innerHTML = "";
+  gallery2024.innerHTML = "";
+  gallery2023.innerHTML = "";
+  galleryPre2024.innerHTML = "";
+
+  const buckets = { 2025:[], 2024:[], 2023:[], 0:[] };
+  projects.forEach(p=>{
+    // Apply category filter
+    if(activeCategory !== "all" && (!p.categories || !p.categories.some(cat => typeClass(cat) === typeClass(activeCategory)))){
+      return;
+    }
+    
+    const y = extractYear(p);
+    if(y === 2025) buckets[2025].push(p);
+    else if(y === 2024) buckets[2024].push(p);
+    else if(y === 2023) buckets[2023].push(p);
+    else buckets[0].push(p);
+  });
+
+  // Sort each bucket using yearSemester: year (desc) then semester (Fall before Spring)
+  Object.keys(buckets).forEach(key=>{
+    buckets[key].sort((a,b)=>{
+      const ya = extractYear(a), yb = extractYear(b);
+      if(ya !== yb) return yb - ya; // newer years first (shouldn't be needed inside bucket)
+      const sa = semesterOrder(a), sb = semesterOrder(b);
+      if(sa !== sb) return sb - sa; // Fall(2) before Spring(1)
+      // fallback: preserve original order or compare strings
+      return (b.yearSemester||"").localeCompare(a.yearSemester||"");
+    });
+  });
+
+  buckets[2025].forEach((p,i)=> gallery2025.appendChild(createCardForProject(p,i)));
+  buckets[2024].forEach((p,i)=> gallery2024.appendChild(createCardForProject(p,i)));
+  buckets[2023].forEach((p,i)=> gallery2023.appendChild(createCardForProject(p,i)));
+  buckets[0].forEach((p,i)=> galleryPre2024.appendChild(createCardForProject(p,i)));
+  
+  // Hide year sections if they have no projects
+  gallery2025.parentElement.style.display = gallery2025.children.length > 0 ? "block" : "none";
+  gallery2024.parentElement.style.display = gallery2024.children.length > 0 ? "block" : "none";
+  gallery2023.parentElement.style.display = gallery2023.children.length > 0 ? "block" : "none";
+  galleryPre2024.parentElement.style.display = galleryPre2024.children.length > 0 ? "block" : "none";
+}
+
+// Card type class
+function typeClass(type){
+  switch(type.toLowerCase()){
+    case "environment": return "environment";
+    case "character": return "character";
+    case "prop": return "prop";
+    case "project": return "project";
+    case "physical": 
+    case "physical creation": return "physical";
+    default: return "";
+  }
+}
+
+// (Filtering and infinite-scroll removed.)
+
+// Zoom & Modal
+let currentProject=null, currentMediaIndex=0, filteredMediaList=[];
+
+// Build filtered media list (excludes section dividers)
+function getFilteredMediaList(project) {
+  return project.media.filter(m => !m.section);
+}
+
+// Map from filtered index to original project.media index
+function getOriginalMediaIndex(filteredIndex) {
+  const originalMedia = currentProject.media;
+  let count = 0;
+  for (let i = 0; i < originalMedia.length; i++) {
+    if (!originalMedia[i].section) {
+      if (count === filteredIndex) return i;
+      count++;
+    }
+  }
+  return 0;
+}
+
+function openModal(project){
+  modal.classList.add("show");
+  document.body.style.overflow = "hidden";
+  modalContent.innerHTML=`
+    <h2>${project.title}</h2>
+    <p><em>${project.yearSemester} • ${project.categories.join(", ")}</em></p>
+    <p>${project.description}</p>
+    <div class="media-grid ${project.media.length===1?'single':''}">
+      ${project.media.map((m,idx)=>{
+        // Skip rendering media-item for section dividers
+        if(m.section) {
+          return `<div class="media-section-divider"><span class="media-section-divider-label">${m.section}</span></div>`;
+        }
+        // Only render actual media items
+        return `<div class="media-item${m.hero?' hero':''}
+" data-index="${idx}">${m.type==='image'?`<img loading="lazy" src="${m.src}" alt="${m.title}"/>`:`<iframe src="${m.src}" frameborder="0" allowfullscreen title="${m.title}"></iframe>`}</div>`;
+      }).join("")}
+    </div>
+  `;
+  modalContent.querySelectorAll(".media-item").forEach(el=>{
+    const idx=el.dataset.index; el.addEventListener("click",()=>openZoom(Number(idx),project));
+  });
+}
+
+function openZoom(originalIndex,project){
+  currentProject=project;
+  filteredMediaList = getFilteredMediaList(project);
+  
+  // Find the filtered index from the original index
+  let filteredIndex = 0;
+  for (let i = 0; i < originalIndex; i++) {
+    if (!project.media[i].section) filteredIndex++;
+  }
+  currentMediaIndex = filteredIndex;
+  
+  updateZoomMedia(); zoomOverlay.classList.add("show");
+  document.body.style.overflow = "hidden";
+  zoomOverlay.addEventListener("click",closeZoom);
+}
+
+function updateZoomMedia(){
+  const media = filteredMediaList[currentMediaIndex];
+  if (!media) return;
+  
+  zoomContainer.innerHTML = "";
+
+  // Create media element
+  let el;
+  if (media.type === "image") {
+    el = document.createElement("img");
+    el.src = media.src;
+    el.alt = media.title;
+    el.loading = "lazy";
+  } else if (media.type === "video") {
+    el = document.createElement("iframe");
+    el.src = media.src;
+    el.title = media.title;
+    el.frameBorder = "0";
+    el.allowFullscreen = true;
+  }
+
+  // Add media and fade it in
+  zoomContainer.appendChild(el);
+  requestAnimationFrame(() => el.classList.add("show"));
+
+  // Update text
+  zoomTitle.textContent = media.title;
+  zoomDescription.textContent = media.description;
+
+  // Add arrows *after* media so they layer above it
+  // Remove any previous arrows and add new arrows attached to the overlay so
+  // they reliably appear above media regardless of the container stacking
+  zoomOverlay.querySelectorAll('.zoom-arrow').forEach(n => n.remove());
+  if (filteredMediaList.length > 1) {
+    const left = document.createElement("div");
+    left.className = "zoom-arrow left";
+    left.setAttribute('role','button'); left.setAttribute('aria-label','Previous');
+    left.innerHTML = "&#10094;";
+    left.addEventListener("click", e => {
+      e.stopPropagation();
+      fadeTransition(-1);
+    });
+
+    const right = document.createElement("div");
+    right.className = "zoom-arrow right";
+    right.setAttribute('role','button'); right.setAttribute('aria-label','Next');
+    right.innerHTML = "&#10095;";
+    right.addEventListener("click", e => {
+      e.stopPropagation();
+      fadeTransition(1);
+    });
+
+    zoomOverlay.appendChild(left);
+    zoomOverlay.appendChild(right);
+  }
+}
+
+
+// Add smooth fade transition helper
+function fadeTransition(direction) {
+  const current = zoomContainer.querySelector("img, iframe");
+  if(!current) return;
+
+  current.classList.remove("show");
+  setTimeout(() => {
+    currentMediaIndex = (currentMediaIndex + direction + filteredMediaList.length) % filteredMediaList.length;
+    updateZoomMedia();
+  }, 300);
+}
+
+
+
+
+
+function closeZoom(){
+  zoomOverlay.classList.remove("show");
+  document.body.style.overflow = "";
+  zoomContainer.innerHTML = "";
+  // remove any arrow controls so they don't persist after closing
+  zoomOverlay.querySelectorAll('.zoom-arrow').forEach(n => n.remove());
+  zoomTitle.textContent = "";
+  zoomDescription.textContent = "";
+}
+modal.addEventListener("click", e=>{ if(e.target===modal) { modal.classList.remove("show"); document.body.style.overflow = ""; } });
+
+// Keyboard navigation
+document.addEventListener("keydown", e=>{
+  if(!zoomOverlay.classList.contains("show")) return;
+  if(e.key==="ArrowLeft"){ fadeTransition(-1); }
+  else if(e.key==="ArrowRight"){ fadeTransition(1); }
+  else if(e.key==="Tab"){ 
+    e.preventDefault();
+    fadeTransition(e.shiftKey ? -1 : 1);
+  }
+  else if(e.key==="Escape"){ closeZoom(); }
+});
+
+// Init
+let activeCategory = "all";
+
+// Tab filtering
+document.querySelectorAll(".tab-button").forEach(btn => {
+  btn.addEventListener("click", () => {
+    // Update active tab
+    document.querySelectorAll(".tab-button").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    
+    // Update active category
+    activeCategory = btn.dataset.category;
+    
+    // Re-render projects with filter
+    renderProjectsByYear();
+  });
+});
+
+renderProjectsByYear();
+
+</script>
+</body>
+</html>
