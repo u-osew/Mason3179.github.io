@@ -118,7 +118,7 @@ header {
 
 .modal h2 { margin-top:0; color:#FFAA00; }
 .media-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(400px,1fr)); gap:1.25rem; margin-top:1rem; justify-items:center; align-items:start; }
-.media-item.hero { grid-column: 1 / -1; aspect-ratio: 16/9; max-width: 90vh;}
+.media-item.hero { grid-column: 1 / -1; aspect-ratio: 16/9; max-width: 100vh;}
 .media-item { width:100%; aspect-ratio:16/9; background:#222; display:flex; justify-content:center; align-items:center; overflow:hidden; border-radius:8px; cursor:pointer; }
 .media-item img, .media-item iframe { max-width:100%; max-height:100%; object-fit:contain; }
 /* Fix video scaling in modal */
@@ -556,13 +556,18 @@ const projects=[
   yearSemester:"Fall 2025", categories:["Projects","Characters"], description:"Project Disciple is a mobile base builder game being developed through a collaboration between Otis College and USC.\n\n I worked closely with our art producer in order to provide tasks for the art team. \n\nFor my personal artistic contributions, I primarily worked through the character workflow in order to provide classmates with a strong base model. \nOnce we pivoted, I continued to provide concept art for the game's disciples.", thumbnail:"media/Disciple/PD_Thumb.png", 
   media:[
 
-    {section:"Early Renders"},
+    {section:"Phase 2 Renders"},
+    {type:"image",src:"media/Disciple/phase_2/PD_Druid.PNG",title:"Modern Druid",description:"When transitioning to our phase 2, we were tasked with creating druid characters in a more modern setting."},
+    {type:"image",src:"media/Disciple/phase_2/Project Disciple-22.png",title:"",description:""},
+    {type:"image",src:"media/Disciple/phase_2/Project Disciple-23.png",title:"Reference Board",description:""},
+
+    {section:"Phase 1 Renders"},
+    {type:"image",src:"media/Disciple/phase_1/Lukki.gif",title:"Lukki",description:"My favorite personal piece from the project, Lukki! The first character I devised for the game, meant to act as a sort of guide NPC for the player, much like the villager in Clash of Clans"},
+    {type:"image",src:"media/Disciple/phase_1/pd_char_design.png",title:"Character Guidelines Sheet",description:"A quick guidelines sheet made to make designing characters in the style easier. Big shapes were emphasized highly to keep visibility on the mobile view."}, 
     {type:"image",src:"media/Disciple/phase_1/pd_Athanasia_Concept.png",title:"Dark Goddess Athanasia",description:"Our narrative team wrote some lore on the primary deities the cults would be following. This is a quick rendition of Athanasia, dark goddess of luxury goods and all things beauty. I incorporated athanasia flowers into her design, as well as a silk dress downloaded online."},
     {type:"image",src:"media/Disciple/phase_1/pd_sampleoni.gif",title:"Oni Gangnam Style!",description:"To ease off our workload, I made the decision to make the base armature with Mixamo animations in mind, at least for prototyping."},
-    {type:"image",src:"media/Disciple/phase_1/Lukki.gif",title:"Lukki",description:"My favorite personal piece from the project, Lukki! The first character I devised for the game, meant to act as a sort of guide NPC for the player, much like the villager in Clash of Clans"},
    {type:"image",src:"media/Disciple/phase_1/Disciple_gangnam_style.gif",title:"Unreal Engine Demo",description:"Using some basic toon shaders, this visualizer demonstrates how the models may look in Unreal Engine 5."},
     {type:"image",src:"media/Disciple/phase_1/pd_Base Model Cultist.gif",title:"Base Model Explorations",description:"The view from an angle more closely representing the game's final perspective. Our second phase's art director believed the giant heads would cover the cultists bodies too much, so model was scrapped."},
-    {type:"image",src:"media/Disciple/phase_1/pd_Cultist Base.png",title:"Base Cultist Sheet",description:"The base proportions for our cultists. We were tasked with creating something 'chibi' for cuteness factor. This is a template I made for the art team to create their work around."},
     {section:"Phase 1"},
  
     {type:"image",src:"media/Disciple/phase_1/Project Disciple-1.png",title:"Lookbook",description:"Some splash art I made for another class's homework featuring Lukki and his old pal Dino. The entirety of the making is elsewhere in the portfolio."},
@@ -573,7 +578,7 @@ const projects=[
     {type:"image",src:"media/Disciple/phase_1/Project Disciple-6.png",title:"",description:""},
     {type:"image",src:"media/Disciple/phase_1/Project Disciple-7.png",title:"",description:""},
     {type:"image",src:"media/Disciple/phase_1/Project Disciple-8.png",title:"",description:""},
-    {type:"image",src:"media/Disciple/phase_1/pd_char_design.png",title:"",description:""}, 
+    {type:"image",src:"media/Disciple/phase_1/pd_Cultist Base.png",title:"Base Cultist Sheet",description:"The base proportions for our cultists. We were tasked with creating something 'chibi' for cuteness factor. This is a template I made for the art team to create their work around."},
     {type:"image",src:"media/Disciple/phase_1/pd_clothing_tiers.jpg",title:"Clothing Tiers",description:"My classmates work using the base drawing template."},    
     {type:"image",src:"media/Disciple/phase_1/pd_basereferences.png",title:"Base Design Reference",description:"A quick reference collection of how other modular characters are handled and their body types."},
     {type:"image",src:"media/Disciple/phase_1/Project Disciple-9.png",title:"",description:""},
@@ -634,8 +639,8 @@ const projects=[
   
   yearSemester:"Fall 2025", categories:["Projects","Environments"], description:"Blender Baby's day out at the park! Designed to be an introductory game level, where different mechanics are explored.\n\nMade in Unreal Engine 5.", thumbnail:"media/EP/EP_Thumb.png",
   media:[
-  {section:"Gameplay Demo"},
-  {type:"video",src:"https://www.youtube.com/embed/g-_WP2jangg?si=H_0N3Dy07nOppAzD",title:"Level 0: Eclipse Park",description:"A walk in the park, the perfect start to any journey. Made in Unreal Engine 5.",hero:true},
+  {section:"Gameplay Reel"},
+  {type:"video",src:"https://www.youtube.com/embed/g-_WP2jangg?si=H_0N3Dy07nOppAzD",title:"",description:"",hero:true},
 
   {section:"Environment Shots"},
   {type:"image",src:"media/EP/EP_7.png",title:"",description:""},
@@ -762,10 +767,9 @@ const projects=[
 ////////////////////////////////////////////////////////////
   {title:"LED Critter", 
   
-  yearSemester:"Fall 2025", categories:["Products"], description:"", thumbnail:"media/LEDCritterThumb.jpg", 
+  yearSemester:"Fall 2025", categories:["Products"], description:"", thumbnail:"media/construction.png", 
   media:[
     {type:"image",src:"media/LEDCritterThumb.jpg",title:"Character Render",description:""},
-    {type:"image",src:"media/LEDCritterThumb.jpg",title:"Character Render",description:""}
   ]},
 ////////////////////////////////////////////////////////////
   {title:"uosew Skateboard", 
@@ -794,6 +798,34 @@ const projects=[
 
     {type:"image",src:"media/TVM/TVM_Prefinal.png",title:"In-Progress Shot",description:"I actually turned this one for class as my final, and only came back to it nearly a year later to touch it up. I think the newer version captures what I was going for better."},
   ]},
+////////////////////////////////////////////////////////////
+  {title:"Fantasy Scene", 
+  
+  yearSemester:"Fall 2024", categories:["Environments"], description:"A fantasy environment scene created in Unreal Engine 5.", thumbnail:"media/UE5_Fantasy/UE5_Fantasy_Thumb.webp", 
+  media:[
+    {section:"Render"},
+    {type:"video",src:"https://www.youtube.com/embed/qZ7nfb1Txjg",title:"Fantasy Scene Render",description:"",hero:true},
+    
+    {section:"Process"},
+    {type:"image",src:"media/UE5_Fantasy/reference_1.jpg",title:"",description:"The main reference, used primarily for the background. Main source can be found here: <a href='https://www.artstation.com/artwork/1xgvE8' target='_blank'>https://www.artstation.com/artwork/1xgvE8</a>"},
+    {type:"image",src:"media/UE5_Fantasy/reference_2.jpg",title:"",description:"When I began the project, I started with this verison of the tower instead of the other one. By the time the project was ending it was too late to upgrade the tower."},
+    {type:"image",src:"media/UE5_Fantasy/Substance_Setup.webp",title:"",description:""},
+    {type:"image",src:"media/UE5_Fantasy/block_1.webp",title:"Blockout 1",description:""},
+    {type:"image",src:"media/UE5_Fantasy/block_2.webp",title:"Blockout 2",description:""},
+    {type:"image",src:"media/UE5_Fantasy/block_3.webp",title:"Blockout 3",description:""},
+    {type:"image",src:"media/UE5_Fantasy/block_4.webp",title:"Final Scene Layout",description:""},
+    {type:"image",src:"media/UE5_Fantasy/progress_1.webp",title:"",description:""},
+    {type:"image",src:"media/UE5_Fantasy/progress_2.webp",title:"",description:""},
+    {type:"image",src:"media/UE5_Fantasy/progress_3.webp",title:"",description:""},
+    {type:"image",src:"media/UE5_Fantasy/progress_4.webp",title:"",description:""},
+    {type:"image",src:"media/UE5_Fantasy/progress_5.webp",title:"",description:""},
+    {type:"image",src:"media/UE5_Fantasy/progress_6.webp",title:"",description:""},
+    {type:"image",src:"media/UE5_Fantasy/viewport_0.webp",title:"",description:""},
+    {type:"image",src:"media/UE5_Fantasy/Viewport_1.webp",title:"",description:""},
+    {type:"image",src:"media/UE5_Fantasy/Viewport_2.webp",title:"",description:""},
+    {type:"image",src:"media/UE5_Fantasy/viewport_3.webp",title:"",description:""}
+  ]},
+////////////////////////////////////////////////////////////
  {title:"Early Blender Renders", yearSemester:"Pre-2024", categories:["Environments"], description:"A collection of my earliest 3D renders.", thumbnail:"https://uosew.com/media/images/fulls/01.jpg",
   media:[
     {type:"image",src:"https://uosew.com/media/images/fulls/01.jpg",title:"Off the Bubble Coast",description:"Made in the period when I was first learning Blender, I still find a sense of comfort in looking at it. Reminds me of the late nights modeling and listening to DnB, which was also new to me."},
