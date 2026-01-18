@@ -268,9 +268,9 @@ header {
 
 /* Mobile Responsive Styles */
 @media screen and (max-width: 768px) {
-  /* Gallery cards - make single column on small screens */
+  /* Gallery cards - make two columns on small screens */
   .gallery { 
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 0.75rem;
     padding: 0.75rem;
   }
@@ -581,10 +581,23 @@ const projects=[
 ////////////////////////////////////////////////////////////
   {title:"Onsen Monkeys", 
   
-  yearSemester:"Spring 2025", categories:["Environments"], description:"Macaques at the Onsen. Made in Unreal Engine 5.", thumbnail:"https://i.ytimg.com/vi/cxfMl2EXvro/maxresdefault.jpg",
-  media:[{type:"video",src:"https://www.youtube.com/embed/cxfMl2EXvro",title:"Onsen Monkeys Video",description:"Cinematic sequence of macaques relaxing."},
-  {type:"image",src:"https://i.ytimg.com/vi/cxfMl2EXvro/maxresdefault.jpg",title:"Render Still",description:"Additional render close-up."},
-  {type:"embed",src:""}]},
+  yearSemester:"Spring 2025", categories:["Environments"], description:"Memories of the tribe relaxing at the Onsen persist, warming the soul. If only times were always this good.\n\n Made in Unreal Engine 5.", thumbnail:"https://i.ytimg.com/vi/cxfMl2EXvro/maxresdefault.jpg",
+  media:[
+  {section:"Cinematic"},  
+  {type:"video",src:"https://www.youtube.com/embed/cxfMl2EXvro",title:"",description:"",hero:true},
+  {section:"Macaque Model"},
+  {type:"video",src:"https://sketchfab.com/models/ab43f905bcc545808ff8b797ff92eda8/embed",title:"PS1 Japanese Macaque (Snow Monkey)",description:"3D model of the macaque used in the scene. Free to download!",hero:true},
+  {section:"Process"},
+  {type:"image",src:"media/OM/Game Engine I-21.webp",title:"",description:""},
+  {type:"image",src:"media/OM/Game Engine I-22.webp",title:"",description:""},
+  {type:"image",src:"media/OM/Game Engine I-23.webp",title:"",description:""},
+  {type:"image",src:"media/OM/Game Engine I-24.webp",title:"",description:""},
+  {type:"image",src:"media/OM/Game Engine I-25.webp",title:"",description:""},
+  {type:"image",src:"media/OM/Game Engine I-26.webp",title:"",description:""},
+  {type:"image",src:"media/OM/Game Engine I-27.webp",title:"",description:""},
+  {type:"image",src:"media/OM/Game Engine I-28.webp",title:"",description:""},
+  {type:"image",src:"media/OM/Game Engine I-29.webp",title:"",description:""},
+  ]},
 ////////////////////////////////////////////////////////////
   {title:"Eclipse Park", 
   
@@ -645,10 +658,29 @@ const projects=[
 ////////////////////////////////////////////////////////////
    {title:"Darker Days", 
    
-   yearSemester:"Spring 2025", categories:["Environments"], description:"Made in Unreal Engine 5.", thumbnail:"https://i.ytimg.com/vi/t5M_X6TLh4A/maxresdefault.jpg",
+   yearSemester:"Spring 2025", categories:["Environments"], description:"A mysterious effigy stands alone in a dark alleyway, with not a soul to be seen. \n\nMade in Unreal Engine 5.", thumbnail:"https://i.ytimg.com/vi/t5M_X6TLh4A/maxresdefault.jpg",
   media:[
-  {type:"video",src:"https://youtube.com/embed/t5M_X6TLh4A",title:"Darker Days",description:"A mysterious effigy stands alone in a dark alleyway. Made in Unreal Engine 5.",hero:true},
-  {type:"image",src:"https://i.ytimg.com/vi/t5M_X6TLh4A/maxresdefault.jpg",title:"Render Still",description:"Additional render close-up."}]},
+  {section:"Cinematic"},    
+  {type:"video",src:"https://youtube.com/embed/t5M_X6TLh4A",title:"",description:"",hero:true},
+  {section:"Goddess Mask"},
+  {type:"video",src:"https://sketchfab.com/models/69fe6a8aad3a49d69b57429e110569fc/embed",title:"Goddess Mask",description:"Effigy of the Goddess, do you dare take it with you? (Free to download!)", hero:true},
+  {section:"Process"},
+  {type:"image",src:"media/DD/Game Engine I-2.webp",title:"",description:""},
+  {type:"image",src:"media/DD/Game Engine I-3.webp",title:"Reference Images",description:""},
+  {type:"image",src:"media/DD/Game Engine I-4.webp",title:"Reference Images",description:""},
+  {type:"image",src:"media/DD/Game Engine I-5.webp",title:"",description:""},
+  {type:"image",src:"media/DD/Game Engine I-8.webp",title:"",description:""},
+  {type:"image",src:"media/DD/Game Engine I-9.webp",title:"",description:""},
+  {type:"image",src:"media/DD/Game Engine I-10.webp",title:"",description:""},
+  {type:"image",src:"media/DD/Game Engine I-11.webp",title:"Skateboard & Goddess Mask",description:"The Skateboard model came from Procreate, with art designed by me. I made one similar in real life, as seen in another project in the portfolio. The goddess mask is also in its own project."},
+  {type:"image",src:"media/DD/Game Engine I-12.webp",title:"",description:""},
+  {type:"image",src:"media/DD/Game Engine I-13.webp",title:"",description:""},
+  {type:"image",src:"media/DD/Game Engine I-14.webp",title:"Decals",description:"These decals were taken from previous art pieces. The red one is a self portrait and the doodle is a small goddess."},
+  {type:"image",src:"media/DD/15.webp",title:"Shower Thoughts",description:"The original piece that the decal came from."},
+  {type:"image",src:"media/DD/Game Engine I-15.webp",title:"",description:""},
+  {type:"image",src:"media/DD/Game Engine I-16.webp",title:"",description:""},
+  {type:"image",src:"media/DD/Game Engine I-18.webp",title:"",description:""}
+  ]},
 ////////////////////////////////////////////////////////////
   {title:"Blender Baby", 
   
@@ -662,9 +694,9 @@ const projects=[
    yearSemester:"Fall 2025", categories:["Characters"], description:"", thumbnail:"media/character_concepts/Concept_Art_Sal.png",
   media:[
   {section:"Character Design Class"},
-  {type:"image",src:"media/character_concepts/mguderian_week3_hw.jpg",title:"Concept Homework",description:"My first iterations of Salvador, who I'd end up returning to for our midterm."},
+  {type:"image",src:"media/character_concepts/mguderian_week3_hw.jpg",title:"",description:""},
   {type:"image",src:"media/character_concepts/mguderian_week4_hw.jpg",title:"Concept Homework",description:""},
-  {type:"image",src:"media/character_concepts/mguderian_week5_hw.jpg",title:"Concept Homework",description:""},{type:"image",src:"media/character_concepts/mguderian_week7_hw.png",title:"Concept Homework",description:""}]},
+  {type:"image",src:"media/character_concepts/mguderian_week5_hw.jpg",title:"",description:""},{type:"image",src:"media/character_concepts/mguderian_week7_hw.png",title:"",description:""}]},
 ////////////////////////////////////////////////////////////
   {title:"Ancient Underground", 
   
