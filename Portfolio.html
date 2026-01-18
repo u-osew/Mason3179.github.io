@@ -734,10 +734,10 @@ const zoomDescription=zoomOverlay.querySelector(".zoom-description");
 // Render all projects grouped into year sections (2025, 2024, 2023)
 function extractYear(p){
   const ys = (p.yearSemester||"").toString();
+  // Treat "Pre-2024" and similar as 0 (pre-2024 bucket) - check FIRST before extracting year
+  if(/pre-?2024/i.test(ys)) return 0;
   const m = ys.match(/\b(\d{4})\b/);
   if(m) return parseInt(m[1],10);
-  // Treat "Pre-2024" and similar as 0 (pre-2024 bucket)
-  if(/pre-?2024/i.test(ys)) return 0;
   return 0;
 }
 
