@@ -888,6 +888,13 @@ function openZoom(originalIndex,project){
   updateZoomMedia(); zoomOverlay.classList.add("show");
   document.body.style.overflow = "hidden";
   zoomOverlay.addEventListener("click",closeZoom);
+  
+  // Scroll to top of zoom overlay and window
+  requestAnimationFrame(() => {
+    window.scrollTo(0, 0);
+    zoomOverlay.scrollTop = 0;
+    zoomContainer.scrollTop = 0;
+  });
 }
 
 function updateZoomMedia(){
@@ -972,6 +979,10 @@ function closeZoom(){
   zoomOverlay.querySelectorAll('.zoom-arrow').forEach(n => n.remove());
   zoomTitle.textContent = "";
   zoomDescription.textContent = "";
+  // Reset zoom state
+  currentMediaIndex = 0;
+  currentProject = null;
+  filteredMediaList = [];
 }
 modal.addEventListener("click", e=>{ if(e.target===modal) { modal.classList.remove("show"); document.body.style.overflow = ""; } });
 
