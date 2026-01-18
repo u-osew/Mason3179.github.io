@@ -147,7 +147,8 @@ header {
 .zoom-container { width:95vw; max-width:1600px; aspect-ratio:16/9; position:relative; z-index: 2; display:flex; justify-content:center; align-items:center; margin-bottom:1rem;  overflow: visible;}
 .zoom-container img, .zoom-container iframe { width:100%; height:100%; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.4); cursor:zoom-out; object-fit:contain; }
 .zoom-container iframe { pointer-events: auto; }
-.zoom-info { color:white; text-align:center; max-width:90%; margin-bottom:20px; }
+.zoom-info { color:white; text-align:center; max-width:90%; margin-bottom:20px; opacity:1; transition: opacity 0.3s ease; }
+.zoom-info.hide { opacity:0; }
 .zoom-info h3 { margin-bottom:0.3rem; color:#FFAA00; }
 .zoom-info p { margin:0; font-size:1.1rem; }
 /* Ensure zoom arrows are visible and layered above media */
@@ -374,7 +375,7 @@ header {
   
   /* Year headings */
   .year-block h2 {
-    font-size: 1.5rem;
+    font-size: 4rem;
   }
   
   /* Media section divider */
@@ -459,19 +460,19 @@ header {
 </div>
 
 <section class="year-block">
-  <h2 style="text-align:center; margin:1rem 0; color:#FFAA00;">2025</h2>
+  <h2 style="text-align:left; margin:1rem 0; color:#FFAA00; font-weight:bold; font-size:5rem; padding-left:1rem;">2025</h2>
   <div class="gallery" id="gallery-2025"></div>
 </section>
 <section class="year-block">
-  <h2 style="text-align:center; margin:1rem 0; color:#FFAA00;">2024</h2>
+  <h2 style="text-align:left; margin:1rem 0; color:#FFAA00; font-weight:bold; font-size:5rem; padding-left:1rem;">2024</h2>
   <div class="gallery" id="gallery-2024"></div>
 </section>
 <section class="year-block">
-  <h2 style="text-align:center; margin:1rem 0; color:#FFAA00;">Pre-2024</h2>
+  <h2 style="text-align:left; margin:1rem 0; color:#FFAA00; font-weight:bold; font-size:5rem; padding-left:1rem;">Pre-2024</h2>
   <div class="gallery" id="gallery-pre2024"></div>
 </section>
 <section class="year-block">
-  <h2 style="text-align:center; margin:1rem 0; color:#FFAA00;">2023</h2>
+  <h2 style="text-align:left; margin:1rem 0; color:#FFAA00; font-weight:bold; font-size:5rem; padding-left:1rem;">2023</h2>
   <div class="gallery" id="gallery-2023"></div>
 </section>
 
@@ -494,7 +495,7 @@ const projects=[
 
   {title:"Estuary", 
   
-  yearSemester:"Fall 2025", categories:["Projects","Characters"], description:"A collaborative final project done for a character concept art class! Estuary is a fantasy platformer concept inspired by Japanese Shinto. It takes place in a sleepy, lush grove. I was tasked with character creation. We would later decided that the golems would be the protagonists of the story.", thumbnail:"media/Estuary/Estuary_Thumb.png",
+  yearSemester:"Fall 2025", categories:["Projects","Characters"], description:"Estuary is a fantasy platformer concept inspired by Japanese Shinto. It takes place in a sleepy, lush grove. \n\nI was tasked with character creation. We would later decided that the golems would be the protagonists of the story.\n\nThis collaborative project was done as a final for a character design class.", thumbnail:"media/Estuary/Estuary_Thumb.png",
   media:[
   {section:"Deliverables"},
   {type:"image",src:"media/Estuary/Estuary_Deliverable.png",title:"Golem Trio",description:"Rendered concepts of the three golems. With segmented bodies, they were designed to swap at the head. Shape diversity was a primary focus."},
@@ -521,7 +522,7 @@ const projects=[
 ////////////////////////////////////////////////////////////
   {title:"Project Disciple", 
   
-  yearSemester:"Fall 2025", categories:["Projects"], description:"Project Disciple is a mobile base builder game being developed through a collaboration between Otis College and USC. I worked closely with our art producer in order to provide tasks for my fellow artists and I. \nFor my personal artistic contributions, I primarily worked through the character workflow in order to provide classmates with a strong base model. \nOnce we pivoted, I continued to provide concept art for the game's disciples.", thumbnail:"media/Disciple/PD_Thumb.png", 
+  yearSemester:"Fall 2025", categories:["Projects"], description:"Project Disciple is a mobile base builder game being developed through a collaboration between Otis College and USC.\n\n I worked closely with our art producer in order to provide tasks for the art team. \n\nFor my personal artistic contributions, I primarily worked through the character workflow in order to provide classmates with a strong base model. \nOnce we pivoted, I continued to provide concept art for the game's disciples.", thumbnail:"media/Disciple/PD_Thumb.png", 
   media:[
 
     {section:"Early Renders"},
@@ -541,7 +542,8 @@ const projects=[
     {type:"image",src:"media/Disciple/phase_1/Project Disciple-6.png",title:"",description:""},
     {type:"image",src:"media/Disciple/phase_1/Project Disciple-7.png",title:"",description:""},
     {type:"image",src:"media/Disciple/phase_1/Project Disciple-8.png",title:"",description:""},
-    {type:"image",src:"media/Disciple/phase_1/pd_char_design.png",title:"",description:""},
+    {type:"image",src:"media/Disciple/phase_1/pd_char_design.png",title:"",description:""}, 
+    {type:"image",src:"media/Disciple/phase_1/pd_clothing_tiers.jpg",title:"Clothing Tiers",description:"My classmates work using the base drawing template."},    
     {type:"image",src:"media/Disciple/phase_1/pd_basereferences.png",title:"Base Design Reference",description:"A quick reference collection of how other modular characters are handled and their body types."},
     {type:"image",src:"media/Disciple/phase_1/Project Disciple-9.png",title:"",description:""},
     {type:"image",src:"media/Disciple/phase_1/Project Disciple-10.png",title:"",description:""},
@@ -586,7 +588,7 @@ const projects=[
 ////////////////////////////////////////////////////////////
   {title:"Eclipse Park", 
   
-  yearSemester:"Fall 2025", categories:["Projects"], description:"Blender Baby's day out at the park! Designed to be an introductory game level, where different mechanics are explored.", thumbnail:"media/EP/EP_Thumb.png",
+  yearSemester:"Fall 2025", categories:["Projects"], description:"Blender Baby's day out at the park! Designed to be an introductory game level, where different mechanics are explored.\nMade in Unreal Engine 5.", thumbnail:"media/EP/EP_Thumb.png",
   media:[
   {section:"Gameplay Demo"},
   {type:"video",src:"https://www.youtube.com/embed/g-_WP2jangg?si=H_0N3Dy07nOppAzD",title:"Level 0: Eclipse Park",description:"A walk in the park, the perfect start to any journey. Made in Unreal Engine 5.",hero:true},
@@ -605,37 +607,37 @@ const projects=[
   {type:"image",src:"media/EP/EP_12.png",title:"",description:""},
   {type:"image",src:"media/EP/EP_13.png",title:"",description:""},
   {section:"Presentation"},
-  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-3.png",title:"",description:""},
-  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-4.png",title:"",description:""},
-  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-5.png",title:"",description:""},
-  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-6.png",title:"",description:""},
-  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-7.png",title:"",description:""},
-  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-9.png",title:"",description:""},
-  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-10.png",title:"",description:""},
-  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-11.png",title:"",description:""},
-  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-13.png",title:"",description:""},
-  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-15.png",title:"",description:""},
-  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-16.png",title:"",description:""},
-  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-17.png",title:"",description:""},
-  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-19.png",title:"",description:""},
-  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-20.png",title:"",description:""},
-  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-21.png",title:"",description:""},
-  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-22.png",title:"",description:""},
-  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-23.png",title:"",description:""},
-  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-24.png",title:"",description:""},
-  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-26.png",title:"",description:""},
-  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-27.png",title:"",description:""},
-  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-31.png",title:"",description:""},
-  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-32.png",title:"",description:""},
-  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-33.png",title:"",description:""},
-  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-36.png",title:"",description:""},
-  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-37.png",title:"",description:""},
-  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-38.png",title:"",description:""},
-  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-39.png",title:"",description:""},
-  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-40.png",title:"",description:""},
-  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-41.png",title:"",description:""},
-  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-42.png",title:"",description:""},
-  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-43.png",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-3.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-4.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-5.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-6.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-7.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-9.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-10.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-11.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-13.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-15.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-16.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-17.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-19.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-20.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-21.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-22.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-23.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-24.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-26.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-27.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-31.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-32.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-33.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-36.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-37.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-38.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-39.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-40.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-41.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-42.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-43.webp",title:"",description:""},
 
 
 
@@ -650,7 +652,7 @@ const projects=[
 ////////////////////////////////////////////////////////////
   {title:"Blender Baby", 
   
-  yearSemester:"Fall 2025", categories:["Characters"], description:"A young deity reincarnated on the gray plane, Blender Baby is destined to live a life of creation.", thumbnail:"media/BB/BB_Thumb.png",
+  yearSemester:"Fall 2025", categories:["Characters"], description:"A young deity reincarnated on the gray plane, Blender Baby is destined to live a life of creation.\nFeatured in the Eclipse Park Project!", thumbnail:"media/BB/BB_Thumb.png",
   media:[{type:"image",src:"media/BB/BB_Render.png",title:"Render",description:"Early render with base materials!"},
   {type:"image",src:"media/BB/BB_turnaround_full.png",title:"Costume Design",description:"Gizmo earrings, 3D cursor necklace, view mode piercings, and a grid cloak. Not to mention a shining halo and head piece!"},
   {type:"image",src:"media/BB/BB_turnaround.png",title:"Costume Design",description:"Gizmo earrings, 3D cursor necklace, view mode piercings, and a grid cloak. Not to mention a shining halo and head piece!"}]},
@@ -666,8 +668,31 @@ const projects=[
 ////////////////////////////////////////////////////////////
   {title:"Ancient Underground", 
   
-  yearSemester:"Spring 2025", categories:["Environments"], description:"An ancient civilization lies beneath the megalithic desert caves, sustained by natural water flow and just enough sunlight to thrive. What treasures lie hidden within? Process photos coming soon!", thumbnail:"https://i.ytimg.com/vi/2tgprrs8rPE/maxresdefault.jpg",
-  media:[{type:"video",src:"https://www.youtube.com/embed/2tgprrs8rPE",title:"",description:"",hero:true},]},
+  yearSemester:"Spring 2025", categories:["Environments"], description:"An ancient civilization lies beneath the megalithic desert caves, sustained by natural water flow and just enough sunlight to thrive. What treasures lie hidden within?", thumbnail:"media/AU/AU_Thumb.jpg",
+  media:[
+
+    {section:"Demo Reel"},
+    {type:"video",src:"https://www.youtube.com/embed/2tgprrs8rPE",title:"Ancient Underground",description:"",hero:true},
+    {type:"image",src:"media/AU/AU_Shot.png",title:"Wideshot",description:"",hero:true},
+
+    {section:"Process"},
+    {type:"image",src:"media/AU/Game Studio Project-1.webp",title:"",description:""},
+    {type:"image",src:"media/AU/Game Studio Project-3.webp",title:"",description:""},
+    {type:"image",src:"media/AU/Game Studio Project-4.webp",title:"",description:"For this project, we had to start with a chosen composition, which I think I followed a bit too literally for the first iteration."},
+    {type:"image",src:"media/AU/Game Studio Project-5.webp",title:"",description:""},
+    {type:"image",src:"media/AU/Game Studio Project-6.webp",title:"",description:""},
+    {type:"image",src:"media/AU/Game Studio Project-7.webp",title:"",description:""},
+    {type:"image",src:"media/AU/Game Studio Project-8.webp",title:"",description:""},
+    {type:"image",src:"media/AU/Game Studio Project-9.webp",title:"",description:""},
+    {type:"image",src:"media/AU/Game Studio Project-10.webp",title:"",description:""},
+    {type:"image",src:"media/AU/Game Studio Project-11.webp",title:"",description:""},
+    {type:"image",src:"media/AU/Game Studio Project-12.webp",title:"",description:""},
+    {type:"image",src:"media/AU/Game Studio Project-14.webp",title:"",description:""},
+    {type:"image",src:"media/AU/Game Studio Project-15.webp",title:"",description:""},
+    {type:"image",src:"media/AU/Game Studio Project-16.webp",title:"",description:""},
+    {type:"image",src:"media/AU/Game Studio Project-17.webp",title:"",description:""},
+    {type:"image",src:"media/AU/Game Studio Project-18.webp",title:"",description:""}
+  ]},
 ////////////////////////////////////////////////////////////
   {title:"LED Critter", 
   
@@ -856,7 +881,7 @@ function openModal(project){
   modalContent.innerHTML=`
     <h2>${project.title}</h2>
     <p><em>${project.yearSemester} • ${project.categories.join(", ")}</em></p>
-    <p>${project.description}</p>
+    <p>${project.description.replace(/\n/g, '<br>')}</p>
     <div class="media-grid ${project.media.length===1?'single':''}">
       ${project.media.map((m,idx)=>{
         // Skip rendering media-item for section dividers
@@ -924,7 +949,7 @@ function updateZoomMedia(){
 
   // Update text
   zoomTitle.textContent = media.title;
-  zoomDescription.textContent = media.description;
+  zoomDescription.innerHTML = (media.description || '').replace(/\n/g, '<br>');
 
   // Add arrows *after* media so they layer above it
   // Remove any previous arrows and add new arrows attached to the overlay so
@@ -960,10 +985,16 @@ function fadeTransition(direction) {
   const current = zoomContainer.querySelector("img, iframe");
   if(!current) return;
 
+  // Fade out both image and text
   current.classList.remove("show");
+  const zoomInfo = zoomOverlay.querySelector(".zoom-info");
+  zoomInfo.classList.add("hide");
+  
   setTimeout(() => {
     currentMediaIndex = (currentMediaIndex + direction + filteredMediaList.length) % filteredMediaList.length;
     updateZoomMedia();
+    // Fade text back in
+    setTimeout(() => zoomInfo.classList.remove("hide"), 10);
   }, 300);
 }
 
