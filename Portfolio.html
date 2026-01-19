@@ -119,14 +119,13 @@ header {
 .modal h2 { margin-top:0; color:#FFAA00; }
 .media-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(400px,1fr)); gap:1.25rem; margin-top:1rem; justify-items:center; align-items:start; }
 .media-item.hero { grid-column: 1 / -1; aspect-ratio: 16/9; max-width: 100vh;}
-.media-item { width:100%; aspect-ratio:16/9; background:#222; display:flex; justify-content:center; align-items:center; overflow:hidden; border-radius:8px; cursor:pointer; }
+.media-item { width:100%; aspect-ratio:16/9; background:transparent; display:flex; justify-content:center; align-items:center; overflow:hidden; border-radius:8px; cursor:pointer; }
 .media-item img, .media-item iframe { max-width:100%; max-height:100%; object-fit:contain; }
 /* Fix video scaling in modal */
 .media-item iframe {
   width: 100%;
   height: 100%;
   border: none;
-  aspect-ratio: 16 / 9;
   border-radius: 8px;
   object-fit: cover;
   pointer-events: none;
@@ -447,7 +446,7 @@ header {
 </style>
 </head>
 <body>
-<div align='center'><img src="./media/title.gif" class="center"></div>
+<div align='center' style="margin-top: 20px;"><img src="./media/title.gif" class="center"></div>
 
 <!-- Tab Navigation -->
 <div class="tabs-container">
@@ -493,6 +492,63 @@ header {
 // Projects array
 const projects=[
 
+  {title:"Project Jump!", 
+  
+  yearSemester:"Fall 2024", categories:["Projects"], description:"My very first Unreal Engine project, I had a blast learning the basics of the engine. We used a sidescroller template to start us off.\n\nMade in Unreal Engine 5, Blender, and Substance Painter.", thumbnail:"media/PJ/PJ_Thumb.jpg",
+  media:[
+  {section:"Gameplay Reel"},
+  {type:"video",src:"https://www.youtube.com/embed/gorPa1qOrUY?si=tRIIj-kOBKA1wFdc",title:"",description:"",hero:true},
+  
+  {section:"Concepts"},
+  {type:"image",src:"media/PJ/renders/character_concepts.jpg",title:"Character Concepts",description:"Rather mild in terms of interesting silhouettes and originality, these were made before I started to dive into character design. I wish I got to flesh out the kappa (second from left) a bit more. it was supposed to wear a molcajete on its head to mimic their water bowl heads."},
+  {type:"image",src:"media/PJ/renders/calavera_concept.png",title:"La Calavera Picante Concept",description:"La Calavera Picante is the spacecraft of Squibby the Alien (what a sentence). It was freshly rebranded after crash landing in Mexico, where he decided to make spicy sugar skulls for a living."},
+  {type:"image",src:"media/PJ/renders/environment_concept.png",title:"Environment Concepts",description:"The player, a forlorn soul, would reawaken after Squibby's ship accidentally smashes their grave to pieces. He would then ask the player for help collecting ghost peppers, which grow spiciest in the valley of the dead!"},
+  
+  {section:"Renders"},
+  {type:"image",src:"media/PJ/renders/calavera_render.jpg",title:"Calavera Render",description:""},
+  {type:"image",src:"media/PJ/renders/calavera_gif.gif",title:"Calavera In-Game",description:"Squibby's out using the restroom. His cardboard cutout should do the trick for now."},
+  {type:"image",src:"media/PJ/renders/cart_render.jpg",title:"Cart Render",description:"Ka-Shwing! I really enjoy how this cart turned out."},
+  {type:"image",src:"media/PJ/renders/grave_render_still.jpg",title:"Grave Render",description:""},
+  {type:"video",src:"media/PJ/renders/grave_turnaround.mp4",title:"Grave Turnaround",description:""},
+  {type:"video",src:"media/PJ/renders/coin_render.mp4",title:"Coin Turnaround",description:""},
+  
+  {section:"Extras"},
+  {type:"image",src:"media/PJ/extras/sugar skull.gif",title:"Sugar Skull Animation",description:"Seen on the Calavera Picante."},
+  {type:"image",src:"media/PJ/extras/runskeleton.gif",title:"",description:"I made this skeleton models for the project, then decided it would be funny to render them out and plop them around the level. I was having too much fun to take anything seriously!"},
+  {type:"image",src:"media/sillyalien.gif",title:"Silly Alien",description:"Squibby used to be called Silly Alien, former guardian of uosew.com. I made him long ago when learning blender. If you can uncover the old version of the site, you might see him there!"},
+  {type:"image",src:"media/PJ/extras/misc.png",title:"",description:"Here's a look at the storage room behind the graveyard. It's where they keep all the extra meshes."},
+  {type:"video",src:"https://sketchfab.com/models/97bf61dc5345444eb4097724cfbd6c3c/embed",title:"Sun Decoration",description:"This sun, which was originally made for a pewter necklace commission, was the basis for the coin collectible."},
+  
+  {section:"Presentation"},
+  {type:"image",src:"media/PJ/Project Jump!-2.jpg",title:"",description:"Since this was my first time in Unreal, I figured I'd keep the even the less important slides from the presentation in my portfolio."},
+  {type:"image",src:"media/PJ/Project Jump!-3.jpg",title:"",description:""},
+  {type:"image",src:"media/PJ/Project Jump!-4.jpg",title:"",description:""},
+  {type:"image",src:"media/PJ/Project Jump!-5.jpg",title:"",description:""},
+  {type:"image",src:"media/PJ/Project Jump!-6.jpg",title:"",description:""},
+  {type:"image",src:"media/PJ/Project Jump!-7.jpg",title:"",description:""},
+  {type:"image",src:"media/PJ/Project Jump!-8.jpg",title:"",description:""},
+  {type:"image",src:"media/PJ/Project Jump!-9.jpg",title:"",description:""},
+  {type:"image",src:"media/PJ/Project Jump!-10.jpg",title:"",description:""},
+  {type:"image",src:"media/PJ/Project Jump!-11.jpg",title:"",description:""},
+  {type:"image",src:"media/PJ/Project Jump!-12.jpg",title:"",description:""},
+  {type:"image",src:"media/PJ/Project Jump!-13.jpg",title:"",description:""},
+  {type:"image",src:"media/PJ/Project Jump!-14.jpg",title:"",description:""},
+  {type:"image",src:"media/PJ/Project Jump!-15.jpg",title:"",description:""},
+  {type:"image",src:"media/PJ/Project Jump!-16.jpg",title:"",description:""},
+  {type:"image",src:"media/PJ/Project Jump!-17.jpg",title:"",description:""},
+  {type:"image",src:"media/PJ/Project Jump!-18.jpg",title:"",description:""},
+  {type:"image",src:"media/PJ/Project Jump!-19.jpg",title:"",description:""},
+  {type:"image",src:"media/PJ/Project Jump!-20.jpg",title:"",description:""},
+  {type:"image",src:"media/PJ/Project Jump!-21.jpg",title:"",description:""},
+  {type:"image",src:"media/PJ/Project Jump!-22.jpg",title:"",description:""},
+  {type:"image",src:"media/PJ/Project Jump!-23.jpg",title:"",description:""},
+  {type:"image",src:"media/PJ/Project Jump!-24.jpg",title:"",description:""},
+  {type:"image",src:"media/PJ/Project Jump!-25.jpg",title:"",description:""},
+  {type:"image",src:"media/PJ/Project Jump!-26.jpg",title:"",description:""},
+  
+
+  ]},  
+////////////////////////////////////////////////////////////
   {title:"Estuary", 
   
   yearSemester:"Fall 2025", categories:["Projects","Characters"], description:"Estuary is a fantasy platformer concept inspired by Japanese Shinto. It takes place in a sleepy, lush grove. \n\nI was tasked with character creation. We would later decided that the golems would be the protagonists of the story.\n\nThis collaborative project was done as a final for a character design class.", thumbnail:"media/Estuary/Estuary_Thumb.png",
@@ -770,6 +826,7 @@ const projects=[
   yearSemester:"Fall 2025", categories:["Products"], description:"This LED critter has glowing eyes, articulating limbs, and endless customization possibilities! Made as the main project for an independent study.\n\n Made with Blender.\n3D Printed with Bambu P1S.", thumbnail:"media/LED_Critter/Critter_Thumb.png", 
   media:[
     {type:"image",src:"media/LED_Critter/Critter_1.png",title:"Dressed to Impress",description:"This little critter has a TPU wig, some Cricut-cut vinyl stickers, and a comfy sweater on.",hero:true},
+    {type:"image",src:"media/LED_Critter/baggy.webp",title:"Baggy Clothes",description:"A baggy-clothed, bright-eyed, balding baddie!"},
   ]},
 ////////////////////////////////////////////////////////////
   {title:"Skyscraper (Skateboard)", 
@@ -777,10 +834,16 @@ const projects=[
   yearSemester:"Spring 2025", categories:["Products"], description:"A skateboard made for a product design class, dubbed The Skyscraper! It features uosew descending from the heavens in a flash of lightning.\n\nIt took 3 tries making this skateboard, the first two failing during the vacuum sealing... \n\nGraphic created in Procreate.", thumbnail:"media/SkyScraper/SkyScraper_Thumb.jpg", 
   media:[
     {type:"image",src:"media/SkyScraper/SkyScraper_Thumb.jpg",title:"Board No. 2",description:"I was the only one to try doing four layers of screen printing, which the project wasn't necessarily designed for. This resulted in a big bubble forming under the paint layer which wasn't supposed to be there. Despite the flaws, I think it came out quite nice. This is the board still in my possession.",hero:true},
-    {type:"image",src:"media/SkyScraper/board_2.jpg",title:"Board No. 2",description:"Here's a look at the lovely purple grip tape used on top. The imperfections on the board were caused by paint sticking to the vacuum bag."},   
+    {type:"image",src:"media/SkyScraper/board_1.webp",title:"Board No. 1",description:"We sacrificed it for science. Here's it's corpse lounging in my passenger seat. It's still in my car trunk to this day."},   
+    {type:"image",src:"media/SkyScraper/board_2_closeup.webp",title:"Board No. 2 Close-up",description:""},
     {type:"image",src:"media/SkyScraper/skyscraper.jpg",title:"Board No. 3",description:"This is the board that ended up in the show. I tried adding metallic paint to the yellow, which I wasn't quite fond of in the end. The board is also slightly asymmetrical. Since this was my third attempt and the due date was near, I was able to get away with these imperfections. I left it at school, never to be seen again! (by me, at least)"},
-    {type:"image",src:"media/SkyScraper/phonecase.jpg",title:"Phone Case",description:"A kitschy phone case I 3D printed with the Skyscraper graphic, using the colors I had available. It was a fun way to see my dying phone out."},
-    {type:"image",src:"media/SkyScraper/shirt.jpg",title:"T Shirt",description:"I also made a little T Shirt during the process. Unfortunately, most of it wore off after the first wash."}
+    {type:"image",src:"media/SkyScraper/board_2.jpg",title:"Board No. 2",description:"Here's a look at the lovely purple grip tape used on top. The imperfections on the board were caused by paint sticking to the vacuum bag."},
+    {type:"image",src:"media/SkyScraper/skate.png",title:"The Skyscraper",description:"Boom! uosew scrapes the sky as he falls to earth at lightning speed."},
+    {type:"image",src:"media/SkyScraper/graphics.webp",title:"Graphic Evolution",description:"A look at the original render and graphics. I tested the design on the Procreate skateboard model before the project to make sure it would look good. Thank you Procreate!"},
+    {type:"image",src:"media/SkyScraper/grocerylist.webp",title:"Grocery List",description:"The original pic was a 3D render, which I humbly added my grocery list to, then set to my phone wallpaper. Talk about art with a function! (P.S. look at how garish that excess bloom is)"},
+    {type:"image",src:"media/SkyScraper/screenprinting.webp",title:"Screen Printing",description:"They look so good here! (please disregard the bar of yellow at the bottom of the shirt and the imperfections on the board.) What a shame. I would've loved to create a tapestry with the design on it, that would've held up without any further tampering. Then again, it's never too late!"},
+    {type:"image",src:"media/SkyScraper/phonecase.jpg",title:"Phone Case",description:"A phone case I 3D printed with the Skyscraper graphic, using the colors I had available. It was a fun way to see my dying phone out."},
+    {type:"image",src:"media/SkyScraper/shirt.jpg",title:"T Shirt",description:"Unfortunately, most of the color wore off after the first wash."}
   ]},
 ////////////////////////////////////////////////////////////
   {title:"Tropical Temptations", 
@@ -794,10 +857,12 @@ const projects=[
     {type:"image",src:"media/TVM/TVM_Day.png",title:"Daytime Render",description:""},
     {type:"image",src:"media/TVM/TVM_Night.png",title:"Nighttime Render",description:""},
     {type:"image",src:"media//TVM/TVM_Turnaround.gif",title:"Turnaround",description:""},
-    {section:"Adrian"},
+    {section:"Character"},
     {type:"image",src:"media/TVM/TVM_Adrians.png",title:"Iterations",description:""},
     {type:"image",src:"media/TVM/TVM_Adrian.PNG",title:"Final Render",description:""},
     {type:"image",src:"media/TVM/TVM_Size.png",title:"Size Comparison",description:""},
+    {type:"image",src:"media/TVM/references.webp",title:"References",description:""},
+
     {section:"In-Progress Environment"},
 
     {type:"image",src:"media/TVM/TVM_Prefinal.png",title:"In-Progress Shot",description:"I actually turned this one for class as my final, and only came back to it nearly a year later to touch it up. I think the newer version captures what I was going for better."},
@@ -814,9 +879,9 @@ const projects=[
     {type:"image",src:"media/UE5_Fantasy/reference_1.jpg",title:"",description:"The main reference, used primarily for the background. Main source can be found here: <a href='https://www.artstation.com/artwork/1xgvE8' target='_blank'>https://www.artstation.com/artwork/1xgvE8</a>"},
     {type:"image",src:"media/UE5_Fantasy/reference_2.jpg",title:"",description:"When I began the project, I started with this verison of the tower instead of the other one. By the time the project was ending it was too late to upgrade the tower."},
     {type:"image",src:"media/UE5_Fantasy/Substance_Setup.webp",title:"",description:""},
-    {type:"image",src:"media/UE5_Fantasy/block_1.webp",title:"Blockout 1",description:""},
-    {type:"image",src:"media/UE5_Fantasy/block_2.webp",title:"Blockout 2",description:""},
-    {type:"image",src:"media/UE5_Fantasy/block_3.webp",title:"Blockout 3",description:""},
+    {type:"image",src:"media/UE5_Fantasy/block_1.webp",title:"Importing to Unreal",description:""},
+    {type:"image",src:"media/UE5_Fantasy/block_2.webp",title:"Blockout 1",description:""},
+    {type:"image",src:"media/UE5_Fantasy/block_3.webp",title:"Blockout 2",description:""},
     {type:"image",src:"media/UE5_Fantasy/block_4.webp",title:"Final Scene Layout",description:""},
     {type:"image",src:"media/UE5_Fantasy/progress_1.webp",title:"",description:""},
     {type:"image",src:"media/UE5_Fantasy/progress_2.webp",title:"",description:""},
