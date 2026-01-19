@@ -1113,6 +1113,14 @@ function getOriginalMediaIndex(filteredIndex) {
 function openModal(project){
   modal.classList.add("show");
   document.body.style.overflow = "hidden";
+  
+  // Scroll to top
+  requestAnimationFrame(() => {
+    window.scrollTo(0, 0);
+    modal.scrollTop = 0;
+    modalContent.scrollTop = 0;
+  });
+  
   modalContent.innerHTML=`
     <h2>${project.title}</h2>
     <p><em>${project.yearSemester} • ${project.categories.join(", ")}</em></p>
