@@ -120,9 +120,9 @@ header {
 .media-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(400px,1fr)); gap:1.25rem; margin-top:1rem; justify-items:center; align-items:start; }
 .media-item.hero { grid-column: 1 / -1; aspect-ratio: 16/9; max-width: 100vh;}
 .media-item { width:100%; aspect-ratio:16/9; background:#222; display:flex; justify-content:center; align-items:center; overflow:hidden; border-radius:8px; cursor:pointer; }
-.media-item img, .media-item iframe { max-width:100%; max-height:100%; object-fit:contain; }
+.media-item img, .media-item iframe, .media-item video { max-width:100%; max-height:100%; object-fit:contain; }
 /* Fix video scaling in modal */
-.media-item iframe {
+.media-item iframe, .media-item video {
   width: 100%;
   height: 100%;
   border: none;
@@ -130,9 +130,16 @@ header {
   object-fit: cover;
   pointer-events: none;
 }
+/* Hide video controls in modal view */
+.media-item video::-webkit-media-controls {
+  display: none !important;
+}
+.media-item video::-webkit-media-controls-enclosure {
+  display: none !important;
+}
 
 /* Fix video scaling in zoom view */
-.zoom-container iframe {
+.zoom-container iframe, .zoom-container video {
   width: 100%;
   height: 100%;
   border: none;
@@ -144,8 +151,8 @@ header {
 .zoom-overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); display:flex; flex-direction:column; justify-content:center; align-items:center; opacity:0; pointer-events:none; transition:opacity 0.3s ease; z-index:1000; overflow:hidden; }
 .zoom-overlay.show { opacity:1; pointer-events:all; }
 .zoom-container { width:95vw; max-width:1600px; aspect-ratio:16/9; position:relative; z-index: 2; display:flex; justify-content:center; align-items:center; margin-bottom:1rem;  overflow: visible; background:transparent;}
-.zoom-container img, .zoom-container iframe { width:100%; height:100%; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.4); cursor:zoom-out; object-fit:contain; }
-.zoom-container iframe { pointer-events: auto; }
+.zoom-container img, .zoom-container iframe, .zoom-container video { width:100%; height:100%; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.4); cursor:zoom-out; object-fit:contain; }
+.zoom-container iframe, .zoom-container video { pointer-events: auto; }
 .zoom-info { color:white; text-align:center; max-width:90%; margin-bottom:20px; opacity:1; transition: opacity 0.3s ease; }
 .zoom-info.hide { opacity:0; }
 .zoom-info h3 { margin-bottom:0.3rem; color:#FFAA00; }
@@ -467,12 +474,12 @@ header {
   <div class="gallery" id="gallery-2024"></div>
 </section>
 <section class="year-block">
-  <h2 style="text-align:left; margin:1rem 0; color:#FFAA00; font-weight:bold; font-size:5rem; padding-left:1rem;">Pre-2024</h2>
-  <div class="gallery" id="gallery-pre2024"></div>
-</section>
-<section class="year-block">
   <h2 style="text-align:left; margin:1rem 0; color:#FFAA00; font-weight:bold; font-size:5rem; padding-left:1rem;">2023</h2>
   <div class="gallery" id="gallery-2023"></div>
+</section>
+<section class="year-block">
+  <h2 style="text-align:left; margin:1rem 0; color:#FFAA00; font-weight:bold; font-size:5rem; padding-left:1rem;">Pre-2023</h2>
+  <div class="gallery" id="gallery-pre2023"></div>
 </section>
 
 
@@ -500,7 +507,7 @@ const projects=[
   {type:"video",src:"https://www.youtube.com/embed/gorPa1qOrUY?si=tRIIj-kOBKA1wFdc",title:"",description:"",hero:true},
   
   {section:"Concepts"},
-  {type:"image",src:"media/PJ/renders/character_concepts.jpg",title:"Character Concepts",description:"Rather mild in terms of interesting silhouettes and originality, these were made before I started to dive into character design. I wish I got to flesh out the kappa (second from left) a bit more. it was supposed to wear a molcajete on its head to mimic their water bowl heads."},
+  {type:"image",src:"media/PJ/renders/character_concepts.jpg",title:"Character Concepts",description:"Rather mild in terms of interesting silhouettes and originality, these were made before I started to dive into character design. I would've liked to flesh out the kappa character (second from left) a bit more. it was supposed to wear a molcajete on its head to mimic their water bowl heads."},
   {type:"image",src:"media/PJ/renders/calavera_concept.png",title:"La Calavera Picante Concept",description:"La Calavera Picante is the spacecraft of Squibby the Alien (what a sentence). It was freshly rebranded after crash landing in Mexico, where he decided to make spicy sugar skulls for a living."},
   {type:"image",src:"media/PJ/renders/environment_concept.png",title:"Environment Concepts",description:"The player, a forlorn soul, would reawaken after Squibby's ship accidentally smashes their grave to pieces. He would then ask the player for help collecting ghost peppers, which grow spiciest in the valley of the dead!"},
   
@@ -579,9 +586,22 @@ const projects=[
   {type:"image",src:"media/Becoming/75b42d6534bf0bad124e469e23443fa9-21.png",title:"",description:""},
   
   {section:"Extras"},
+  {type:"image",src:"media/Becoming/logo.png",title:"Logo",description:""},
   {type:"image",src:"media/Becoming/extras/smoke_render.png",title:"Smoke Render",description:""},
   {type:"image",src:"media/Becoming/extras/smoke.gif",title:"Smoke Turnaround",description:""},
   {type:"image",src:"media/Becoming/extras/purpturntabe.gif",title:"Purple Turnaround",description:"I did end up making a toy of Purple as well. I only articulated his head."}
+  ]},
+////////////////////////////////////////////////////////////
+  {title:"Crabulb", 
+  
+  yearSemester:"Summer 2023", categories:["Characters"], description:"\"This little amalgamation uses bioluminescence to navigate the nights, with the ability to discharge electricity through its prey via feeding appendages. Based on a ghost crab and a lightbulb. Comes with baked walking and idle animations!\" \n\nMy only Sketchfab model to be added to Staff Picks to this day... I still look at that little orange badge with pride.\n\nMade using Blender, ZBrush, and Substance Painter, for a Summer Game Design class that proved to be extremely influencial on my path in life. Thank you Professor Scott!", thumbnail:"media/Summer 23/Crabulb/crabulb_thumb.png", 
+  media:[
+  {type:"video",src:"https://sketchfab.com/models/eccf00581ba04a68a98a7fd52424c1a8/embed",title:"Crabulb - Rigged",description:"After years of being a paid asset, Crabulb is now free to download! (It made me approximately 15 dollars over the course of 2 years... better than nothing!)",hero:true},
+  {type:"video",src:"media/Summer 23/Crabulb/Crabulb.mp4",title:"Close-up Shot",description:"This crabulb was caught on tape shortly after finishing its lunch - a single bland piece of seaweed.",hero:true},
+  {type:"image",src:"media/Summer 23/Crabulb/crabonimo3.png",title:"",description:""},
+  {type:"image",src:"media/Summer 23/Crabulb/crabs.png",title:"",description:""},
+  {type:"image",src:"media/Summer 23/Crabulb/crab_walk.gif",title:"",description:""},
+  {type:"video",src:"media/Summer 23/Crabulb/dream_440B.mp4",title:"dream_440B",description:"This one always has me longing...<a href='https://uosew.com/index.html' target='_blank'>.</a>\nMusic - Cocktail Lounge, Yume 2kki\n"},
   ]},
 ////////////////////////////////////////////////////////////
   {title:"Estuary", 
@@ -936,7 +956,7 @@ const projects=[
     {type:"image",src:"media/UE5_Fantasy/viewport_3.webp",title:"",description:""}
   ]},
 ////////////////////////////////////////////////////////////
- {title:"Early Blender Renders", yearSemester:"Pre-2024", categories:["Environments"], description:"A collection of my earliest 3D renders.", thumbnail:"https://uosew.com/media/images/fulls/01.jpg",
+ {title:"Early Blender Renders", yearSemester:"Pre-2023", categories:["Environments"], description:"A collection of my earliest 3D renders.", thumbnail:"https://uosew.com/media/images/fulls/01.jpg",
   media:[
     {type:"image",src:"https://uosew.com/media/images/fulls/01.jpg",title:"Off the Bubble Coast",description:"Made in the period when I was first learning Blender, I still find a sense of comfort in looking at it. Reminds me of the late nights modeling and listening to DnB, which was also new to me."},
     {type:"image",src:"https://uosew.com/media/images/fulls/02.jpg",title:"Eternal Eye",description:"Lots of fun with procedural texturing in this one. I've had it as my background for the longest time!"},
@@ -963,7 +983,7 @@ const projects=[
 const gallery2025 = document.getElementById("gallery-2025");
 const gallery2024 = document.getElementById("gallery-2024");
 const gallery2023 = document.getElementById("gallery-2023");
-const galleryPre2024 = document.getElementById("gallery-pre2024");
+const galleryPre2023 = document.getElementById("gallery-pre2023");
 const modal=document.getElementById("modal");
 const modalContent=document.getElementById("modalContent");
 const zoomOverlay=document.getElementById("zoomOverlay");
@@ -974,8 +994,8 @@ const zoomDescription=zoomOverlay.querySelector(".zoom-description");
 // Render all projects grouped into year sections (2025, 2024, 2023)
 function extractYear(p){
   const ys = (p.yearSemester||"").toString();
-  // Treat "Pre-2024" and similar as 0 (pre-2024 bucket) - check FIRST before extracting year
-  if(/pre-?2024/i.test(ys)) return 0;
+  // Treat "Pre-2023" and similar as 0 (pre-2023 bucket) - check FIRST before extracting year
+  if(/pre-?2023/i.test(ys)) return 0;
   const m = ys.match(/\b(\d{4})\b/);
   if(m) return parseInt(m[1],10);
   return 0;
@@ -1009,7 +1029,7 @@ function renderProjectsByYear(){
   gallery2025.innerHTML = "";
   gallery2024.innerHTML = "";
   gallery2023.innerHTML = "";
-  galleryPre2024.innerHTML = "";
+  galleryPre2023.innerHTML = "";
 
   const buckets = { 2025:[], 2024:[], 2023:[], 0:[] };
   projects.forEach(p=>{
@@ -1022,7 +1042,7 @@ function renderProjectsByYear(){
     if(y === 2025) buckets[2025].push(p);
     else if(y === 2024) buckets[2024].push(p);
     else if(y === 2023) buckets[2023].push(p);
-    else buckets[0].push(p);
+    else buckets[0].push(p); // Pre-2023
   });
 
   // Sort each bucket using yearSemester: year (desc) then semester (Fall before Spring)
@@ -1040,7 +1060,7 @@ function renderProjectsByYear(){
   buckets[2025].forEach((p,i)=> gallery2025.appendChild(createCardForProject(p,i)));
   buckets[2024].forEach((p,i)=> gallery2024.appendChild(createCardForProject(p,i)));
   buckets[2023].forEach((p,i)=> gallery2023.appendChild(createCardForProject(p,i)));
-  buckets[0].forEach((p,i)=> galleryPre2024.appendChild(createCardForProject(p,i)));
+  buckets[0].forEach((p,i)=> galleryPre2023.appendChild(createCardForProject(p,i)));
   
   // Hide year sections if they have no projects
   gallery2025.parentElement.style.display = gallery2025.children.length > 0 ? "block" : "none";
@@ -1104,8 +1124,19 @@ function openModal(project){
           return `<div class="media-section-divider"><span class="media-section-divider-label">${m.section}</span></div>`;
         }
         // Only render actual media items
+        let mediaContent;
+        if(m.type==='image') {
+          mediaContent = `<img loading="lazy" src="${m.src}" alt="${m.title}"/>`;
+        } else if(m.type==='video') {
+          // Check if it's a local video file or an embed
+          if(m.src.endsWith('.mp4') || m.src.endsWith('.webm')) {
+            mediaContent = `<video src="${m.src}" muted loop controls></video>`;
+          } else {
+            mediaContent = `<iframe src="${m.src}" frameborder="0" allowfullscreen title="${m.title}"></iframe>`;
+          }
+        }
         return `<div class="media-item${m.hero?' hero':''}
-" data-index="${idx}">${m.type==='image'?`<img loading="lazy" src="${m.src}" alt="${m.title}"/>`:`<iframe src="${m.src}" frameborder="0" allowfullscreen title="${m.title}"></iframe>`}</div>`;
+" data-index="${idx}">${mediaContent}</div>`;
       }).join("")}
     </div>
   `;
@@ -1151,11 +1182,21 @@ function updateZoomMedia(){
     el.alt = media.title;
     el.loading = "lazy";
   } else if (media.type === "video") {
-    el = document.createElement("iframe");
-    el.src = media.src;
-    el.title = media.title;
-    el.frameBorder = "0";
-    el.allowFullscreen = true;
+    // Check if it's a local video file or an embed
+    if(media.src.endsWith('.mp4') || media.src.endsWith('.webm')) {
+      el = document.createElement("video");
+      el.src = media.src;
+      el.controls = true;
+      el.muted = false;
+      el.loop = true;
+      el.autoplay = true;
+    } else {
+      el = document.createElement("iframe");
+      el.src = media.src;
+      el.title = media.title;
+      el.frameBorder = "0";
+      el.allowFullscreen = true;
+    }
   }
 
   // Add media and fade it in
