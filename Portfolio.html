@@ -119,7 +119,7 @@ header {
 .modal h2 { margin-top:0; color:#FFAA00; }
 .media-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(400px,1fr)); gap:1.25rem; margin-top:1rem; justify-items:center; align-items:start; }
 .media-item.hero { grid-column: 1 / -1; aspect-ratio: 16/9; max-width: 100vh;}
-.media-item { width:100%; aspect-ratio:16/9; background:transparent; display:flex; justify-content:center; align-items:center; overflow:hidden; border-radius:8px; cursor:pointer; }
+.media-item { width:100%; aspect-ratio:16/9; background:#222; display:flex; justify-content:center; align-items:center; overflow:hidden; border-radius:8px; cursor:pointer; }
 .media-item img, .media-item iframe { max-width:100%; max-height:100%; object-fit:contain; }
 /* Fix video scaling in modal */
 .media-item iframe {
@@ -143,7 +143,7 @@ header {
 
 .zoom-overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); display:flex; flex-direction:column; justify-content:center; align-items:center; opacity:0; pointer-events:none; transition:opacity 0.3s ease; z-index:1000; overflow:hidden; }
 .zoom-overlay.show { opacity:1; pointer-events:all; }
-.zoom-container { width:95vw; max-width:1600px; aspect-ratio:16/9; position:relative; z-index: 2; display:flex; justify-content:center; align-items:center; margin-bottom:1rem;  overflow: visible;}
+.zoom-container { width:95vw; max-width:1600px; aspect-ratio:16/9; position:relative; z-index: 2; display:flex; justify-content:center; align-items:center; margin-bottom:1rem;  overflow: visible; background:transparent;}
 .zoom-container img, .zoom-container iframe { width:100%; height:100%; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.4); cursor:zoom-out; object-fit:contain; }
 .zoom-container iframe { pointer-events: auto; }
 .zoom-info { color:white; text-align:center; max-width:90%; margin-bottom:20px; opacity:1; transition: opacity 0.3s ease; }
@@ -507,21 +507,21 @@ const projects=[
   {section:"Renders"},
   {type:"image",src:"media/PJ/renders/calavera_render.jpg",title:"Calavera Render",description:""},
   {type:"image",src:"media/PJ/renders/calavera_gif.gif",title:"Calavera In-Game",description:"Squibby's out using the restroom. His cardboard cutout should do the trick for now."},
-  {type:"image",src:"media/PJ/renders/cart_render.jpg",title:"Cart Render",description:"Ka-Shwing! I really enjoy how this cart turned out."},
+  {type:"image",src:"media/PJ/renders/cart_render.jpg",title:"Cart Render",description:"Ka-shwing! I really enjoy how this cart render turned out."},
   {type:"image",src:"media/PJ/renders/grave_render_still.jpg",title:"Grave Render",description:""},
   {type:"video",src:"media/PJ/renders/grave_turnaround.mp4",title:"Grave Turnaround",description:""},
   {type:"video",src:"media/PJ/renders/coin_render.mp4",title:"Coin Turnaround",description:""},
   
   {section:"Extras"},
   {type:"image",src:"media/PJ/extras/sugar skull.gif",title:"Sugar Skull Animation",description:"Seen on the Calavera Picante."},
-  {type:"image",src:"media/PJ/extras/runskeleton.gif",title:"",description:"I made this skeleton models for the project, then decided it would be funny to render them out and plop them around the level. I was having too much fun to take anything seriously!"},
-  {type:"image",src:"media/sillyalien.gif",title:"Silly Alien",description:"Squibby used to be called Silly Alien, former guardian of uosew.com. I made him long ago when learning blender. If you can uncover the old version of the site, you might see him there!"},
+  {type:"image",src:"media/PJ/extras/runskeleton.gif",title:"",description:"I made this skeleton model for the project, then decided it would be funny to render them out and plop them around the level. I was having too much fun to take anything seriously!"},
+  {type:"image",src:"media/sillyalien.gif",title:"Silly Alien",description:"Squibby used to be called Silly Alien, former guardian of uosew.com. I made him long ago while learning Blender. If you can uncover the old version of the site, you might see him there!"},
   {type:"image",src:"media/PJ/extras/misc.png",title:"",description:"Here's a look at the storage room behind the graveyard. It's where they keep all the extra meshes."},
-  {type:"video",src:"https://sketchfab.com/models/97bf61dc5345444eb4097724cfbd6c3c/embed",title:"Sun Decoration",description:"This sun, which was originally made for a pewter necklace commission, was the basis for the coin collectible."},
+  {type:"video",src:"https://sketchfab.com/models/97bf61dc5345444eb4097724cfbd6c3c/embed",title:"Sun Decoration",description:"This sun, which was originally made for a pewter necklace commission, was the basis for the coin collectible. Free to Download!"},
   {type:"image",src:"media/UE5_Fantasy/viewport_0.webp",title:"House and Fences",description:"These were made for the Fantasy Scene project, but I was able to get good use out of them here as well."},
   
   {section:"Presentation"},
-  {type:"image",src:"media/PJ/Project Jump!-2.jpg",title:"",description:"Since this was my first time in Unreal, I figured I'd keep the even the less important slides from the presentation in my portfolio."},
+  {type:"image",src:"media/PJ/Project Jump!-2.jpg",title:"",description:"Since this was my first time in Unreal, I figured I'd keep even the less important slides from the presentation in my portfolio."},
   {type:"image",src:"media/PJ/Project Jump!-3.jpg",title:"",description:""},
   {type:"image",src:"media/PJ/Project Jump!-4.jpg",title:"",description:""},
   {type:"image",src:"media/PJ/Project Jump!-5.jpg",title:"",description:""},
@@ -780,7 +780,8 @@ const projects=[
   yearSemester:"Fall 2025", categories:["Characters"], description:"A young deity reincarnated on the gray plane, Blender Baby is destined to live a life of creation.\nFeatured in the Eclipse Park Project!", thumbnail:"media/BB/BB_Thumb.png",
   media:[{type:"image",src:"media/BB/BB_Render.png",title:"Render",description:"Early render with base materials!"},
   {type:"image",src:"media/BB/BB_turnaround_full.png",title:"Costume Design",description:"Gizmo earrings, 3D cursor necklace, view mode piercings, and a grid cloak. Not to mention a shining halo and head piece!"},
-  {type:"image",src:"media/BB/BB_turnaround.png",title:"Costume Design",description:"Gizmo earrings, 3D cursor necklace, view mode piercings, and a grid cloak. Not to mention a shining halo and head piece!"}]},
+  {type:"image",src:"media/BB/BB_turnaround.png",title:"Costume Design",description:"Gizmo earrings, 3D cursor necklace, view mode piercings, and a grid cloak. Not to mention a shining halo and head piece!"},
+  {type:"image",src:"media/BB/bbaby_print.jpg",title:"3D Print",description:"A prototype print of Blender Baby, colored in with whiteboard markers. Given to a younger cousin of mine."},]},
 ////////////////////////////////////////////////////////////
    {title:"Character Concept Art", 
    
@@ -829,6 +830,11 @@ const projects=[
     {type:"image",src:"media/LED_Critter/Critter_1.png",title:"Dressed to Impress",description:"This little critter has a TPU wig, some Cricut-cut vinyl stickers, and a comfy sweater on.",hero:true},
     {type:"image",src:"media/LED_Critter/baggy.webp",title:"Baggy Clothes",description:"A baggy-clothed, bright-eyed, balding baddie!"},
   ]},
+////////////////////////////////////////////////////////////
+  {title:"Plush Accessories", 
+  
+  yearSemester:"Spring 2025", categories:["Products"], description:"🚧 Under Construction 🚧", thumbnail:"media/construction.png", 
+  media:[]},
 ////////////////////////////////////////////////////////////
   {title:"Skyscraper (Skateboard)", 
   
