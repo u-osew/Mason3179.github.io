@@ -292,9 +292,9 @@ header {
   
   /* Modal content - full width on mobile */
   .modal-content {
-    max-width: 95%;
-    width: 95%;
-    max-height: 90vh;
+    max-width: 90%;
+    width: 90%;
+    max-height: 85vh;
     padding: 1rem;
   }
   
@@ -883,6 +883,9 @@ const projects=[
   media:[
     {type:"image",src:"media/LED_Critter/Critter_1.png",title:"Dressed to Impress",description:"This little critter has a TPU wig, some Cricut-cut vinyl stickers, and a comfy sweater on.",hero:true},
     {type:"image",src:"media/LED_Critter/baggy.webp",title:"Baggy Clothes",description:"A baggy-clothed, bright-eyed, balding baddie!"},
+    {type:"image",src:"media/LED_Critter/microphone.webp",title:"Mic Mounted",description:""},
+    {type:"image",src:"media/LED_Critter/nightmode.webp",title:"Night Mode",description:"We all seem to lose our head sometimes. Or at least half of it..."},
+    {type:"image",src:"media/LED_Critter/yeehaw.webp",title:"Fishing Frenzy",description:""},
   ]},
 ////////////////////////////////////////////////////////////
   {title:"Plush Accessories", 
@@ -1114,9 +1117,8 @@ function openModal(project){
   modal.classList.add("show");
   document.body.style.overflow = "hidden";
   
-  // Scroll to top
+  // Scroll modal content to top
   requestAnimationFrame(() => {
-    window.scrollTo(0, 0);
     modal.scrollTop = 0;
     modalContent.scrollTop = 0;
   });
@@ -1167,13 +1169,6 @@ function openZoom(originalIndex,project){
   updateZoomMedia(); zoomOverlay.classList.add("show");
   document.body.style.overflow = "hidden";
   zoomOverlay.addEventListener("click",closeZoom);
-  
-  // Scroll to top of zoom overlay and window
-  requestAnimationFrame(() => {
-    window.scrollTo(0, 0);
-    zoomOverlay.scrollTop = 0;
-    zoomContainer.scrollTop = 0;
-  });
 }
 
 function updateZoomMedia(){
