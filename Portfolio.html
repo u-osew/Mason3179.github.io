@@ -270,7 +270,7 @@ img.center {
 .card.physical { background:#0d8060; color:#222; }
 .card.projects { background: linear-gradient(135deg, #FF1493 0%, #FFD700 100%); color:#222; }
 .card.products { background:#0d8060; color:#222; }
-.card.doodles { background:#FFD700; }
+.card.doodles { background:#D9AA00; color:#222; }
 
 /* Smooth fade animation for zoomed media */
 .zoom-container > * {
@@ -627,7 +627,7 @@ const projects=[
 ////////////////////////////////////////////////////////////
   {title:"Doodles", 
   
-  yearSemester:"2025", categories:["Doodles"], description:"A collection of doodles and sketches from 2025.", thumbnail:"media/Doodles/2025/doodles_25_Thumb.jpg", 
+  yearSemester:"2025", categories:["Doodles"], description:"Ideas, practice, whatever couldn't make it into a category of its own. Not limited to any particular medium.", thumbnail:"media/Doodles/2025/doodles_25_Thumb.jpg", 
   media:[
   {type:"image",src:"media/Doodles/2025/doodles_25_Thumb.jpg",title:"",description:"",hero:true}
   ]},
@@ -826,8 +826,9 @@ const projects=[
   {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-41.webp",title:"",description:""},
   {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-42.webp",title:"",description:""},
   {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-43.webp",title:"",description:""},
-
-
+  
+  {section:"Logo"},
+  {type:"image",src:"media/EP/EP_Logo.png",title:"Eclipse Park Logo",description:"A quick yet effective logo made in Procreate! It draws from the initial thumbnail sketch for inspo."}
 
 ]},
 ////////////////////////////////////////////////////////////
@@ -1114,6 +1115,7 @@ function typeClass(type){
     case "products": 
     case "physical": 
     case "physical creation": return "products";
+    case "doodles": return "doodles";
     default: return "";
   }
 }
