@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<title>uosew</title>
+<link rel="stylesheet" href="../styles.css">
+<link rel="shortcut icon" href="../media/0124.ico">
+    <input type="image" src="../media/nightlight.gif" onclick="location.href='nightmode.html'" height="20">
+<img src="../media/title.gif" class="center">
+<div class="icon-bar">
+  <a  href="Portfolio.html" >home</a> 
+  <a href="about.html">emotes</a> 
+  <a href="shop.html">shop</a> 
+  <a href="gallery.html">3D Art</a>
+  <a  class="active" onClick="playAudio('../media/nuhuh.mp3')" href="#">2D Art</a> 
+</div>
+
+<!--body background="../media/bg.gif"-->
+
+ <style>
+body {
+  background-color: black;
+}
+</style>
+
+  
+<img src="../media/images/2D/01.jpg" class="center">
+<img src="../media/images/2D/02.jpg" height=1080 class="center">
+<img src="../media/images/2D/03.jpg" class="center">
+<img src="../media/images/2D/04.jpg" class="center">
+<img src="../media/images/2D/05.jpg" class="center">
+<img src="../media/images/2D/06.jpg" class="center">
+<img src="../media/images/2D/07.jpg" class="center">
+<img src="../media/images/2D/08.jpg" class="center">
+<img src="../media/images/2D/09.jpg" class="center">
+<img src="../media/images/2D/10.jpg" class="center">
+  
+  
+
+
+<img src="../media/hoo-hah.gif" class="center">
+</body>
+
+
+<script>
+      var aud = document.getElementById("ASong").children[0];
+      var isPlaying = false;
+      aud.pause();
+
+      function playPause() {
+        if (isPlaying) {
+          aud.pause();
+        } else {
+          aud.play();
+        }
+        isPlaying = !isPlaying;
+      }
+        
+        function playAudio(url) {
+        new Audio(url).play();
+        }
+        
+        
+    </script>

@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <title>masonuosew</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="shortcut icon" href="../media/night.ico">
+</head>
+    <style>
+body {
+  background-color: black;
+}
+</style>
+<input type="image" src="../media/daytime.gif" onclick="location.href='../index.html'" height="20">
+        
+        <img src="../media/nighttitle.gif" class="center">
+    
+        
+ <!--NavBar-->        
+    <div class="d-icon-bar">
+      <a href="nightmode.html">home</a>
+      <a href="about.html">about</a> 
+      <a href="goddess.html">goddess</a>
+      <a href="iterations.html">iterations</a>
+      <a class="d-active" href="#" onClick="playAudio('../media/goddessnoise.mp3')">exit</a>
+    </div>
+        
+        
+<p align="center">
+        <iframe frameborder="0" src="https://itch.io/embed-upload/7522986?color=333333" allowfullscreen="" width="640" height="380"><a href="https://uosew.itch.io/comatic"></a></iframe>
+    
+    <img src="../media/crab.gif" class="center">
+    </p>        
+    
+    
+    
+    
+    
+    <script>
+      var aud = document.getElementById("ASong").children[0];
+      var isPlaying = false;
+      aud.pause();
+
+      function playPause() {
+        if (isPlaying) {
+          aud.pause();
+        } else {
+          aud.play();
+        }
+        isPlaying = !isPlaying;
+      }
+        
+        function playAudio(url) {
+        new Audio(url).play();
+        }
+        
+        
+    </script>

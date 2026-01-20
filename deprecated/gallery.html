@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<title>uosew</title>
+<link rel="stylesheet" href="../styles.css">
+<link rel="shortcut icon" href="../media/0124.ico">
+    <input type="image" src="../media/nightlight.gif" onclick="location.href='nightmode.html'" height="20">
+<img src="../media/title.gif" class="center">
+<div class="icon-bar">
+  <a  href="Portfolio.html" >home</a> 
+  <a href="about.html">emotes</a> 
+  <a href="shop.html">shop</a> 
+  <a class="active" onClick="playAudio('../media/nuhuh.mp3')" href="#">3D Art</a>
+  <a  href="contact.html">2D Art</a> 
+</div>
+<style>
+body {
+  background-color: black;
+}
+</style>
+<img src="../media/images/fulls/01.jpg" class="center">
+<img src="../media/images/fulls/02.jpg" class="center">
+<img src="../media/images/fulls/03.jpg" class="center">
+<img src="../media/images/fulls/04.jpg" class="center">
+<img src="../media/images/fulls/05.jpg" class="center">
+<img src="../media/images/fulls/06.jpg" class="center">
+<img src="../media/images/fulls/07.jpg" class="center">
+<img src="../media/images/fulls/08.jpg" class="center">
+<img src="../media/images/fulls/19.jpg" class="center">
+<img src="../media/images/fulls/18.jpg" class="center">
+<video src="../media/images/fulls/22.mp4" muted loop autoplay class="center"></video>
+<video src="../media/images/fulls/17.mp4" muted loop autoplay class="center"></video>
+<img src="../media/images/fulls/09.jpg" class="center">
+<img src="../media/images/fulls/10.jpg" class="center">
+<img src="../media/images/fulls/12.jpg" class="center">
+<img src="../media/images/fulls/13.jpg" class="center">
+<video src="../media/images/fulls/11.mp4" muted loop autoplay class="center"></video>
+<video src="../media/images/fulls/14.mp4" muted loop autoplay class="center"></video>
+<video src="../media/images/fulls/15.mp4" muted loop autoplay class="center"></video>
+<video src="../media/images/fulls/16.mp4" muted loop autoplay class="center"></video>
+<img src="../media/images/fulls/20.png" class="center">
+<img src="../media/images/fulls/21.png" class="center">
+
+
+
+
+
+
+
+<script>
+      var aud = document.getElementById("ASong").children[0];
+      var isPlaying = false;
+      aud.pause();
+
+      function playPause() {
+        if (isPlaying) {
+          aud.pause();
+        } else {
+          aud.play();
+        }
+        isPlaying = !isPlaying;
+      }
+        
+        function playAudio(url) {
+        new Audio(url).play();
+        }
+        
+        
+    </script>

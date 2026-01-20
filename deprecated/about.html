@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <title>uosew</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="shortcut icon" href="../media/0124.ico">
+</head>
+  
+        <input type="image" src="../media/nightlight.gif" onclick="location.href='nightmode.html'" height="20">
+    
+            <!--video src="../media/crowstep.mp3" controls height="1" width="1" loop autoplay></video-->
+    
+    
+<link href='https://fonts.googleapis.com/css?family=Archivo Black' rel='stylesheet'>
+<style> body { font-family: 'Archivo Black';font-size: 22px; } </style>    
+    
+<style>
+body {
+  background-color: black;
+}
+</style>
+    
+    
+    <!--body background="../media/thinkingfinally.png"-->
+    <body>
+        <img src="../media/title.gif" class="center">
+        
+    <div class="icon-bar">
+      <a href="Portfolio.html">home</a> 
+      <a class="active"  href="#" onClick="playAudio('../media/nuhuh.mp3')">emotes</a> 
+      <a href="shop.html">shop</a> 
+      <a href="gallery.html">3D Art</a>
+      <a href="contact.html">2D Art</a> 
+     </div>
+        
+
+           <ul>
+               <h3></h3>
+        <li><img src="../media/emotes/00.gif" width="100" height="100" alt="ghost"></li>
+        <li><img src="../media/emotes/01.gif" width="100" height="100" alt="chickadee"></li>
+        <li><img src="../media/emotes/02.gif" width="100" height="100" alt="warioclap"></li>
+        <li><img src="../media/emotes/03.gif" width="100" height="100" alt="warioscared"></li>
+        <li><img src="../media/emotes/04.gif" width="100" height="100" alt="wariospin"></li>
+        <li><img src="../media/emotes/38.gif" width="100" height="100" alt="wariopant"></li>
+        <li><img src="../media/emotes/05.gif" width="100" height="100" alt="creeper"></li>
+        <li><img src="../media/emotes/06.gif" width="100" height="100" alt="goddess"></li>
+        <li><img src="../media/emotes/07.png" width="100" height="100" alt="gengar"></li>
+        <li><img src="../media/emotes/14.png" width="100" height="100" alt="squid1"></li>
+        <li><img src="../media/emotes/15.png" width="100" height="100" alt="squid2"></li>
+        <li><img src="../media/emotes/16.png" width="100" height="100" alt="squid3"></li>
+        <li><img src="../media/emotes/15.png" width="100" height="100" alt="squid2"></li>
+        <li><img src="../media/emotes/18.png" width="100" height="100" alt="squid4"></li>
+        <li><img src="../media/emotes/17.png" width="100" height="100" alt="look"></li>
+        <li><img src="../media/emotes/22.png" width="100" height="100" alt="jimberly"></li>
+        <li><img src="../media/emotes/19.png" width="100" height="100" alt="turkeyhawhaw"></li>
+        <li><img src="../media/emotes/20.gif" width="100" height="100" alt="turkiano"></li>       
+        <li><img src="../media/emotes/21.gif" width="100" height="100" alt="twerky"></li>  
+        <li><img src="../media/emotes/23.gif" width="100" height="100" alt="skellington"></li>   
+        <li><img src="../media/emotes/24.gif" width="100" height="100" alt="hiredface"></li>   
+        <li><img src="../media/emotes/27.png" width="100" height="100" alt="spung"></li>   
+        <li><img src="../media/emotes/28.png" width="100" height="100" alt="alien"></li>
+        <li><img src="../media/emotes/29.png" width="100" height="100" alt="eye"></li>
+        <li><img src="../media/emotes/31.png" width="100" height="100" alt="mouth"></li>
+        <li><img src="../media/emotes/29.png" width="100" height="100" alt="eye"></li>    
+        <li><img src="../media/emotes/33.gif" width="100" height="100" alt="jelly"></li>
+        <li><img src="../media/emotes/34.gif" width="100" height="100" alt="jelly"></li>  
+        <li><img src="../media/emotes/34.gif" width="100" height="100" alt="jelly"></li>
+        <!--<li><img src="../media/emotes/35.png" width="100" height="100" alt="vlads"></li>-->
+        <li><img src="../media/emotes/36.gif" width="100" height="100" alt="alien"></li>
+        <li><img src="../media/emotes/37.gif" width="100" height="100" alt="candle"></li>
+        <li><img src="../media/zealot.gif" width="100" height="100"></li>
+        <li><img src="../media/emotes/37.gif" width="100" height="100" alt="candle"></li>      
+               
+        <h3>Commissions</h3>       
+        <li><img src="../media/emotes/08.gif" width="100" height="100" alt="zanvil"></li>
+        <li><img src="../media/emotes/09.gif" width="100" height="100" alt="melt"></li>
+        <li><img src="../media/emotes/10.gif" width="100" height="100" alt="cursedweeg"></li>
+        <li><img src="../media/emotes/11.png" width="100" height="100" alt="hollowwave"></li>
+        <li><img src="../media/emotes/12.gif" width="100" height="100" alt="shadowspin"></li>      
+        <li><img src="../media/emotes/13.gif" width="100" height="100" alt="insanebruh"></li>
+        <li><img src="../media/emotes/25.png" width="100" height="100" alt="poggerfish"></li>
+        <li><img src="../media/emotes/32.png" width="100" height="100" alt="poggerfish"></li>     
+               
+        </ul>
+        
+           <img src="../media/typing.gif" class="floatRight">
+        
+        
+        
+        
+    <script>
+      var aud = document.getElementById("ASong").children[0];
+      var isPlaying = false;
+      aud.pause();
+
+      function playPause() {
+        if (isPlaying) {
+          aud.pause();
+        } else {
+          aud.play();
+        }
+        isPlaying = !isPlaying;
+      }
+        
+        function playAudio(url) {
+        new Audio(url).play();
+        }
+        
+        
+    </script>
+        
+    </body>

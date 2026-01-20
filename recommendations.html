@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>uosew - Recommendations</title>
+<link rel="shortcut icon" href="./media/0124.ico">
+<style>
+/* Sleek custom scrollbar styling */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #AA1596;
+  border-radius: 5px;
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #FFAA00;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #AA1596 rgba(0, 0, 0, 0.2);
+}
+
+body { 
+  font-family: Arial, sans-serif; 
+  margin:0; 
+  padding:0; 
+  background-color: #000;
+  color:#fff;
+  overflow-x: hidden;
+  max-width: 100vw;
+  animation: fadeIn 0.5s ease-in;
+}
+
+/* Page Transition Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+body.fade-out {
+  animation: fadeOut 0.3s ease-out forwards;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  height: 100vh;
+  background: linear-gradient(to top, #001a4d 0%, #000 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 150%;
+  background-position: center 0px;
+  animation: bottomGradientBounce 6s ease-in-out infinite;
+  will-change: background-position;
+  z-index: 0;
+  pointer-events: none;
+}
+
+body > * { position: relative; z-index: 1; }
+
+@keyframes bottomGradientBounce {
+  0%, 100% { background-position: center 0px; }
+  50% { background-position: center 100px; }
+}
+
+/* Hamburger Menu Styles */
+.hamburger {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 30px;
+  height: 25px;
+  cursor: pointer;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hamburger span {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background: #fff;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(8px, 8px);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(8px, -8px);
+}
+
+.side-menu {
+  position: fixed;
+  top: 0;
+  left: -300px;
+  width: 300px;
+  height: 100vh;
+  background: linear-gradient(180deg, #27167C 0%, #1a0e52 100%);
+  z-index: 999;
+  transition: left 0.3s ease, visibility 0.3s ease;
+  padding: 80px 30px 30px 30px;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+  overflow-y: auto;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.side-menu.active {
+  left: 0;
+  visibility: visible;
+  pointer-events: all;
+}
+
+.side-menu nav {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.side-menu nav a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  padding: 10px 15px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  border-left: 3px solid transparent;
+}
+
+.side-menu nav a:hover {
+  background: rgba(255, 170, 0, 0.2);
+  border-left: 3px solid #FFAA00;
+  transform: translateX(5px);
+}
+
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.menu-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.content {
+  max-width: 900px;
+  margin: 100px auto 50px;
+  padding: 20px;
+}
+
+h1 {
+  color: #FFAA00;
+  text-align: center;
+  font-size: 3rem;
+  margin-bottom: 30px;
+}
+
+p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+</style>
+</head>
+<body>
+
+<!-- Hamburger Menu -->
+<div class="hamburger" id="hamburger">
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+
+<!-- Side Menu -->
+<div class="side-menu" id="sideMenu">
+  <nav>
+    <a href="index.html">Portfolio</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="shop.html">Shop</a>
+    <a href="recommendations.html">Recommendations</a>
+  </nav>
+</div>
+
+<!-- Menu Overlay -->
+<div class="menu-overlay" id="menuOverlay"></div>
+
+<div class="content">
+  <h1>Recommendations</h1>
+  <p>This page is currently under construction. More information coming soon!</p>
+</div>
+
+<script>
+// Hamburger Menu Functionality
+const hamburger = document.getElementById('hamburger');
+const sideMenu = document.getElementById('sideMenu');
+const menuOverlay = document.getElementById('menuOverlay');
+
+function toggleMenu() {
+  hamburger.classList.toggle('active');
+  sideMenu.classList.toggle('active');
+  menuOverlay.classList.toggle('active');
+}
+
+hamburger.addEventListener('click', toggleMenu);
+menuOverlay.addEventListener('click', toggleMenu);
+
+const menuLinks = sideMenu.querySelectorAll('a');
+menuLinks.forEach(link => {
+  link.addEventListener('click', toggleMenu);
+});
+</script>
+
+</body>
+</html>
