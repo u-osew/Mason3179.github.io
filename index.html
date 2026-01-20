@@ -661,6 +661,24 @@ menuLinks.forEach(link => {
   link.addEventListener('click', toggleMenu);
 });
 
+// Page Transition Effect
+document.addEventListener('DOMContentLoaded', () => {
+  const links = document.querySelectorAll('a[href]:not([href^="#"]):not([href^="http"]):not([href^="mailto"])');
+  
+  links.forEach(link => {
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+      if (href && !e.ctrlKey && !e.metaKey) {
+        e.preventDefault();
+        document.body.classList.add('fade-out');
+        setTimeout(() => {
+          window.location.href = href;
+        }, 300);
+      }
+    });
+  });
+});
+
 // Projects array
 const projects=[
 
