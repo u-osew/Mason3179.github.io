@@ -1401,6 +1401,21 @@ function updateZoomMedia(){
   const media = filteredMediaList[currentMediaIndex];
   if (!media) return;
   
+  // Unload previous media before clearing
+  zoomContainer.querySelectorAll('video').forEach(video => {
+    video.pause();
+    video.src = "";
+    video.load();
+  });
+  
+  zoomContainer.querySelectorAll('iframe').forEach(iframe => {
+    iframe.src = "about:blank";
+  });
+  
+  zoomContainer.querySelectorAll('img').forEach(img => {
+    img.src = "";
+  });
+  
   zoomContainer.innerHTML = "";
 
   // Create media element
@@ -1488,6 +1503,23 @@ function fadeTransition(direction) {
 
 
 function closeZoom(){
+  // Stop all videos before clearing
+  zoomContainer.querySelectorAll('video').forEach(video => {
+    video.pause();
+    video.src = "";
+    video.load();
+  });
+  
+  // Clear iframes
+  zoomContainer.querySelectorAll('iframe').forEach(iframe => {
+    iframe.src = "about:blank";
+  });
+  
+  // Clear images
+  zoomContainer.querySelectorAll('img').forEach(img => {
+    img.src = "";
+  });
+  
   zoomOverlay.classList.remove("show");
   document.body.style.overflow = "";
   zoomContainer.innerHTML = "";
@@ -1500,18 +1532,49 @@ function closeZoom(){
   currentProject = null;
   filteredMediaList = [];
 }
-modal.addEventListener("click", e=>{ if(e.target===modal) { modal.classList.remove("show"); document.body.style.overflow = ""; } });
+
+function closeModal(){
+  // Stop all videos in modal
+  modalContent.querySelectorAll('video').forEach(video => {
+    video.pause();
+    video.src = "";
+    video.load();
+  });
+  
+  // Clear iframes
+  modalContent.querySelectorAll('iframe').forEach(iframe => {
+    iframe.src = "about:blank";
+  });
+  
+  // Clear images
+  modalContent.querySelectorAll('img').forEach(img => {
+    img.src = "";
+  });
+  
+  modal.classList.remove("show");
+  document.body.style.overflow = "";
+  
+  // Clear modal content after fade out
+  setTimeout(() => {
+    modalContent.innerHTML = "";
+  }, 300);
+}
+
+modal.addEventListener("click", e=>{ if(e.target===modal) { closeModal(); } });
 
 // Keyboard navigation
 document.addEventListener("keydown", e=>{
-  if(!zoomOverlay.classList.contains("show")) return;
-  if(e.key==="ArrowLeft"){ fadeTransition(-1); }
-  else if(e.key==="ArrowRight"){ fadeTransition(1); }
-  else if(e.key==="Tab"){ 
-    e.preventDefault();
-    fadeTransition(e.shiftKey ? -1 : 1);
+  if(zoomOverlay.classList.contains("show")) {
+    if(e.key==="ArrowLeft"){ fadeTransition(-1); }
+    else if(e.key==="ArrowRight"){ fadeTransition(1); }
+    else if(e.key==="Tab"){ 
+      e.preventDefault();
+      fadeTransition(e.shiftKey ? -1 : 1);
+    }
+    else if(e.key==="Escape"){ closeZoom(); }
+  } else if(modal.classList.contains("show") && e.key==="Escape") {
+    closeModal();
   }
-  else if(e.key==="Escape"){ closeZoom(); }
 });
 
 // Touch/Swipe navigation for mobile
