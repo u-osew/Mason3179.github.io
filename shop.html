@@ -274,10 +274,14 @@ p {
   height: 100%;
   object-fit: cover;
   transition: transform 0.3s ease;
+  backface-visibility: hidden;
+  transform-origin: center center;
+  will-change: transform;
+  transform: scale(1.05);
 }
 
 .shop-item:hover .item-thumbnail img {
-  transform: scale(1.05);
+  transform: scale(1.07);
 }
 
 .item-thumbnail::after {
@@ -333,7 +337,7 @@ p {
     <div class="shop-category-section">
       <a href="https://sketchfab.com/uosew" class="shop-item" target="_blank" rel="noopener noreferrer">
         <div class="item-thumbnail">
-          <img src="./media/Shop/Sketchfab_Thumb.png" alt="Sketchfab 3D Models">
+          <img src="./media/Shop/Sketchfab_Thumb.jpg" alt="Sketchfab 3D Models">
         </div>
         <div class="item-info">
           <div class="shop-title">Sketchfab</div>
@@ -347,12 +351,12 @@ p {
     <div class="shop-category-section">
       <a href="https://www.etsy.com/shop/MiAmorHearts" class="shop-item" target="_blank" rel="noopener noreferrer">
         <div class="item-thumbnail">
-          <img src="./media/MA/MA_Thumb.png" alt="Mi Amor Hearts">
+          <img src="./media/Shop/MiAmor_Thumb.jpg" alt="Mi Amor Hearts">
         </div>
         <div class="item-info">
           <div class="shop-title">Mi Amor Hearts</div>
-          <div class="shop-subtitle">Toys</div>
-          <div class="shop-description">My friend's toy business. I designed and curated most of the 3D printed collections.</div>
+          <div class="shop-subtitle">Toys and Goods</div>
+          <div class="shop-description">My friend Justin's toy business. I designed or curated most of the 3D printed collections. Go take a look!</div>
         </div>
       </a>
     </div>
@@ -361,15 +365,19 @@ p {
     <div class="shop-category-section">
       <a href="https://www.etsy.com/shop/uosewshop" class="shop-item" target="_blank" rel="noopener noreferrer">
         <div class="item-thumbnail">
-          <img src="./media/uosewshop/icon_Thumb.png" alt="uosewshop">
+          <img src="./media/Shop/uosewshop_Thumb.jpg" alt="uosewshop">
         </div>
         <div class="item-info">
           <div class="shop-title">uosewshop</div>
           <div class="shop-subtitle">Stickers</div>
-          <div class="shop-description">Sticker accessories! I'll add some 3D printed products when the time is right, but stickers are so much easier to ship.</div>
+          <div class="shop-description">My personal shop where I sell sticker accessories! Someday I'll add 3D prints.</div>
         </div>
       </a>
     </div>
+  </div>
+  
+  <div style="text-align: center; margin-top: 40px; font-size: 1.1rem; color: rgba(255, 255, 255, 0.8);">
+    Want something else? <a href="contact.html" style="color: #FFAA00; text-decoration: none; transition: color 0.2s;">Contact me!</a>
   </div>
 </div>
 
