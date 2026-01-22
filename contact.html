@@ -178,7 +178,7 @@ body > * { position: relative; z-index: 1; }
 }
 
 .content {
-  max-width: 900px;
+  max-width: 1400px;
   margin: 10px auto 50px;
   padding: 20px;
 }
@@ -194,6 +194,113 @@ p {
   font-size: 1.1rem;
   line-height: 1.8;
   margin-bottom: 20px;
+}
+
+/* Shop Layout - Equal Horizontal Distribution */
+.shop-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 80px;
+  margin-top: 40px;
+}
+
+.shop-category-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.shop-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.shop-item {
+  background: transparent;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+}
+
+.shop-item:hover {
+  transform: translateY(-5px);
+  box-shadow: none;
+}
+
+.item-info {
+  padding: 20px;
+  text-align: center;
+}
+
+.shop-title {
+  font-size: 1.3rem;
+  color: #fff;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.shop-subtitle {
+  font-size: 1rem;
+  color: #aaa;
+  font-weight: normal;
+  margin-bottom: 10px;
+}
+
+.shop-description {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.5;
+}
+
+.item-thumbnail {
+  width: 100%;
+  aspect-ratio: 1;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.item-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+  backface-visibility: hidden;
+  transform-origin: center center;
+  will-change: transform;
+  transform: scale(1.05);
+}
+
+.shop-item:hover .item-thumbnail img {
+  transform: scale(1.07);
+}
+
+.item-thumbnail::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: transparent;
+  pointer-events: none;
+}
+
+@media (max-width: 1024px) {
+  .shop-container {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  
+  .item-thumbnail {
+    min-height: 300px;
+  }
 }
 </style>
 </head>
@@ -223,9 +330,48 @@ p {
 <div align='center' style="margin-top: 20px;"><img src="./media/title.gif" class="center"></div>
 
 <div class="content">
-  <h1>Contact</h1>
-  <p></p>
-  <p>This page is currently under construction. More information coming soon!</p>
+  <h1 style="text-align:left; margin:1rem 0; color:#FFAA00; font-weight:bold; font-size:5rem; padding-left:1rem;">Contact</h1>
+  
+  <div class="shop-container">
+    <!-- Contact Item 1 -->
+    <div class="shop-category-section">
+      <a href="https://discord.com/users/196483782839238657" class="shop-item" target="_blank" rel="noopener noreferrer">
+        <div class="item-thumbnail">
+          <img src="./media/Contact/Discord_Thumb.png" alt="Discord">
+        </div>
+        <div class="item-info">
+          <div class="shop-title">Discord</div>
+          <div class="shop-description">Discord is the quickest way to contact me casually.</div>
+        </div>
+      </a>
+    </div>
+    
+    <!-- Contact Item 2 -->
+    <div class="shop-category-section">
+      <a href="https://www.linkedin.com/in/uosew/" class="shop-item" target="_blank" rel="noopener noreferrer">
+        <div class="item-thumbnail">
+          <img src="./media/Contact/Linkedin_Thumb.png" alt="LinkedIn">
+        </div>
+        <div class="item-info">
+          <div class="shop-title">LinkedIn</div>
+          <div class="shop-description">Connect with me professionally on Linkedin!</div>
+        </div>
+      </a>
+    </div>
+    
+    <!-- Contact Item 3 -->
+    <div class="shop-category-section">
+      <a href="mailto:0uosew@gmail.com" class="shop-item">
+        <div class="item-thumbnail">
+          <img src="./media/Contact/Gmail_Thumb.png" alt="Email">
+        </div>
+        <div class="item-info">
+          <div class="shop-title">Email</div>
+          <div class="shop-description">My business email is 0uosew@gmail.com.</div>
+        </div>
+      </a>
+    </div>
+  </div>
 </div>
 
 <script>
