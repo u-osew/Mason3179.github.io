@@ -179,16 +179,16 @@ body > * { position: relative; z-index: 1; }
 
 .content {
   max-width: 1400px;
-  margin: 10px auto 50px;
-  padding: 20px;
+  margin: 5px auto 20px;
+  padding: 10px 20px;
 }
 
 .about-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 60px;
+  gap: 40px;
   align-items: start;
-  margin-top: 40px;
+  margin-top: 20px;
 }
 
 .about-left {
@@ -205,7 +205,7 @@ body > * { position: relative; z-index: 1; }
 }
 
 .about-left h2 {
-  color: #AA1596;
+  color: #CC8800;
   text-align: left;
   font-size: 2rem;
   margin: 10px 0 30px 0;
@@ -215,32 +215,38 @@ body > * { position: relative; z-index: 1; }
 .about-text {
   font-size: 1.1rem;
   line-height: 1.8;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   text-align: left;
+}
+
+.about-text p {
+  white-space: pre-line;
 }
 
 .about-attributes {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  margin-top: 30px;
+  gap: 30px;
+  margin-top: 20px;
+  justify-items: center;
+  text-align: center;
 }
 
 .attribute-column {
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 20px;
 }
 
 .attribute-item h3 {
-  color: #FFAA00;
+  color: #ffffff;
   font-size: 1.3rem;
   margin: 0 0 5px 0;
   font-weight: bold;
 }
 
 .attribute-item p {
-  color: #AA1596;
+  color: #cccccc;
   font-size: 1rem;
   margin: 0;
   line-height: 1.4;
@@ -256,7 +262,7 @@ body > * { position: relative; z-index: 1; }
 .carousel-container {
   position: relative;
   width: 100%;
-  max-width: 500px;
+  max-width: 450px;
   aspect-ratio: 1 / 1;
   overflow: hidden;
   border-radius: 10px;
@@ -279,18 +285,18 @@ body > * { position: relative; z-index: 1; }
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.5);
+  background: transparent;
   color: white;
   border: none;
   padding: 15px 20px;
   cursor: pointer;
   font-size: 24px;
-  transition: background 0.3s ease;
+  transition: color 0.3s ease;
   z-index: 10;
 }
 
 .carousel-nav:hover {
-  background: rgba(170, 21, 150, 0.8);
+  color: #AA1596;
 }
 
 .carousel-nav.prev {
@@ -327,9 +333,9 @@ body > * { position: relative; z-index: 1; }
 .carousel-title {
   color: #FFAA00;
   font-size: 1.5rem;
-  margin-top: 20px;
+  margin-top: 15px;
   text-align: center;
-  min-height: 40px;
+  min-height: 30px;
   transition: opacity 0.3s ease;
 }
 
@@ -359,44 +365,219 @@ body > * { position: relative; z-index: 1; }
 
 .software-section {
   max-width: 1400px;
-  margin: 80px auto 50px;
-  padding: 40px 20px;
+  margin: 20px auto 20px;
+  padding: 20px 20px;
   text-align: center;
 }
 
 .software-section h2 {
   color: #FFAA00;
-  font-size: 3rem;
-  margin-bottom: 50px;
+  font-size: 2rem;
+  margin-bottom: 20px;
   font-weight: bold;
 }
+.software-container {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+}
 
+.software-rows {
+  flex: 1;
+}
+
+.software-info-box {
+  width: 300px;
+  min-height: 200px;
+  background: rgba(170, 21, 150, 0.1);
+  border: 2px solid #AA1596;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.software-info-box.empty {
+  opacity: 0.3;
+}
+
+.software-info-box .software-name {
+  color: #FFAA00;
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.software-info-box .software-description {
+  color: #cccccc;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.software-info-box .placeholder-text {
+  color: #666;
+  font-size: 1rem;
+  font-style: italic;
+}
 .software-row {
-  margin-bottom: 50px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
 .software-row h3 {
   color: #AA1596;
   font-size: 1.5rem;
-  margin-bottom: 25px;
+  margin: 0;
   font-weight: normal;
+  text-align: left;
+  min-width: 150px;
+  flex-shrink: 0;
 }
 
 .software-logos {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   gap: 30px;
   flex-wrap: wrap;
+  flex: 1;
 }
 
-.software-logos img {
+/* Height-based media queries for responsive compression */
+@media (max-height: 1200px) {
+  .content {
+    margin: 2px auto 10px;
+  }
+  
+  .about-container {
+    gap: 30px;
+    margin-top: 10px;
+  }
+  
+  .about-text {
+    margin-bottom: 15px;
+  }
+  
+  .about-attributes {
+    gap: 20px;
+    margin-top: 15px;
+  }
+  
+  .attribute-column {
+    gap: 15px;
+  }
+  
+  .carousel-container {
+    max-width: 400px;
+  }
+  
+  .carousel-title {
+    margin-top: 10px;
+  }
+  
+  .software-section {
+    margin: 10px auto 15px;
+    padding: 15px 20px;
+  }
+  
+  .software-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+  }
+  
+  .software-row {
+    margin-bottom: 15px;
+  }
+  
+  .software-info-box {
+    width: 280px;
+    min-height: 180px;
+  }
+  
+  .software-info-box .software-name {
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+  }
+  
+  .software-info-box .software-description {
+    font-size: 1rem;
+  }
+}
+
+@media (max-height: 900px) {
+  .content {
+    margin: 0px auto 5px;
+    padding: 5px 20px;
+  }
+  
+  .about-container {
+    gap: 20px;
+    margin-top: 5px;
+  }
+  
+  .about-text {
+    margin-bottom: 10px;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  
+  .about-attributes {
+    gap: 15px;
+    margin-top: 10px;
+  }
+  
+  .attribute-column {
+    gap: 10px;
+  }
+  
+  .carousel-container {
+    max-width: 350px;
+  }
+  
+  .software-section {
+    margin: 5px auto 10px;
+    padding: 10px 20px;
+  }
+  
+  .software-section h2 {
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+  }
+  
+  .software-row {
+    margin-bottom: 10px;
+  }
+  
+  .software-info-box {
+    width: 250px;
+    min-height: 150px;
+    padding: 15px;
+  }
+}
+
+.software-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.software-logos img,
+.software-item img {
   transition: transform 0.3s ease, filter 0.3s ease;
   filter: brightness(0.9);
 }
 
-.software-logos img:hover {
-  transform: scale(1.1);
+.software-logos img:hover,
+.software-item:hover img {
+  transform: scale(1.15);
   filter: brightness(1.1);
 }
 
@@ -409,7 +590,8 @@ body > * { position: relative; z-index: 1; }
     gap: 20px;
   }
   
-  .software-logos img {
+  .software-logos img,
+  .software-item img {
     width: 48px !important;
     height: 48px !important;
   }
@@ -459,40 +641,39 @@ p {
     <!-- Left Side: About Text -->
     <div class="about-left">
       <h1>uosew</h1>
-      <h2>aka Mason</h2>
+      <h2>Mason Guderian</h2>
       <div class="about-text">
-        <p>Welcome! I'm a 3D character artist and animator passionate about bringing characters to life through expressive design and storytelling.</p>
-        <p>With experience in character modeling, rigging, and animation, I specialize in creating unique characters that resonate with audiences.</p>
+        <p>Hi, I'm Mason! I've been doing 3D art for around 5 years now, starting out with Blender tutorials on YouTube. It's been my favorite medium ever since.<br>I grew up playing video games and doing art, which are still my two main hobbies.</p>
       </div>
       
       <div class="about-attributes">
         <div class="attribute-column">
           <div class="attribute-item">
             <h3>Age</h3>
-            <p>25 years old</p>
+            <p>23</p>
           </div>
           <div class="attribute-item">
             <h3>Location</h3>
-            <p>Based in California</p>
+            <p>Los Angeles, California</p>
           </div>
           <div class="attribute-item">
-            <h3>Experience</h3>
-            <p>5+ years in 3D art</p>
+            <h3>EYES</h3>
+            <p>GRN</p>
           </div>
         </div>
         
         <div class="attribute-column">
           <div class="attribute-item">
-            <h3>Specialty</h3>
-            <p>Character Design</p>
+            <h3>College Experience</h3>
+            <p>Otis College of Art and Design</p>
           </div>
           <div class="attribute-item">
-            <h3>Software</h3>
-            <p>Blender, Maya, ZBrush</p>
+            <h3>Favorite Game</h3>
+            <p>Yume Nikki</p>
           </div>
           <div class="attribute-item">
-            <h3>Status</h3>
-            <p>Available for work</p>
+            <h3>Temperament</h3>
+            <p>Mild-Mannered</p>
           </div>
         </div>
       </div>
@@ -502,11 +683,11 @@ p {
     <div class="about-right">
       <div class="carousel-container">
         <div class="carousel-track">
-          <img src="./media/images/fulls/01.png" class="carousel-slide" alt="Character Art 1">
-          <img src="./media/images/fulls/02.png" class="carousel-slide" alt="Character Art 2">
-          <img src="./media/images/fulls/03.png" class="carousel-slide" alt="Character Art 3">
-          <img src="./media/images/fulls/04.png" class="carousel-slide" alt="Character Art 4">
-          <img src="./media/images/fulls/05.png" class="carousel-slide" alt="Character Art 5">
+          <img src="./media/about/about_main.jfif" class="carousel-slide" alt="">
+          <img src="./media/images/fulls/02.png" class="carousel-slide" alt="">
+          <img src="./media/images/fulls/03.png" class="carousel-slide" alt="">
+          <img src="./media/images/fulls/04.png" class="carousel-slide" alt="">
+          <img src="./media/images/fulls/05.png" class="carousel-slide" alt="">
         </div>
         
         <button class="carousel-nav prev">‹</button>
@@ -520,7 +701,7 @@ p {
           <span class="carousel-dot" data-index="4"></span>
         </div>
       </div>
-      <div class="carousel-title" id="carouselTitle">Character Art 1</div>
+      <div class="carousel-title" id="carouselTitle">About Main</div>
     </div>
   </div>
 </div>
@@ -529,39 +710,73 @@ p {
 <div class="software-section">
   <h2>Software Used</h2>
   
-  <div class="software-row">
-    <h3>Proficient in:</h3>
-    <div class="software-logos">
-      <!-- Blender -->
-      <img src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Blender_logo_no_text.svg" alt="Blender" width="64" height="64">
+  <div class="software-container">
+    <div class="software-rows">
+      <div class="software-row">
+        <h3>Proficient in:</h3>
+        <div class="software-logos">
+          <div class="software-item" data-name="Blender" data-desc="Primary 3D modeling tool">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Blender_logo_no_text.svg" alt="Blender" width="64" height="64">
+          </div>
+          
+          <div class="software-item" data-name="Unreal Engine" data-desc="Real-time rendering">
+            <img src="https://www.nicepng.com/png/full/321-3211558_unreal-logo-png-for-kids-unreal-engine-icon.png" alt="Unreal Engine" width="64" height="64">
+          </div>
+          
+          <div class="software-item" data-name="Procreate" data-desc="Digital illustration">
+            <img src="https://upload.wikimedia.org/wikipedia/en/9/9b/Procreate_icon.png" alt="Procreate" width="64" height="64">
+          </div>
+          
+          <div class="software-item" data-name="ZBrush" data-desc="High-detail sculpting">
+            <img src="https://icons.iconarchive.com/icons/dakirby309/simply-styled/256/ZBrush-icon.png" alt="ZBrush" width="64" height="64">
+          </div>
+          
+          <div class="software-item" data-name="Substance Painter" data-desc="PBR texturing">
+            <img src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/adobe-substance-3d-painter-icon.png" alt="Substance Painter" width="64" height="64">
+          </div>
+          
+          <div class="software-item" data-name="Aseprite" data-desc="Pixel art & sprites">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Logo_Aseprite.png" alt="Aseprite" width="64" height="64">
+          </div>
+          
+          <div class="software-item" data-name="Bambu Lab" data-desc="3D printing">
+            <img src="https://media.printables.com/media/prints/754259/images/5885287_be47d97c-1aee-45e2-9f54-09a06093081a_b35039bb-5086-43b5-8b8d-4dde65caf490/thumbs/inside/1280x960/webp/bambulablogo.webp" alt="Bambu Lab" width="64" height="64">
+          </div>
+          
+          <div class="software-item" data-name="Cricut" data-desc="Vinyl cutting & crafts">
+            <img src="https://imagedelivery.net/-IT6z0z0Ec5yEiYj3DvVjg/5f30280ddb7150e8493da3750c742171f0b638b9/public" alt="Cricut" width="64" height="64">
+          </div>
+          
+          <div class="software-item" data-name="Photoshop" data-desc="Image editing">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Adobe_Photoshop_CC_icon.svg/500px-Adobe_Photoshop_CC_icon.svg.png" alt="Photoshop" width="64" height="64">
+          </div>
+        </div>
+      </div>
       
-      <!-- Unreal Engine -->
-      <img src="https://www.nicepng.com/png/full/321-3211558_unreal-logo-png-for-kids-unreal-engine-icon.png" alt="Unreal Engine" width="64" height="64">
-      
-      <!-- Procreate -->
-      <img src="https://upload.wikimedia.org/wikipedia/en/9/9b/Procreate_icon.png" alt="Procreate" width="64" height="64">
-      
-      <!-- ZBrush -->
-      <img src="https://icons.iconarchive.com/icons/dakirby309/simply-styled/256/ZBrush-icon.png" alt="ZBrush" width="64" height="64">
-      
-      <!-- Substance Painter -->
-      <img src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/adobe-substance-3d-painter-icon.png" alt="Substance Painter" width="64" height="64">
-      
-      <!-- Aseprite -->
-      <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/aseprite.svg" alt="Aseprite" width="64" height="64">
-      
-      <!-- Bambu Lab -->
-      <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/bambulab.svg" alt="Bambu Lab" width="64" height="64">
-      
-      <!-- Cricut -->
-      <img src="https://imagedelivery.net/-IT6z0z0Ec5yEiYj3DvVjg/5f30280ddb7150e8493da3750c742171f0b638b9/public" alt="Cricut" width="64" height="64">
+      <div class="software-row">
+        <h3>Capable of:</h3>
+        <div class="software-logos">
+          <div class="software-item" data-name="Maya" data-desc="3D animation software">
+            <img src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/autodesk-maya-icon.png" alt="Maya" width="64" height="64">
+          </div>
+          
+          <div class="software-item" data-name="Godot" data-desc="Game engine">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Godot_icon.svg" alt="Godot" width="64" height="64">
+          </div>
+          
+          <div class="software-item" data-name="Marvelous Designer" data-desc="Cloth simulation">
+            <img src="https://blenderartists.org/uploads/default/original/4X/e/5/7/e575245f05336afaeb38e6914589c3cad02cc2ab.png" alt="Marvelous Designer" width="64" height="64">
+          </div>
+          
+          <div class="software-item" data-name="Marmoset Toolbag" data-desc="Real-time renderer">
+            <img src="https://www.iboostup.com/resource?a=r&t=thumbnail&i=marmoset.marmoset-toolbag" alt="Marmoset Toolbag" width="64" height="64">
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-  
-  <div class="software-row">
-    <h3>Capable of:</h3>
-    <div class="software-logos">
-      <!-- Add second row images here -->
+    
+    <div class="software-info-box empty" id="softwareInfoBox">
+      <div class="placeholder-text">Hover over a software icon to see details</div>
     </div>
   </div>
 </div>
@@ -615,7 +830,7 @@ const nextBtn = document.querySelector('.carousel-nav.next');
 
 // Carousel titles for each image
 const titles = [
-  'Character Art 1',
+  '2025',
   'Character Art 2',
   'Character Art 3',
   'Character Art 4',
@@ -675,6 +890,35 @@ setInterval(nextSlide, 5000);
 
 // Initialize
 showSlide(0);
+
+// Software Info Box Functionality
+const softwareItems = document.querySelectorAll('.software-item');
+const infoBox = document.getElementById('softwareInfoBox');
+let resetTimeout;
+
+softwareItems.forEach(item => {
+  item.addEventListener('mouseenter', () => {
+    // Clear any pending reset
+    clearTimeout(resetTimeout);
+    
+    const name = item.getAttribute('data-name');
+    const desc = item.getAttribute('data-desc');
+    
+    infoBox.innerHTML = `
+      <div class="software-name">${name}</div>
+      <div class="software-description">${desc}</div>
+    `;
+    infoBox.classList.remove('empty');
+  });
+  
+  item.addEventListener('mouseleave', () => {
+    // Delay reset to avoid jittery transitions
+    resetTimeout = setTimeout(() => {
+      infoBox.innerHTML = '<div class="placeholder-text">Hover over a software icon to see details</div>';
+      infoBox.classList.add('empty');
+    }, 100);
+  });
+});
 </script>
 
 </body>
