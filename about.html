@@ -209,7 +209,7 @@ body > * { position: relative; z-index: 1; }
   text-align: left;
   font-size: 2rem;
   margin: 10px 0 30px 0;
-  font-weight: normal;
+  font-weight: bold;
 }
 
 .about-text {
@@ -266,7 +266,6 @@ body > * { position: relative; z-index: 1; }
   aspect-ratio: 1 / 1;
   overflow: hidden;
   border-radius: 10px;
-  box-shadow: 0 4px 20px rgba(170, 21, 150, 0.3);
 }
 
 .carousel-track {
@@ -290,7 +289,7 @@ body > * { position: relative; z-index: 1; }
   border: none;
   padding: 15px 20px;
   cursor: pointer;
-  font-size: 24px;
+  font-size: 36px;
   transition: color 0.3s ease;
   z-index: 10;
 }
@@ -390,26 +389,41 @@ body > * { position: relative; z-index: 1; }
   width: 300px;
   min-height: 200px;
   background: rgba(170, 21, 150, 0.1);
-  border: 2px solid #AA1596;
   border-radius: 10px;
   padding: 20px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  text-align: center;
+  text-align: left;
   transition: all 0.3s ease;
+  position: relative;
 }
 
 .software-info-box.empty {
   opacity: 0.3;
 }
 
+.software-info-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
 .software-info-box .software-name {
   color: #FFAA00;
   font-size: 1.8rem;
   font-weight: bold;
-  margin-bottom: 15px;
+  margin: 0;
+}
+
+.software-info-box .software-logo {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  opacity: 0.8;
 }
 
 .software-info-box .software-description {
@@ -431,10 +445,10 @@ body > * { position: relative; z-index: 1; }
 }
 
 .software-row h3 {
-  color: #AA1596;
+  color: #cccccc;
   font-size: 1.5rem;
   margin: 0;
-  font-weight: normal;
+  font-weight: bold;
   text-align: left;
   min-width: 150px;
   flex-shrink: 0;
@@ -715,41 +729,41 @@ p {
       <div class="software-row">
         <h3>Proficient in:</h3>
         <div class="software-logos">
-          <div class="software-item" data-name="Blender" data-desc="Primary 3D modeling tool">
+          <div class="software-item" data-name="Blender" data-desc="Blockouts, rigging, rendering, and creating 3D print-ready models. I also enjoy creating procedural material node trees and nondestructive modeling through modifiers!">
             <img src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Blender_logo_no_text.svg" alt="Blender" width="64" height="64">
           </div>
           
-          <div class="software-item" data-name="Unreal Engine" data-desc="Real-time rendering">
+          <div class="software-item" data-name="Unreal Engine" data-desc="My primary game engine, our curriculum at Otis is based around it. I've become comfortable with importing assets and creating elementary blueprints. Eclipse Park has been my best project yet.">
             <img src="https://www.nicepng.com/png/full/321-3211558_unreal-logo-png-for-kids-unreal-engine-icon.png" alt="Unreal Engine" width="64" height="64">
           </div>
           
-          <div class="software-item" data-name="Procreate" data-desc="Digital illustration">
+          <div class="software-item" data-name="Procreate" data-desc="My app of choice for 2D art and sketching. I find the brushes and interface a bit more intuitive than Photoshop.">
             <img src="https://upload.wikimedia.org/wikipedia/en/9/9b/Procreate_icon.png" alt="Procreate" width="64" height="64">
           </div>
           
-          <div class="software-item" data-name="ZBrush" data-desc="High-detail sculpting">
+          <div class="software-item" data-name="ZBrush" data-desc="I use ZBrush for sculpting high-poly models and remeshing. For a long time I only used a mouse...">
             <img src="https://icons.iconarchive.com/icons/dakirby309/simply-styled/256/ZBrush-icon.png" alt="ZBrush" width="64" height="64">
           </div>
           
-          <div class="software-item" data-name="Substance Painter" data-desc="PBR texturing">
+          <div class="software-item" data-name="Photoshop" data-desc="I mainly use Photoshop for creating thumbnails and quick edits. It's helped a ton in creating the assets for this website. I also use it for product thumbnails.">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Adobe_Photoshop_CC_icon.svg/500px-Adobe_Photoshop_CC_icon.svg.png" alt="Photoshop" width="64" height="64">
+          </div>
+          <div class="software-item" data-name="Substance Painter" data-desc="My go-to for baking and texturing models that need that require a higher level of detail.">
             <img src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/adobe-substance-3d-painter-icon.png" alt="Substance Painter" width="64" height="64">
           </div>
           
-          <div class="software-item" data-name="Aseprite" data-desc="Pixel art & sprites">
+          <div class="software-item" data-name="Aseprite" data-desc="Used mostly for editing and creating sprite sheets and pixel art, of course.">
             <img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Logo_Aseprite.png" alt="Aseprite" width="64" height="64">
           </div>
           
-          <div class="software-item" data-name="Bambu Lab" data-desc="3D printing">
+          <div class="software-item" data-name="Bambu Studio" data-desc="I use Bambu Studio with my P1S to 3D Print toys, products, and tools. I've been able to make lots of jewelry molds with the prints as well!">
             <img src="https://media.printables.com/media/prints/754259/images/5885287_be47d97c-1aee-45e2-9f54-09a06093081a_b35039bb-5086-43b5-8b8d-4dde65caf490/thumbs/inside/1280x960/webp/bambulablogo.webp" alt="Bambu Lab" width="64" height="64">
           </div>
           
-          <div class="software-item" data-name="Cricut" data-desc="Vinyl cutting & crafts">
+          <div class="software-item" data-name="Cricut" data-desc="My trusty vinyl sticker cutter, the Cricut Explore Air 2. Though the machine works well, I cannot express just how awfully unoptimized the software is.">
             <img src="https://imagedelivery.net/-IT6z0z0Ec5yEiYj3DvVjg/5f30280ddb7150e8493da3750c742171f0b638b9/public" alt="Cricut" width="64" height="64">
           </div>
           
-          <div class="software-item" data-name="Photoshop" data-desc="Image editing">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Adobe_Photoshop_CC_icon.svg/500px-Adobe_Photoshop_CC_icon.svg.png" alt="Photoshop" width="64" height="64">
-          </div>
         </div>
       </div>
       
@@ -831,10 +845,10 @@ const nextBtn = document.querySelector('.carousel-nav.next');
 // Carousel titles for each image
 const titles = [
   '2025',
-  'Character Art 2',
-  'Character Art 3',
-  'Character Art 4',
-  'Character Art 5'
+  '???',
+  '???',
+  '???',
+  '???'
 ];
 
 function showSlide(index) {
@@ -895,6 +909,8 @@ showSlide(0);
 const softwareItems = document.querySelectorAll('.software-item');
 const infoBox = document.getElementById('softwareInfoBox');
 let resetTimeout;
+let isPinned = false;
+let pinnedData = null;
 
 softwareItems.forEach(item => {
   item.addEventListener('mouseenter', () => {
@@ -903,21 +919,69 @@ softwareItems.forEach(item => {
     
     const name = item.getAttribute('data-name');
     const desc = item.getAttribute('data-desc');
+    const logoSrc = item.querySelector('img').getAttribute('src');
     
     infoBox.innerHTML = `
-      <div class="software-name">${name}</div>
+      <div class="software-info-header">
+        <div class="software-name">${name}</div>
+        <img src="${logoSrc}" alt="${name}" class="software-logo">
+      </div>
       <div class="software-description">${desc}</div>
     `;
     infoBox.classList.remove('empty');
   });
   
   item.addEventListener('mouseleave', () => {
-    // Delay reset to avoid jittery transitions
+    // Delay reset
     resetTimeout = setTimeout(() => {
-      infoBox.innerHTML = '<div class="placeholder-text">Hover over a software icon to see details</div>';
-      infoBox.classList.add('empty');
+      if (isPinned && pinnedData) {
+        // Return to pinned content
+        infoBox.innerHTML = `
+          <div class="software-info-header">
+            <div class="software-name">${pinnedData.name}</div>
+            <img src="${pinnedData.logoSrc}" alt="${pinnedData.name}" class="software-logo">
+          </div>
+          <div class="software-description">${pinnedData.desc}</div>
+        `;
+        infoBox.classList.remove('empty');
+      } else {
+        // Return to placeholder
+        infoBox.innerHTML = '<div class="placeholder-text">Hover over a software icon to see details</div>';
+        infoBox.classList.add('empty');
+      }
     }, 100);
   });
+  
+  item.addEventListener('click', () => {
+    // Clear any pending reset
+    clearTimeout(resetTimeout);
+    
+    const name = item.getAttribute('data-name');
+    const desc = item.getAttribute('data-desc');
+    const logoSrc = item.querySelector('img').getAttribute('src');
+    
+    // Pin the information
+    isPinned = true;
+    pinnedData = { name, desc, logoSrc };
+    infoBox.innerHTML = `
+      <div class="software-info-header">
+        <div class="software-name">${name}</div>
+        <img src="${logoSrc}" alt="${name}" class="software-logo">
+      </div>
+      <div class="software-description">${desc}</div>
+    `;
+    infoBox.classList.remove('empty');
+  });
+});
+
+// Click on info box or anywhere else to unpin
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.software-item') && isPinned) {
+    isPinned = false;
+    pinnedData = null;
+    infoBox.innerHTML = '<div class="placeholder-text">Hover over a software icon to see details</div>';
+    infoBox.classList.add('empty');
+  }
 });
 </script>
 
