@@ -228,8 +228,8 @@ body > * { position: relative; z-index: 1; }
   grid-template-columns: 1fr 1fr;
   gap: 30px;
   margin-top: 20px;
-  justify-items: center;
-  text-align: center;
+  justify-items: left;
+  text-align: left;
 }
 
 .attribute-column {
@@ -623,6 +623,109 @@ p {
   line-height: 1.8;
   margin-bottom: 20px;
 }
+
+/* Zoom Overlay Styles */
+.zoom-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 10000;
+  overflow: hidden;
+}
+
+.zoom-overlay.show {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.zoom-image-container {
+  width: 90vw;
+  max-width: 1200px;
+  max-height: 90vh;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.zoom-image-container img {
+  max-width: 100%;
+  max-height: 90vh;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  cursor: zoom-out;
+  object-fit: contain;
+  transition: opacity 0.3s ease;
+}
+
+.zoom-info {
+  color: white;
+  text-align: center;
+  max-width: 90%;
+  margin-bottom: 20px;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.zoom-info.hide {
+  opacity: 0;
+}
+
+.zoom-info h3 {
+  margin-bottom: 0.3rem;
+  color: #FFAA00;
+  font-size: 1.5rem;
+}
+
+.zoom-arrow {
+  position: absolute;
+  z-index: 10002;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2.25rem;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.65);
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+  transition: background 0.15s ease, transform 0.15s ease;
+  opacity: 0.98;
+}
+
+.zoom-arrow:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-50%) scale(1.08);
+}
+
+.zoom-arrow.left {
+  left: 2.5%;
+}
+
+.zoom-arrow.right {
+  right: 2.5%;
+}
+
+.carousel-slide {
+  cursor: zoom-in;
+}
 </style>
 </head>
 <body>
@@ -657,7 +760,7 @@ p {
       <h1>uosew</h1>
       <h2>Mason Guderian</h2>
       <div class="about-text">
-        <p>Hi, I'm Mason! I've been doing 3D art for around 5 years now, starting out with Blender tutorials on YouTube. It's been my favorite medium ever since.<br>I grew up playing video games and doing art, which are still my two main hobbies.</p>
+        <p>Hi, I'm Mason! I've been doing 3D art for around 5 years now, starting out with Blender tutorials on YouTube. It's been my favorite medium ever since.</p>
       </div>
       
       <div class="about-attributes">
@@ -679,7 +782,7 @@ p {
         <div class="attribute-column">
           <div class="attribute-item">
             <h3>College Experience</h3>
-            <p>Otis College of Art and Design</p>
+            <p>Otis College of Art and Design, El Camino</p>
           </div>
           <div class="attribute-item">
             <h3>Favorite Game</h3>
@@ -698,10 +801,10 @@ p {
       <div class="carousel-container">
         <div class="carousel-track">
           <img src="./media/about/about_main.jfif" class="carousel-slide" alt="">
-          <img src="./media/images/fulls/02.png" class="carousel-slide" alt="">
-          <img src="./media/images/fulls/03.png" class="carousel-slide" alt="">
-          <img src="./media/images/fulls/04.png" class="carousel-slide" alt="">
-          <img src="./media/images/fulls/05.png" class="carousel-slide" alt="">
+          <img src="./media/about/drawing_2.webp" class="carousel-slide" alt="">
+          <img src="./media/about/drawing_3.jpg" class="carousel-slide" alt="">
+          <img src="./media/about/drawing_4.jpg" class="carousel-slide" alt="">
+          <img src="./media/about/drawing_5.jpg" class="carousel-slide" alt="">
         </div>
         
         <button class="carousel-nav prev">‹</button>
@@ -722,7 +825,7 @@ p {
 
 <!-- Software Used Section -->
 <div class="software-section">
-  <h2>Software Used</h2>
+  <h2>Software I Use</h2>
   
   <div class="software-container">
     <div class="software-rows">
@@ -790,8 +893,16 @@ p {
     </div>
     
     <div class="software-info-box empty" id="softwareInfoBox">
-      <div class="placeholder-text">Hover over a software icon to see details</div>
+      <div class="placeholder-text">Click a software to see how I use it!</div>
     </div>
+  </div>
+</div>
+
+<!-- Zoom Overlay -->
+<div class="zoom-overlay" id="zoomOverlay">
+  <div class="zoom-image-container" id="zoomImageContainer"></div>
+  <div class="zoom-info">
+    <h3 class="zoom-title" id="zoomTitle"></h3>
   </div>
 </div>
 
@@ -844,11 +955,11 @@ const nextBtn = document.querySelector('.carousel-nav.next');
 
 // Carousel titles for each image
 const titles = [
+  '2026',
   '2025',
-  '???',
-  '???',
-  '???',
-  '???'
+  '2024',
+  '2023',
+  '2022'
 ];
 
 function showSlide(index) {
@@ -889,21 +1000,39 @@ function prevSlide() {
   showSlide(currentSlide - 1);
 }
 
+// Auto-advance functionality
+let carouselInterval;
+
+function startCarouselTimer() {
+  clearInterval(carouselInterval);
+  carouselInterval = setInterval(nextSlide, 5000);
+}
+
+function resetCarouselTimer() {
+  startCarouselTimer();
+}
+
 // Event listeners
-prevBtn.addEventListener('click', prevSlide);
-nextBtn.addEventListener('click', nextSlide);
+prevBtn.addEventListener('click', () => {
+  prevSlide();
+  resetCarouselTimer();
+});
+
+nextBtn.addEventListener('click', () => {
+  nextSlide();
+  resetCarouselTimer();
+});
 
 dots.forEach((dot, index) => {
   dot.addEventListener('click', () => {
     showSlide(index);
+    resetCarouselTimer();
   });
 });
 
-// Auto-advance carousel every 5 seconds
-setInterval(nextSlide, 5000);
-
 // Initialize
 showSlide(0);
+startCarouselTimer();
 
 // Software Info Box Functionality
 const softwareItems = document.querySelectorAll('.software-item');
@@ -946,7 +1075,7 @@ softwareItems.forEach(item => {
         infoBox.classList.remove('empty');
       } else {
         // Return to placeholder
-        infoBox.innerHTML = '<div class="placeholder-text">Hover over a software icon to see details</div>';
+        infoBox.innerHTML = '<div class="placeholder-text">Click a software to see how I use it!</div>';
         infoBox.classList.add('empty');
       }
     }, 100);
@@ -982,6 +1111,106 @@ document.addEventListener('click', (e) => {
     infoBox.innerHTML = '<div class="placeholder-text">Hover over a software icon to see details</div>';
     infoBox.classList.add('empty');
   }
+});
+
+// Zoom Functionality
+const zoomOverlay = document.getElementById('zoomOverlay');
+const zoomImageContainer = document.getElementById('zoomImageContainer');
+const zoomTitle = document.getElementById('zoomTitle');
+let zoomIndex = 0;
+
+function openZoom(index) {
+  zoomIndex = index;
+  updateZoomImage();
+  zoomOverlay.classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function updateZoomImage() {
+  // Clear previous content
+  zoomImageContainer.innerHTML = '';
+  zoomOverlay.querySelectorAll('.zoom-arrow').forEach(n => n.remove());
+  
+  // Create new image
+  const img = document.createElement('img');
+  img.src = slides[zoomIndex].src;
+  img.alt = titles[zoomIndex];
+  zoomImageContainer.appendChild(img);
+  
+  // Update title
+  zoomTitle.textContent = titles[zoomIndex];
+  
+  // Add navigation arrows
+  if (slides.length > 1) {
+    const left = document.createElement('div');
+    left.className = 'zoom-arrow left';
+    left.innerHTML = '&#10094;';
+    left.addEventListener('click', (e) => {
+      e.stopPropagation();
+      zoomNavigate(-1);
+    });
+    
+    const right = document.createElement('div');
+    right.className = 'zoom-arrow right';
+    right.innerHTML = '&#10095;';
+    right.addEventListener('click', (e) => {
+      e.stopPropagation();
+      zoomNavigate(1);
+    });
+    
+    zoomOverlay.appendChild(left);
+    zoomOverlay.appendChild(right);
+  }
+}
+
+function zoomNavigate(direction) {
+  const img = zoomImageContainer.querySelector('img');
+  const zoomInfo = zoomOverlay.querySelector('.zoom-info');
+  
+  if (img) img.style.opacity = '0';
+  if (zoomInfo) zoomInfo.classList.add('hide');
+  
+  setTimeout(() => {
+    zoomIndex = (zoomIndex + direction + slides.length) % slides.length;
+    updateZoomImage();
+    setTimeout(() => {
+      if (zoomInfo) zoomInfo.classList.remove('hide');
+    }, 10);
+  }, 300);
+}
+
+function closeZoom() {
+  zoomOverlay.classList.remove('show');
+  document.body.style.overflow = '';
+  zoomImageContainer.innerHTML = '';
+  zoomOverlay.querySelectorAll('.zoom-arrow').forEach(n => n.remove());
+  zoomTitle.textContent = '';
+}
+
+// Close zoom when clicking on overlay background
+zoomOverlay.addEventListener('click', (e) => {
+  if (e.target === zoomOverlay || e.target === zoomImageContainer) {
+    closeZoom();
+  }
+});
+
+// Close zoom with Escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && zoomOverlay.classList.contains('show')) {
+    closeZoom();
+  }
+  // Navigate with arrow keys in zoom
+  if (zoomOverlay.classList.contains('show')) {
+    if (e.key === 'ArrowLeft') zoomNavigate(-1);
+    if (e.key === 'ArrowRight') zoomNavigate(1);
+  }
+});
+
+// Make carousel slides clickable to open zoom
+slides.forEach((slide, index) => {
+  slide.addEventListener('click', () => {
+    openZoom(index);
+  });
 });
 </script>
 
