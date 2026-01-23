@@ -178,9 +178,241 @@ body > * { position: relative; z-index: 1; }
 }
 
 .content {
-  max-width: 900px;
+  max-width: 1400px;
   margin: 10px auto 50px;
   padding: 20px;
+}
+
+.about-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+  margin-top: 40px;
+}
+
+.about-left {
+  padding-left: 40px;
+}
+
+.about-left h1 {
+  color: #FFAA00;
+  text-align: left;
+  font-size: 5rem;
+  margin: 0;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.about-left h2 {
+  color: #AA1596;
+  text-align: left;
+  font-size: 2rem;
+  margin: 10px 0 30px 0;
+  font-weight: normal;
+}
+
+.about-text {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 30px;
+  text-align: left;
+}
+
+.about-attributes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-top: 30px;
+}
+
+.attribute-column {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.attribute-item h3 {
+  color: #FFAA00;
+  font-size: 1.3rem;
+  margin: 0 0 5px 0;
+  font-weight: bold;
+}
+
+.attribute-item p {
+  color: #AA1596;
+  font-size: 1rem;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.about-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-container {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(170, 21, 150, 0.3);
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  height: 100%;
+}
+
+.carousel-slide {
+  min-width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.carousel-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 15px 20px;
+  cursor: pointer;
+  font-size: 24px;
+  transition: background 0.3s ease;
+  z-index: 10;
+}
+
+.carousel-nav:hover {
+  background: rgba(170, 21, 150, 0.8);
+}
+
+.carousel-nav.prev {
+  left: 10px;
+}
+
+.carousel-nav.next {
+  right: 10px;
+}
+
+.carousel-dots {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+}
+
+.carousel-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.carousel-dot.active {
+  background: #FFAA00;
+}
+
+.carousel-title {
+  color: #FFAA00;
+  font-size: 1.5rem;
+  margin-top: 20px;
+  text-align: center;
+  min-height: 40px;
+  transition: opacity 0.3s ease;
+}
+
+@media (max-width: 968px) {
+  .about-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  
+  .about-left {
+    padding-left: 20px;
+  }
+  
+  .about-left h1 {
+    font-size: 4rem;
+  }
+  
+  .carousel-container {
+    max-width: 400px;
+  }
+  
+  .about-attributes {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+}
+
+.software-section {
+  max-width: 1400px;
+  margin: 80px auto 50px;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.software-section h2 {
+  color: #FFAA00;
+  font-size: 3rem;
+  margin-bottom: 50px;
+  font-weight: bold;
+}
+
+.software-row {
+  margin-bottom: 50px;
+}
+
+.software-row h3 {
+  color: #AA1596;
+  font-size: 1.5rem;
+  margin-bottom: 25px;
+  font-weight: normal;
+}
+
+.software-logos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.software-logos img {
+  transition: transform 0.3s ease, filter 0.3s ease;
+  filter: brightness(0.9);
+}
+
+.software-logos img:hover {
+  transform: scale(1.1);
+  filter: brightness(1.1);
+}
+
+@media (max-width: 768px) {
+  .software-section h2 {
+    font-size: 2rem;
+  }
+  
+  .software-logos {
+    gap: 20px;
+  }
+  
+  .software-logos img {
+    width: 48px !important;
+    height: 48px !important;
+  }
 }
 
 h1 {
@@ -223,9 +455,115 @@ p {
 <div align='center' style="margin-top: 20px;"><img src="./media/title.gif" class="center"></div>
 
 <div class="content">
-  <h1 style="text-align:left; margin:1rem 0; color:#FFAA00; font-weight:bold; font-size:5rem; padding-left:1rem;">About</h1>
-  <p></p>
-  <p>This page is currently under construction. More information coming soon!</p>
+  <div class="about-container">
+    <!-- Left Side: About Text -->
+    <div class="about-left">
+      <h1>uosew</h1>
+      <h2>aka Mason</h2>
+      <div class="about-text">
+        <p>Welcome! I'm a 3D character artist and animator passionate about bringing characters to life through expressive design and storytelling.</p>
+        <p>With experience in character modeling, rigging, and animation, I specialize in creating unique characters that resonate with audiences.</p>
+      </div>
+      
+      <div class="about-attributes">
+        <div class="attribute-column">
+          <div class="attribute-item">
+            <h3>Age</h3>
+            <p>25 years old</p>
+          </div>
+          <div class="attribute-item">
+            <h3>Location</h3>
+            <p>Based in California</p>
+          </div>
+          <div class="attribute-item">
+            <h3>Experience</h3>
+            <p>5+ years in 3D art</p>
+          </div>
+        </div>
+        
+        <div class="attribute-column">
+          <div class="attribute-item">
+            <h3>Specialty</h3>
+            <p>Character Design</p>
+          </div>
+          <div class="attribute-item">
+            <h3>Software</h3>
+            <p>Blender, Maya, ZBrush</p>
+          </div>
+          <div class="attribute-item">
+            <h3>Status</h3>
+            <p>Available for work</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Side: Image Carousel -->
+    <div class="about-right">
+      <div class="carousel-container">
+        <div class="carousel-track">
+          <img src="./media/images/fulls/01.png" class="carousel-slide" alt="Character Art 1">
+          <img src="./media/images/fulls/02.png" class="carousel-slide" alt="Character Art 2">
+          <img src="./media/images/fulls/03.png" class="carousel-slide" alt="Character Art 3">
+          <img src="./media/images/fulls/04.png" class="carousel-slide" alt="Character Art 4">
+          <img src="./media/images/fulls/05.png" class="carousel-slide" alt="Character Art 5">
+        </div>
+        
+        <button class="carousel-nav prev">‹</button>
+        <button class="carousel-nav next">›</button>
+        
+        <div class="carousel-dots">
+          <span class="carousel-dot active" data-index="0"></span>
+          <span class="carousel-dot" data-index="1"></span>
+          <span class="carousel-dot" data-index="2"></span>
+          <span class="carousel-dot" data-index="3"></span>
+          <span class="carousel-dot" data-index="4"></span>
+        </div>
+      </div>
+      <div class="carousel-title" id="carouselTitle">Character Art 1</div>
+    </div>
+  </div>
+</div>
+
+<!-- Software Used Section -->
+<div class="software-section">
+  <h2>Software Used</h2>
+  
+  <div class="software-row">
+    <h3>Proficient in:</h3>
+    <div class="software-logos">
+      <!-- Blender -->
+      <img src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Blender_logo_no_text.svg" alt="Blender" width="64" height="64">
+      
+      <!-- Unreal Engine -->
+      <img src="https://www.nicepng.com/png/full/321-3211558_unreal-logo-png-for-kids-unreal-engine-icon.png" alt="Unreal Engine" width="64" height="64">
+      
+      <!-- Procreate -->
+      <img src="https://upload.wikimedia.org/wikipedia/en/9/9b/Procreate_icon.png" alt="Procreate" width="64" height="64">
+      
+      <!-- ZBrush -->
+      <img src="https://icons.iconarchive.com/icons/dakirby309/simply-styled/256/ZBrush-icon.png" alt="ZBrush" width="64" height="64">
+      
+      <!-- Substance Painter -->
+      <img src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/adobe-substance-3d-painter-icon.png" alt="Substance Painter" width="64" height="64">
+      
+      <!-- Aseprite -->
+      <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/aseprite.svg" alt="Aseprite" width="64" height="64">
+      
+      <!-- Bambu Lab -->
+      <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/bambulab.svg" alt="Bambu Lab" width="64" height="64">
+      
+      <!-- Cricut -->
+      <img src="https://imagedelivery.net/-IT6z0z0Ec5yEiYj3DvVjg/5f30280ddb7150e8493da3750c742171f0b638b9/public" alt="Cricut" width="64" height="64">
+    </div>
+  </div>
+  
+  <div class="software-row">
+    <h3>Capable of:</h3>
+    <div class="software-logos">
+      <!-- Add second row images here -->
+    </div>
+  </div>
 </div>
 
 <script>
@@ -265,6 +603,78 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+
+// Carousel Functionality
+let currentSlide = 0;
+const slides = document.querySelectorAll('.carousel-slide');
+const carouselTrack = document.querySelector('.carousel-track');
+const dots = document.querySelectorAll('.carousel-dot');
+const carouselTitle = document.getElementById('carouselTitle');
+const prevBtn = document.querySelector('.carousel-nav.prev');
+const nextBtn = document.querySelector('.carousel-nav.next');
+
+// Carousel titles for each image
+const titles = [
+  'Character Art 1',
+  'Character Art 2',
+  'Character Art 3',
+  'Character Art 4',
+  'Character Art 5'
+];
+
+function showSlide(index) {
+  // Wrap around
+  if (index >= slides.length) {
+    currentSlide = 0;
+  } else if (index < 0) {
+    currentSlide = slides.length - 1;
+  } else {
+    currentSlide = index;
+  }
+
+  // Slide the track
+  const offset = -currentSlide * 100;
+  carouselTrack.style.transform = `translateX(${offset}%)`;
+
+  // Update dots
+  dots.forEach((dot, i) => {
+    dot.classList.remove('active');
+    if (i === currentSlide) {
+      dot.classList.add('active');
+    }
+  });
+
+  // Update title
+  carouselTitle.style.opacity = '0';
+  setTimeout(() => {
+    carouselTitle.textContent = titles[currentSlide];
+    carouselTitle.style.opacity = '1';
+  }, 150);
+}
+
+function nextSlide() {
+  showSlide(currentSlide + 1);
+}
+
+function prevSlide() {
+  showSlide(currentSlide - 1);
+}
+
+// Event listeners
+prevBtn.addEventListener('click', prevSlide);
+nextBtn.addEventListener('click', nextSlide);
+
+dots.forEach((dot, index) => {
+  dot.addEventListener('click', () => {
+    showSlide(index);
+  });
+});
+
+// Auto-advance carousel every 5 seconds
+setInterval(nextSlide, 5000);
+
+// Initialize
+showSlide(0);
 </script>
 
 </body>
