@@ -172,7 +172,7 @@ body::before {
 }
 
 /* Ensure content sits above the gradient layer */
-body > *:not(.hamburger):not(.side-menu):not(.menu-overlay) { position: relative; z-index: 1; }
+body > * { position: relative; z-index: 1; }
 
 @keyframes bottomGradientBounce {
   0%, 100% { background-position: center 0px; }
@@ -180,56 +180,193 @@ body > *:not(.hamburger):not(.side-menu):not(.menu-overlay) { position: relative
 }
 
 .content {
-  max-width: 1400px;
-  margin: 80px auto 50px;
-  padding: 20px;
+  margin: 20px auto 50px;
+  padding: 0;
 }
 
-/* Contact Section - Top Left */
+/* Header container for inline layout */
+.header-container {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: 0 1rem;
+  padding-top: 0rem;
+  margin-bottom: 2rem;
+  min-height: 200px;
+}
+
+.header-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  pointer-events: none;
+}
+
+.header-center > * {
+  pointer-events: auto;
+}
+
+.title-gif {
+  flex: 0 1 auto;
+  max-width: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title-gif img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Contact Section - Right Aligned */
 .contact-section {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  margin-bottom: 60px;
-  padding-left: 1rem;
+  align-items: flex-end;
+  text-align: right;
+  position: relative;
+  z-index: 1;
+  margin-left: auto;
+  margin-right: 2rem;
+  max-width: 30%;
 }
 
 .contact-section h1 {
   color: #FFAA00;
   font-size: 3rem;
-  margin: 0 0 20px 0;
+  margin: 0 0 10px 0;
   font-weight: bold;
+}
+
+.contact-section .subtitle {
+  color: #fff;
+  font-size: 1.2rem;
+  margin: 0 0 20px 0;
+  opacity: 0.9;
 }
 
 .contact-links {
   display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-end;
 }
 
 .contact-link {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: #fff;
+  color: #AA1596;
   text-decoration: none;
-  padding: 10px 15px;
-  border-radius: 8px;
-  background: rgba(170, 21, 150, 0.2);
-  border: 2px solid #AA1596;
+  font-size: 2rem;
   transition: all 0.3s ease;
 }
 
 .contact-link:hover {
-  background: #AA1596;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(170, 21, 150, 0.4);
+  color: #FFAA00;
+  transform: translateX(-3px);
 }
 
-.contact-icon {
-  width: 24px;
-  height: 24px;
-  object-fit: contain;
+/* Gallery cards and portfolio sections */
+.gallery { 
+  display:grid; 
+  grid-template-columns:repeat(auto-fill, minmax(275px,1fr)); 
+  gap:1rem; 
+  padding:1.5rem; 
+  transition: opacity 0.4s ease; 
+}
+
+.card { 
+  border-radius:12px; 
+  overflow:hidden; 
+  box-shadow:0 2px 5px rgba(0,0,0,0.2); 
+  cursor:pointer; 
+  opacity:0; 
+  transform:scale(0.95); 
+  visibility:hidden; 
+  transition:opacity 0.4s ease, transform 0.4s ease, visibility 0.4s ease; 
+  color:white; 
+}
+
+.card.show { 
+  opacity:1; 
+  transform:scale(1); 
+  visibility:visible; 
+}
+
+.card:hover { 
+  transform:scale(1.08); 
+}
+
+.card img { 
+  width:100%; 
+  aspect-ratio: 1/1; 
+  object-fit:cover; 
+  transition: transform 0.3s ease; 
+}
+
+.card:hover img { 
+  transform:scale(1.05); 
+}
+
+.card-content { 
+  padding:1.1rem; 
+  color:white; 
+}
+
+.card-content h3 { 
+  margin:0 0 0.3rem 0; 
+}
+
+.card-content p { 
+  margin:0; 
+  font-size:0.99rem; 
+}
+
+/* Type-based card colors */
+.card.environments { background:#27167C; }
+.card.characters { background:#CC7722; color:#222; }
+.card.props { background:#0d8060; color:#222; }
+.card.physical { background:#0d8060; color:#222; }
+.card.projects { background: linear-gradient(135deg, #FF1493 0%, #FFD700 100%); color:#222; }
+.card.products { background:#CC22AA; }
+.card.doodles { background:#D9AA00; color:#222; }
+
+/* Tab Navigation Styles */
+.tabs-container {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 0;
+  flex-wrap: wrap;
+}
+
+.tab-button {
+  padding: 0.75rem 1.5rem;
+  border: 2px solid #AA1596;
+  background: transparent;
+  color: #AA1596;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: capitalize;
+}
+
+.tab-button:hover {
+  background: #AA1596;
+  color: white;
+}
+
+.tab-button.active {
+  background: #AA1596;
+  color: white;
+  border-color: #FFAA00;
 }
 
 /* Curated Projects Section */
@@ -319,7 +456,7 @@ body > *:not(.hamburger):not(.side-menu):not(.menu-overlay) { position: relative
   opacity:0; 
   pointer-events:none; 
   transition:opacity 0.3s ease; 
-  z-index:4; 
+  z-index:1500; 
 }
 .modal.show { 
   opacity:1; 
@@ -414,7 +551,7 @@ body > *:not(.hamburger):not(.side-menu):not(.menu-overlay) { position: relative
   opacity:0; 
   pointer-events:none; 
   transition:opacity 0.3s ease; 
-  z-index:1000; 
+  z-index:2000; 
   overflow:hidden; 
 }
 .zoom-overlay.show { 
@@ -426,7 +563,7 @@ body > *:not(.hamburger):not(.side-menu):not(.menu-overlay) { position: relative
   max-width:1600px; 
   aspect-ratio:16/9; 
   position:relative; 
-  z-index: 2; 
+  z-index: 1; 
   display:flex; 
   justify-content:center; 
   align-items:center; 
@@ -466,7 +603,7 @@ body > *:not(.hamburger):not(.side-menu):not(.menu-overlay) { position: relative
 }
 .zoom-arrow {
   position: absolute;
-  z-index: 10002;
+  z-index: 2001;
   top: 50%;
   transform: translateY(-50%);
   font-size: 2.25rem;
@@ -524,11 +661,46 @@ body > *:not(.hamburger):not(.side-menu):not(.menu-overlay) { position: relative
 @media screen and (max-width: 768px) {
   .content {
     margin: 60px auto 30px;
-    padding: 15px;
+    padding: 0.5rem;
+  }
+
+  .header-container {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0;
+    min-height: auto;
+  }
+
+  .title-gif {
+    max-width: 100%;
+    position: relative;
+    left: auto;
+    transform: none;
+    order: -1;
+  }
+
+  .contact-section {
+    margin-left: 0;
+    margin-right: 0;
+    max-width: 100%;
   }
 
   .contact-section h1 {
     font-size: 2rem;
+  }
+
+  .contact-section .subtitle {
+    font-size: 1rem;
+  }
+
+  .contact-section {
+    align-items: center;
+    text-align: center;
+    padding-right: 0;
+  }
+
+  .contact-links {
+    align-items: center;
   }
 
   .projects-section h2 {
@@ -540,13 +712,42 @@ body > *:not(.hamburger):not(.side-menu):not(.menu-overlay) { position: relative
     gap: 1.5rem;
   }
 
-  .contact-links {
-    flex-direction: column;
+  /* Gallery cards - two columns on small screens */
+  .gallery { 
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
+  .card {
+    max-width: 100%;
+  }
+  
+  .card:hover {
+    transform: scale(1.02);
   }
 
-  .contact-link {
-    width: 100%;
-    max-width: 300px;
+  .card-content {
+    padding: 0.75rem;
+  }
+  
+  .card-content h3 {
+    font-size: 1rem;
+  }
+  
+  .card-content p {
+    font-size: 0.85rem;
+  }
+
+  /* Tab navigation */
+  .tabs-container {
+    gap: 0.4rem;
+    margin: 1rem 0.5rem;
+  }
+  
+  .tab-button {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
   }
 
   .modal-content {
@@ -611,6 +812,11 @@ body > *:not(.hamburger):not(.side-menu):not(.menu-overlay) { position: relative
     grid-template-columns: 1fr;
   }
 
+  .gallery {
+    gap: 0.5rem;
+    padding: 0.5rem;
+  }
+
   .modal-content {
     padding: 0.75rem;
   }
@@ -628,6 +834,11 @@ body > *:not(.hamburger):not(.side-menu):not(.menu-overlay) { position: relative
     width: 40px;
     height: 40px;
     font-size: 1.5rem;
+  }
+
+  .tab-button {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
   }
 }
 
@@ -681,31 +892,38 @@ body > *:not(.hamburger):not(.side-menu):not(.menu-overlay) { position: relative
 <div class="menu-overlay" id="menuOverlay"></div>
 
 <div class="content">
-  <!-- Contact Section -->
-  <section class="contact-section">
-    <h1>Home</h1>
-    <div class="contact-links">
-      <a href="https://discord.com/users/196483782839238657" class="contact-link" target="_blank" rel="noopener noreferrer">
-        <img src="./media/Contact/Discord_Thumb.png" alt="Discord" class="contact-icon">
-        <span>Discord</span>
-      </a>
-      <a href="https://www.linkedin.com/in/uosew/" class="contact-link" target="_blank" rel="noopener noreferrer">
-        <img src="./media/Contact/Linkedin_Thumb.png" alt="LinkedIn" class="contact-icon">
-        <span>LinkedIn</span>
-      </a>
-      <a href="mailto:0uosew@gmail.com" class="contact-link">
-        <img src="./media/Contact/Gmail_Thumb.png" alt="Email" class="contact-icon">
-        <span>Email</span>
-      </a>
+  <!-- Header Container: Text and GIF inline -->
+  <div class="header-container">
+    <div class="header-center">
+      <div class="title-gif">
+        <img src="./media/title.gif" alt="Title">
+      </div>
+      <!-- Tab Navigation -->
+      <div class="tabs-container">
+        <button class="tab-button active" data-category="all">All</button>
+        <button class="tab-button" data-category="projects">Projects</button>
+        <button class="tab-button" data-category="environments">Environments</button>
+        <button class="tab-button" data-category="characters">Characters</button>
+        <button class="tab-button" data-category="props">Props</button>
+        <button class="tab-button" data-category="products">Products</button>
+      </div>
     </div>
-  </section>
+    <section class="contact-section">
+      <h1>Mason Guderian</h1>
+      <p class="subtitle">3D Modeling Generalist, Environment Artist</p>
+      <div class="contact-links">
+        <a href="https://www.linkedin.com/in/uosew/" class="contact-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 3px;">
+          <a href="mailto:0uosew@gmail.com" class="contact-link">Email</a>
+          <span style="font-size: 0.9em; opacity: 0.7; color: #AA1596;">(0uosew@gmail.com)</span>
+        </div>
+      </div>
+    </section>
+  </div>
 
-  <!-- Curated Projects Section -->
+  <!-- Project Gallery -->
   <section class="projects-section">
-    <h2>Featured Projects</h2>
-    <div class="projects-grid" id="projectsGrid">
-      <!-- Projects will be dynamically added here -->
-    </div>
+    <div class="gallery" id="gallery"></div>
   </section>
 </div>
 
@@ -738,6 +956,7 @@ function toggleMenu() {
 hamburger.addEventListener('click', toggleMenu);
 menuOverlay.addEventListener('click', toggleMenu);
 
+// Close menu when clicking a link
 const menuLinks = sideMenu.querySelectorAll('a');
 menuLinks.forEach(link => {
   link.addEventListener('click', toggleMenu);
@@ -760,9 +979,742 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
-</script>
-// Full project data with media
-const projects = [{}];
 
+// Projects array
+const projects=[
+
+  {title:"Project Disciple", 
+  
+  yearSemester:"Fall 2025", categories:["Projects","Characters"], description:"Project Disciple is a mobile base builder game being developed through a collaboration between Otis College and USC.\n\n I worked closely with our art producer in order to provide tasks for the art team. \n\nFor my personal artistic contributions, I primarily worked through the character workflow in order to provide classmates with a strong base model. \nOnce we pivoted, I continued to provide concept art for the game's disciples.", thumbnail:"media/Disciple/PD_Thumb.png", 
+  media:[
+
+    {section:"Phase 2 Renders"},
+    {type:"image",src:"media/Disciple/phase_2/PD_Druid.PNG",title:"Modern Druid",description:"When transitioning to our phase 2, we were tasked with creating druid characters in a more modern setting."},
+    {type:"image",src:"media/Disciple/phase_2/Project Disciple-22.png",title:"",description:""},
+    {type:"image",src:"media/Disciple/phase_2/Project Disciple-23.png",title:"Reference Board",description:""},
+
+    {section:"Phase 1 Renders"},
+    {type:"image",src:"media/Disciple/phase_1/Lukki.gif",title:"Lukki",description:"My favorite personal piece from the project, Lukki! The first character I devised for the game, meant to act as a sort of guide NPC for the player, much like the villager in Clash of Clans."},
+    {type:"image",src:"media/Disciple/phase_1/pd_char_design.png",title:"Character Guidelines Sheet",description:"A quick guidelines sheet made to make designing characters in the style easier. Big shapes were emphasized highly to keep visibility on the mobile view."}, 
+    {type:"image",src:"media/Disciple/phase_1/pd_Athanasia_Concept.png",title:"Dark Goddess Athanasia",description:"Our narrative team wrote some lore on the deities the cults would be following. This is a quick rendition of Athanasia, dark goddess of luxury goods and all things beauty. I incorporated athanasia flowers into her design, as well as a silk dress downloaded online."},
+    {type:"image",src:"media/Disciple/phase_1/pd_sampleoni.gif",title:"Oni Gangnam Style!",description:"To ease off our workload, I made the decision to make the base armature with Mixamo animations in mind, at least for prototyping."},
+   {type:"image",src:"media/Disciple/phase_1/Disciple_gangnam_style.gif",title:"Unreal Engine Demo",description:"Using some basic toon shaders, this visualizer demonstrates the characters looks in the project file."},
+    {type:"image",src:"media/Disciple/phase_1/pd_Base Model Cultist.gif",title:"Base Model Explorations",description:"The view from an angle more closely representing the game's final perspective. Our second phase's art director believed the giant heads would cover the cultists bodies too much, so model was scrapped."},
+    {section:"Phase 1"},
+ 
+    {type:"image",src:"media/Disciple/phase_1/Project Disciple-1.png",title:"Lookbook",description:"Some splash art I made for another class's homework featuring Lukki and his old pal Dino. The entirety of the making is elsewhere in the portfolio."},
+    {type:"image",src:"media/Disciple/phase_1/Project Disciple-3.png",title:"",description:"My earliest concepts for Lukki. He started as a shower thought, as all good art does."},
+    {type:"image",src:"media/Disciple/phase_1/Project Disciple-4.png",title:"",description:""},
+    {type:"image",src:"media/Disciple/phase_1/pd_Athanasia_Ref.png",title:"Athanasia References",description:""},
+    {type:"image",src:"media/Disciple/phase_1/Project Disciple-5.png",title:"",description:""},
+    {type:"image",src:"media/Disciple/phase_1/Project Disciple-6.png",title:"",description:""},
+    {type:"image",src:"media/Disciple/phase_1/Project Disciple-7.png",title:"",description:""},
+    {type:"image",src:"media/Disciple/phase_1/Project Disciple-8.png",title:"",description:""},
+    {type:"image",src:"media/Disciple/phase_1/pd_Cultist Base.png",title:"Base Cultist Sheet",description:"The base proportions for our cultists. We were tasked with creating something 'chibi' for cuteness factor. This is a template I made for the art team to create their work around."},
+    {type:"image",src:"media/Disciple/phase_1/pd_clothing_tiers.jpg",title:"Clothing Tiers",description:"My classmates work using the base drawing template."},    
+    {type:"image",src:"media/Disciple/phase_1/pd_basereferences.png",title:"Base Design Reference",description:"A quick reference collection of how other modular characters are handled and their body types."},
+    {type:"image",src:"media/Disciple/phase_1/Project Disciple-9.png",title:"",description:""},
+    {type:"image",src:"media/Disciple/phase_1/Project Disciple-10.png",title:"",description:""},
+    {type:"image",src:"media/Disciple/phase_1/Project Disciple-11.png",title:"",description:""},
+    {type:"image",src:"media/Disciple/phase_1/Project Disciple-12.png",title:"",description:"I wanted the cultists to be as modular as possible, even supporting different arm and leg variants. You can see some pieces of my team's work interpreted to fit the 3D base. Credits to my teammates for the bottom right pictures."},
+    {type:"image",src:"media/Disciple/phase_1/Project Disciple-14.png",title:"",description:"I envisioned our environment with a beautiful vista in the background, thinking it might help us stand our from the competition. So many isometric games have you staring directly at the ground. A dynamic time and weather system would give us so much freedom for beautiful scenarios."},
+    {type:"image",src:"media/Disciple/phase_1/Project Disciple-15.png",title:"",description:""},
+    {type:"image",src:"media/Disciple/phase_1/Project Disciple-16.png",title:"",description:""},
+    {type:"image",src:"media/Disciple/phase_1/Project Disciple-17.png",title:"",description:""},
+    {type:"image",src:"media/Disciple/phase_1/Project Disciple-18.png",title:"",description:""},
+    {type:"image",src:"media/Disciple/phase_1/pd_Too_many_pieces.png",title:"Too many pieces",description:"For some reason I thought this would be the best approach to modularity... later on we combined the limbs so less pieces would have to be dealt with."},
+    {type:"image",src:"media/Disciple/phase_1/pd_UVMapped_Cultist.png",title:"UV Mapping",description:"Despite using toon shaders without texturing, I thought it would be good to future proof the model with proper UV mapping."},
+    {type:"image",src:"media/Disciple/phase_1/pd_MeshWeight.gif",title:"Mesh Weighting",description:"A quick demo of the mesh weights, and a peek at the bones."},
+
+  ]},  
+////////////////////////////////////////////////////////////
+  {title:"Crabulb", 
+  
+  yearSemester:"Summer 2023", categories:["Characters"], description:"\"This little amalgamation uses bioluminescence to navigate the nights, with the ability to discharge electricity through its prey via feeding appendages. Based on a ghost crab and a lightbulb. Comes with baked walking and idle animations!\" \n\nMy first (and only) Sketchfab model to be added to Staff Picks. I still look at that little orange badge with pride.\n\nMade using Blender, ZBrush, and Substance Painter, for a Summer Game Design class that proved to be extremely influencial on my path in life. Thank you Professor Scott!", thumbnail:"media/Summer 23/Crabulb/crabulb_thumb.png", 
+  media:[
+  {type:"video",src:"https://sketchfab.com/models/eccf00581ba04a68a98a7fd52424c1a8/embed",title:"Crabulb - Rigged",description:"After years of being a paid asset, Crabulb is now free to download! (It made me approximately 15 dollars over the course of 2 years... better than nothing!)",hero:true},
+  {type:"video",src:"media/Summer 23/Crabulb/Crabulb.mp4",title:"Close-up Shot",description:"This crabulb was caught on tape shortly after finishing its lunch, a bland piece of seaweed.",hero:true},
+  {type:"image",src:"media/Summer 23/Crabulb/crabonimo3.png",title:"",description:""},
+  {type:"image",src:"media/Summer 23/Crabulb/crabs.png",title:"",description:""},
+  {type:"image",src:"media/Summer 23/Crabulb/crab_walk.gif",title:"",description:""},
+  {type:"video",src:"media/Summer 23/Crabulb/dream_440B.mp4",title:"dream_440B",description:"This one always has me longing...<a href='https://uosew.com/deprecated/stream.html'>.</a>\nMusic - Cocktail Lounge, Yume 2kki\n"},
+  ]},
+////////////////////////////////////////////////////////////
+  {title:"Eclipse Park", 
+  
+  yearSemester:"Fall 2025", categories:["Projects","Environments"], description:"Blender Baby's day out at the Eclipse Park. Designed to be an introductory game level, where different mechanics are explored.\n\nMade in Unreal Engine 5.", thumbnail:"media/EP/EP_Thumb.png",
+  media:[
+  {section:"Gameplay Reel"},
+  {type:"video",src:"https://www.youtube.com/embed/g-_WP2jangg?si=H_0N3Dy07nOppAzD",title:"",description:"",hero:true},
+
+  {section:"Environment Shots"},
+  {type:"image",src:"media/EP/EP_7.png",title:"",description:""},
+  {type:"image",src:"media/EP/EP_14.png",title:"",description:""},
+  {type:"image",src:"media/EP/EP_15.png",title:"",description:""},
+  {type:"image",src:"media/EP/EP_5.png",title:"",description:""},
+  {type:"image",src:"media/EP/EP_4.png",title:"",description:""},
+  {type:"image",src:"media/EP/EP_6.png",title:"",description:""},
+  {type:"image",src:"media/EP/EP_8.png",title:"",description:""},
+  {type:"image",src:"media/EP/EP_9.png",title:"",description:""},
+  {type:"image",src:"media/EP/EP_10.png",title:"",description:""},
+  {type:"image",src:"media/EP/EP_11.png",title:"",description:""},
+  {type:"image",src:"media/EP/EP_12.png",title:"",description:""},
+  {type:"image",src:"media/EP/EP_13.png",title:"",description:""},
+  {section:"Presentation"},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-3.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-4.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-5.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-6.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-7.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-9.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-10.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-11.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-13.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-15.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-16.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-17.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-19.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-20.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-21.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-22.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-23.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-24.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-26.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-27.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-31.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-32.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-33.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-36.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-37.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-38.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-39.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-40.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-41.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-42.webp",title:"",description:""},
+  {type:"image",src:"media/EP/EPSS/Guderian_Mason_ProductionJournal_Game Design II - Game-300-B-43.webp",title:"",description:""},
+  
+  {section:"Logo"},
+  {type:"image",src:"media/EP/EP_Logo.png",title:"Eclipse Park Logo",description:"A quick yet effective logo made in Procreate! It draws from the initial thumbnail sketch for inspo."}
+
+]},
+////////////////////////////////////////////////////////////
+  {title:"Estuary", 
+  
+  yearSemester:"Fall 2025", categories:["Projects","Characters"], description:"Estuary is a fantasy platformer concept inspired by Japanese Shinto. It takes place in a sleepy, lush grove. \n\nI was tasked with character creation. We would later decided that the golems would be the protagonists of the story.\n\nThis collaborative project was done as a final for a character design class.", thumbnail:"media/Estuary/Estuary_Thumb.png",
+  media:[
+  {section:"Deliverables"},
+  {type:"image",src:"media/Estuary/Rock.gif",title:"Rock Golem",description:"3D mockup of the rock golem, the most primal of the bunch. Inspired by suijin's engraved stones."},
+  {type:"image",src:"media/Estuary/Riverstone.gif",title:"Riverstone Golem",description:"3D mockup of the riverstone golem. A more refined figure, formed through flowing water's touch. Inspired by ancient Dogu statues."},
+  {type:"image",src:"media/Estuary/Clay.gif",title:"Clay Golem",description:"3D mockup of the clay golem, the most malleable of the bunch. Inspired by Haniwa sculptures."},
+  {type:"image",src:"media/Estuary/Estuary_Golems_Concept.png",title:"Concept Art",description:""},
+  {type:"image",src:"media/Estuary/Estuary_Deliverable.png",title:"Golem Trio",description:"Rendered concepts of the three golems. With segmented bodies, they were designed to swap at the head. Shape diversity was a primary focus."},
+  {type:"image",src:"media/Estuary/Estuary_RockGolem_Ref.png",title:"Golem References",description:""},
+
+  
+  {section:"Presentation"},
+  {type:"image",src:"media/Estuary/Estuary_Title.png",title:"",description:""},
+  {type:"image",src:"media/Estuary/Estuary_Background.png",title:"",description:""},
+  {type:"image",src:"media/Estuary/Estuary_Golems.png",title:"",description:""},
+  {type:"image",src:"media/Estuary/Estuary_Golems_powers.png",title:"",description:""},
+  {type:"image",src:"media/Estuary/Estuary_Aki.png",title:"",description:""},
+  {type:"image",src:"media/Estuary/Estuary_Eshizu.png",title:"",description:""},
+  {type:"image",src:"media/Estuary/Estuary_side-by-side.png",title:"",description:""},
+  {type:"image",src:"media/Estuary/Estuary_scale_reference.png",title:"",description:""},
+  {type:"image",src:"media/Estuary/Estuary_Water_Shrine.png",title:"",description:""},
+  {type:"image",src:"media/Estuary/Estuary_Environment.png",title:"",description:""}
+
+]},
+////////////////////////////////////////////////////////////
+  {title:"A Lukki Break", 
+  
+  yearSemester:"Fall 2025", categories:["Projects","Environments"], description:"Visiting an old friend for a lunch break is one of the best ways to spend the afternoon.\n\nMade in Blender.", thumbnail:"media/LB/stillrender.png",
+  media:[
+  {section:"Render"},
+  {type:"video",src:"https://www.youtube.com/embed/F0SUKQ0XGUc?si=RVj-spj5Kudn4_KT",title:"",description:"",hero:true},
+  {type:"image",src:"media/LB/stillrender.png",title:"",description:"",hero:true},
+  
+  {section:"Process"},
+  {type:"image",src:"media/LB/Blender Presentation-3.jpg",title:"",description:""},
+  {type:"image",src:"media/LB/Blender Presentation-4.jpg",title:"",description:""},
+  {type:"image",src:"media/LB/Blender Presentation-5.jpg",title:"",description:""},
+  {type:"image",src:"media/LB/Blender Presentation-6.jpg",title:"",description:""},
+  {type:"image",src:"media/LB/Blender Presentation-7.jpg",title:"",description:""},
+  {type:"image",src:"media/LB/Blender Presentation-8.jpg",title:"",description:""},
+  {type:"image",src:"media/LB/Blender Presentation-9.jpg",title:"",description:""},
+  {type:"image",src:"media/LB/Blender Presentation-10.jpg",title:"",description:""},
+  {type:"image",src:"media/LB/Blender Presentation-11.jpg",title:"",description:""},
+  {type:"image",src:"media/LB/Blender Presentation-12.jpg",title:"",description:""},
+  {type:"image",src:"media/LB/Blender Presentation-13.jpg",title:"",description:""},
+  {type:"image",src:"media/LB/Blender Presentation-14.jpg",title:"",description:""},
+  {type:"image",src:"media/LB/Blender Presentation-15.jpg",title:"",description:""},
+  {type:"image",src:"media/LB/Blender Presentation-16.jpg",title:"",description:""},
+  {type:"video",src:"media/LB/asset_turntable.mp4",title:"",description:""},
+  {type:"image",src:"media/LB/Blender Presentation-18.jpg",title:"",description:""},
+  {type:"image",src:"media/LB/Blender Presentation-19.jpg",title:"",description:""},
+  {type:"image",src:"media/LB/Blender Presentation-20.jpg",title:"",description:""},
+  {type:"image",src:"media/LB/Blender Presentation-21.jpg",title:"",description:""},
+  {type:"image",src:"media/LB/Blender Presentation-22.jpg",title:"",description:""},
+  {type:"image",src:"media/LB/Blender Presentation-23.jpg",title:"",description:""}
+]},
+////////////////////////////////////////////////////////////
+  {title:"Project Jump!", 
+  
+  yearSemester:"Fall 2024", categories:["Projects"], description:"My very first Unreal Engine project, I had a blast learning the basics of the engine. We used a sidescroller template to start us off.\n\nMade in Unreal Engine 5, Blender, and Substance Painter.", thumbnail:"media/PJ/PJ_Thumb.jpg",
+  media:[
+  {section:"Gameplay Reel"},
+  {type:"video",src:"https://www.youtube.com/embed/gorPa1qOrUY?si=tRIIj-kOBKA1wFdc",title:"",description:"",hero:true},
+  
+  {section:"Concepts"},
+  {type:"image",src:"media/PJ/renders/character_concepts.jpg",title:"Character Concepts",description:"Rather mild in terms of interesting silhouettes and originality, these were made before I started to dive into character design. I would've liked to flesh out the kappa character (second from left) a bit more. it was supposed to wear a molcajete on its head to mimic their water bowl heads."},
+  {type:"image",src:"media/PJ/renders/calavera_concept.png",title:"La Calavera Picante Concept",description:"La Calavera Picante is the spacecraft of Squibby the Alien (what a sentence). It was freshly rebranded after crash landing in Mexico, where he decided to make spicy sugar skulls for a living."},
+  {type:"image",src:"media/PJ/renders/environment_concept.png",title:"Environment Concepts",description:"The player, a forlorn soul, would reawaken after Squibby's ship accidentally smashes their grave to pieces. He would then ask the player for help collecting ghost peppers, which grow spiciest in the valley of the dead!"},
+  
+  {section:"Renders"},
+  {type:"image",src:"media/PJ/renders/calavera_render.jpg",title:"Calavera Render",description:""},
+  {type:"image",src:"media/PJ/renders/calavera_gif.gif",title:"Calavera In-Game",description:"Squibby's out using the restroom. His cardboard cutout should do the trick for now."},
+  {type:"image",src:"media/PJ/renders/cart_render.jpg",title:"Cart Render",description:"Ka-shwing! I really enjoy how this cart render turned out."},
+  {type:"image",src:"media/PJ/renders/grave_render_still.jpg",title:"Grave Render",description:""},
+  {type:"video",src:"media/PJ/renders/grave_turnaround.mp4",title:"Grave Turnaround",description:""},
+  {type:"video",src:"media/PJ/renders/coin_render.mp4",title:"Coin Turnaround",description:""},
+  
+  {section:"Extras"},
+  {type:"image",src:"media/PJ/extras/sugar skull.gif",title:"Sugar Skull Animation",description:"Seen on the Calavera Picante."},
+  {type:"image",src:"media/PJ/extras/runskeleton.gif",title:"",description:"I made this skeleton model for the project, then decided it would be funny to render them out and plop them around the level. I was having too much fun to take anything seriously!"},
+  {type:"image",src:"media/sillyalien.gif",title:"Silly Alien",description:"Squibby used to be called Silly Alien, former guardian of uosew.com. I made him long ago while learning Blender. If you can uncover the old version of the site, you might see him there!"},
+  {type:"image",src:"media/PJ/extras/misc.png",title:"",description:"Here's a look at the storage room behind the graveyard. It's where they keep all the extra meshes."},
+  {type:"video",src:"https://sketchfab.com/models/97bf61dc5345444eb4097724cfbd6c3c/embed",title:"Sun Decoration",description:"This sun, which was originally made for a pewter necklace commission, was the basis for the coin collectible. Free to Download!"},
+  {type:"image",src:"media/UE5_Fantasy/viewport_0.webp",title:"House and Fences",description:"These were made for the Fantasy Scene project, but I was able to get good use out of them here as well."},
+  
+  {section:"Presentation"},
+  {type:"image",src:"media/PJ/Project Jump!-2.jpg",title:"",description:"Since this was my first time in Unreal, I figured I'd keep even the less important slides from the presentation in my portfolio."},
+  {type:"image",src:"media/PJ/Project Jump!-3.jpg",title:"",description:""},
+  {type:"image",src:"media/PJ/Project Jump!-4.jpg",title:"",description:""},
+  {type:"image",src:"media/PJ/Project Jump!-5.jpg",title:"",description:""},
+  {type:"image",src:"media/PJ/Project Jump!-6.jpg",title:"",description:""},
+  {type:"image",src:"media/PJ/Project Jump!-7.jpg",title:"",description:""},
+  {type:"image",src:"media/PJ/Project Jump!-8.jpg",title:"",description:""},
+  {type:"image",src:"media/PJ/Project Jump!-9.jpg",title:"",description:""},
+  {type:"image",src:"media/PJ/Project Jump!-10.jpg",title:"",description:""},
+  {type:"image",src:"media/PJ/Project Jump!-11.jpg",title:"",description:""},
+  {type:"image",src:"media/PJ/Project Jump!-12.jpg",title:"",description:""},
+  {type:"image",src:"media/PJ/Project Jump!-13.jpg",title:"",description:""},
+  {type:"image",src:"media/PJ/Project Jump!-14.jpg",title:"",description:""},
+  {type:"image",src:"media/PJ/Project Jump!-15.jpg",title:"",description:""},
+  {type:"image",src:"media/PJ/Project Jump!-16.jpg",title:"",description:""},
+  {type:"image",src:"media/PJ/Project Jump!-17.jpg",title:"",description:""},
+  {type:"image",src:"media/PJ/Project Jump!-18.jpg",title:"",description:""},
+  {type:"image",src:"media/PJ/Project Jump!-19.jpg",title:"",description:""},
+  {type:"image",src:"media/PJ/Project Jump!-20.jpg",title:"",description:""},
+  {type:"image",src:"media/PJ/Project Jump!-21.jpg",title:"",description:""},
+  {type:"image",src:"media/PJ/Project Jump!-22.jpg",title:"",description:""},
+  {type:"image",src:"media/PJ/Project Jump!-23.jpg",title:"",description:""},
+  {type:"image",src:"media/PJ/Project Jump!-24.jpg",title:"",description:""},
+  {type:"image",src:"media/PJ/Project Jump!-25.jpg",title:"",description:""},
+  {type:"image",src:"media/PJ/Project Jump!-26.jpg",title:"",description:""},
+  
+
+  ]},
+////////////////////////////////////////////////////////////
+  {title:"Onsen Monkeys", 
+  
+  yearSemester:"Spring 2025", categories:["Environments"], description:"Memories of the tribe relaxing at the Onsen persist, warming the soul. If only times were always this good.\n\n Made in Unreal Engine 5.", thumbnail:"media/OM/OM_Thumb.jpg",
+  media:[
+  {section:"Cinematic"},  
+  {type:"video",src:"https://www.youtube.com/embed/cxfMl2EXvro",title:"",description:"",hero:true},
+  {section:"Macaque Model"},
+  {type:"video",src:"https://sketchfab.com/models/ab43f905bcc545808ff8b797ff92eda8/embed",title:"PS1 Japanese Macaque (Snow Monkey)",description:"3D model of the macaque used in the scene. It really reminds me of a sock monkey. Free to download!",hero:true},
+  {section:"Process"},
+  {type:"image",src:"media/OM/Game Engine I-21.webp",title:"",description:""},
+  {type:"image",src:"media/OM/Game Engine I-22.webp",title:"",description:""},
+  {type:"image",src:"media/OM/Game Engine I-23.webp",title:"",description:""},
+  {type:"image",src:"media/OM/Game Engine I-24.webp",title:"",description:""},
+  {type:"image",src:"media/OM/Game Engine I-25.webp",title:"",description:""},
+  {type:"image",src:"media/OM/Game Engine I-26.webp",title:"",description:""},
+  {type:"image",src:"media/OM/Game Engine I-27.webp",title:"",description:""},
+  {type:"image",src:"media/OM/Game Engine I-28.webp",title:"",description:""},
+  {type:"image",src:"media/OM/Game Engine I-29.webp",title:"",description:""},
+  ]},
+////////////////////////////////////////////////////////////
+  {title:"Renaissance Revenant", 
+  
+  yearSemester:"Summer 2023", categories:["Characters"], description:"\"An accumulation of humanity's willpower conceived through an amalgamation of lost souls, brought together one last time in an attempt to create a new renaissance.\" \nMade with models from <a href='https://www.myminifactory.com/users/Scan%20The%20World' target='_blank'>Scan the World</a> as a kitbashing project.\nComposed in ZBrush, textured in Substance Painter.", thumbnail:"media/Summer 23/RR/mason-g-mason-g-rr.jpg", 
+  media:[
+  {type:"video",src:"https://sketchfab.com/models/3a597d5c254c401993f871803ec88769/embed",title:"Renaissance Revenant",description:"",hero:true},
+  {type:"image",src:"media/Summer 23/RR/mason-g-mason-g-rr.jpg",title:"",description:""},
+  {type:"image",src:"media/Summer 23/RR/mason-g-rr-highpoly.jpg",title:"",description:""},
+  {type:"image",src:"media/Summer 23/RR/mason-g-tbrender-viewport-002.jpg",title:"",description:""}
+  ]},
+////////////////////////////////////////////////////////////
+   {title:"Darker Days", 
+   
+   yearSemester:"Spring 2025", categories:["Environments"], description:"A mysterious effigy stands alone in a dark alleyway, with not a soul to be seen. \n\nMade in Unreal Engine 5.", thumbnail:"media/DD/DD_Thumb.jpg",
+  media:[
+  {section:"Cinematic"},    
+  {type:"video",src:"https://youtube.com/embed/t5M_X6TLh4A",title:"",description:"",hero:true},
+  {section:"Goddess Mask"},
+  {type:"video",src:"https://sketchfab.com/models/69fe6a8aad3a49d69b57429e110569fc/embed",title:"Goddess Mask",description:"Effigy of the Goddess, do you dare take it with you? (Free to download!)", hero:true},
+  {section:"Process"},
+  {type:"image",src:"media/DD/Game Engine I-2.webp",title:"",description:""},
+  {type:"image",src:"media/DD/Game Engine I-3.webp",title:"Reference Images",description:""},
+  {type:"image",src:"media/DD/Game Engine I-4.webp",title:"Reference Images",description:""},
+  {type:"image",src:"media/DD/Game Engine I-5.webp",title:"",description:""},
+  {type:"image",src:"media/DD/Game Engine I-8.webp",title:"",description:""},
+  {type:"image",src:"media/DD/Game Engine I-9.webp",title:"",description:""},
+  {type:"image",src:"media/DD/Game Engine I-10.webp",title:"",description:""},
+  {type:"image",src:"media/DD/Game Engine I-11.webp",title:"Skateboard & Goddess Mask",description:"The Skateboard model came from Procreate, with art designed by me. I made one similar in real life, as seen in another project in the portfolio. The goddess mask is also in its own project."},
+  {type:"image",src:"media/DD/Game Engine I-12.webp",title:"",description:""},
+  {type:"image",src:"media/DD/Game Engine I-13.webp",title:"",description:""},
+  {type:"image",src:"media/DD/Game Engine I-14.webp",title:"Decals",description:"These decals were taken from previous art pieces. The red one is a self portrait and the doodle is a small goddess."},
+  {type:"image",src:"media/DD/15.webp",title:"Shower Thoughts",description:"The original piece that the decal came from."},
+  {type:"image",src:"media/DD/Game Engine I-15.webp",title:"",description:""},
+  {type:"image",src:"media/DD/Game Engine I-16.webp",title:"",description:""},
+  {type:"image",src:"media/DD/Game Engine I-18.webp",title:"",description:""}
+  ]},
+////////////////////////////////////////////////////////////
+  {title:"Ancient Underground", 
+  
+  yearSemester:"Spring 2025", categories:["Environments"], description:"An ancient civilization lies beneath the megalithic desert caves, sustained by natural water flow and just enough sunlight to thrive. What treasures lie hidden within?", thumbnail:"media/AU/AU_Thumb.jpg",
+  media:[
+
+    {section:"Cinematic"},
+    {type:"video",src:"https://www.youtube.com/embed/2tgprrs8rPE",title:"Ancient Underground",description:"",hero:true},
+    {type:"image",src:"media/AU/AU_Shot.png",title:"Wideshot",description:"",hero:true},
+
+    {section:"Background NPC"},
+    {type:"video",src:"https://sketchfab.com/models/93142c12fe5b4ef999993e2dc426c2df/embed",title:"Animated Halloween Bat",description:"A bat 3D model I made a while ago, you can see a pack of them fly around in the background. Free to download!",hero:true},
+
+    {section:"Process"},
+    {type:"image",src:"media/AU/Game Studio Project-1.webp",title:"",description:""},
+    {type:"image",src:"media/AU/Game Studio Project-3.webp",title:"",description:""},
+    {type:"image",src:"media/AU/Game Studio Project-4.webp",title:"",description:"For this project, we had to start with a chosen composition, which I think I followed a bit too literally for the first iteration."},
+    {type:"image",src:"media/AU/Game Studio Project-5.webp",title:"",description:""},
+    {type:"image",src:"media/AU/Game Studio Project-6.webp",title:"",description:""},
+    {type:"image",src:"media/AU/Game Studio Project-7.webp",title:"",description:""},
+    {type:"image",src:"media/AU/Game Studio Project-8.webp",title:"",description:""},
+    {type:"image",src:"media/AU/Game Studio Project-9.webp",title:"",description:""},
+    {type:"image",src:"media/AU/Game Studio Project-10.webp",title:"",description:""},
+    {type:"image",src:"media/AU/Game Studio Project-11.webp",title:"",description:""},
+    {type:"image",src:"media/AU/Game Studio Project-12.webp",title:"",description:""},
+    {type:"image",src:"media/AU/Game Studio Project-14.webp",title:"",description:""},
+    {type:"image",src:"media/AU/Game Studio Project-15.webp",title:"",description:""},
+    {type:"image",src:"media/AU/Game Studio Project-16.webp",title:"",description:""},
+    {type:"image",src:"media/AU/Game Studio Project-17.webp",title:"",description:""},
+    {type:"image",src:"media/AU/Game Studio Project-18.webp",title:"",description:""}
+  ]},
+////////////////////////////////////////////////////////////
+  {title:"Fantasy Scene", 
+  
+  yearSemester:"Fall 2024", categories:["Environments"], description:"A fantasy environment scene created in Unreal Engine 5. Another one of my earliest projects. Based on this reference:  <a href='https://www.artstation.com/artwork/1xgvE8' target='_blank'>https://www.artstation.com/artwork/1xgvE8</a>", thumbnail:"media/UE5_Fantasy/UE5_Fantasy_Thumb.webp", 
+  media:[
+    {section:"Render"},
+    {type:"video",src:"https://www.youtube.com/embed/qZ7nfb1Txjg",title:"Fantasy Scene Render",description:"",hero:true},
+    
+    {section:"Process"},
+    {type:"image",src:"media/UE5_Fantasy/reference_1.jpg",title:"",description:"The main reference, used primarily for the background. Main source can be found here: <a href='https://www.artstation.com/artwork/1xgvE8' target='_blank'>https://www.artstation.com/artwork/1xgvE8</a>"},
+    {type:"image",src:"media/UE5_Fantasy/reference_2.jpg",title:"",description:"When I began the project, I started with this verison of the tower instead of the other one. By the time the project was ending it was too late to upgrade the tower."},
+    {type:"image",src:"media/UE5_Fantasy/Substance_Setup.webp",title:"",description:""},
+    {type:"image",src:"media/UE5_Fantasy/block_1.webp",title:"Importing to Unreal",description:""},
+    {type:"image",src:"media/UE5_Fantasy/block_2.webp",title:"Blockout 1",description:""},
+    {type:"image",src:"media/UE5_Fantasy/block_3.webp",title:"Blockout 2",description:""},
+    {type:"image",src:"media/UE5_Fantasy/block_4.webp",title:"Final Scene Layout",description:""},
+    {type:"image",src:"media/UE5_Fantasy/progress_1.webp",title:"",description:""},
+    {type:"image",src:"media/UE5_Fantasy/progress_2.webp",title:"",description:""},
+    {type:"image",src:"media/UE5_Fantasy/progress_3.webp",title:"",description:""},
+    {type:"image",src:"media/UE5_Fantasy/progress_4.webp",title:"",description:""},
+    {type:"image",src:"media/UE5_Fantasy/progress_5.webp",title:"",description:""},
+    {type:"image",src:"media/UE5_Fantasy/progress_6.webp",title:"",description:""},
+    {type:"image",src:"media/UE5_Fantasy/viewport_0.webp",title:"",description:""},
+    {type:"image",src:"media/UE5_Fantasy/Viewport_1.webp",title:"",description:""},
+    {type:"image",src:"media/UE5_Fantasy/Viewport_2.webp",title:"",description:""},
+    {type:"image",src:"media/UE5_Fantasy/viewport_3.webp",title:"",description:""}
+  ]},
+
+////////////////////////////////////////////////////////////
+
+
+];
+
+
+
+const gallery = document.getElementById("gallery");
+const modal=document.getElementById("modal");
+const modalContent=document.getElementById("modalContent");
+const zoomOverlay=document.getElementById("zoomOverlay");
+const zoomContainer=zoomOverlay.querySelector(".zoom-container");
+const zoomTitle=zoomOverlay.querySelector(".zoom-title");
+const zoomDescription=zoomOverlay.querySelector(".zoom-description");
+
+// Render all projects
+function createCardForProject(p, index){
+  const card=document.createElement("div");
+  card.className="card "+(p.categories && p.categories[0] ? typeClass(p.categories[0]) : "");
+  const img=new Image(); img.src=p.thumbnail; img.alt=p.title; img.loading="lazy";
+  const content=document.createElement("div"); content.className="card-content";
+  let displayCategories = [...(p.categories||[])];
+  if(displayCategories.join(", ").length>25){ displayCategories = displayCategories.map(c=>c.length>10?c.slice(0,10)+"…":c); }
+  content.innerHTML=`<h3>${p.title}</h3><p>${displayCategories.join(", ")}</p>`;
+  card.appendChild(img); card.appendChild(content);
+
+  img.addEventListener("load",()=>{ requestAnimationFrame(()=>{ setTimeout(()=>card.classList.add("show"),index*80); }); });
+  img.addEventListener("error",()=>card.classList.add("show"));
+  card.addEventListener("click",()=>openModal(p));
+  return card;
+}
+
+function renderProjects(){
+  // Clear gallery
+  gallery.innerHTML = "";
+
+  const filteredProjects = projects.filter(p=>{
+    // Apply category filter
+    if(activeCategory !== "all" && (!p.categories || !p.categories.some(cat => typeClass(cat) === typeClass(activeCategory)))){
+      return false;
+    }
+    return true;
+  });
+
+  filteredProjects.forEach((p,i)=> gallery.appendChild(createCardForProject(p,i)));
+}
+
+// Card type class
+function typeClass(type){
+  switch(type.toLowerCase()){
+    case "environments": return "environments";
+    case "environment": return "environments";
+    case "characters": return "characters";
+    case "character": return "characters";
+    case "props": return "props";
+    case "prop": return "props";
+    case "projects": return "projects";
+    case "project": return "projects";
+    case "products": 
+    case "physical": 
+    case "physical creation": return "products";
+    case "doodles": return "doodles";
+    default: return "";
+  }
+}
+
+// Zoom & Modal
+let currentProject=null, currentMediaIndex=0, filteredMediaList=[];
+
+// Build filtered media list (excludes section dividers)
+function getFilteredMediaList(project) {
+  return project.media.filter(m => !m.section);
+}
+
+// Map from filtered index to original project.media index
+function getOriginalMediaIndex(filteredIndex) {
+  const originalMedia = currentProject.media;
+  let count = 0;
+  for (let i = 0; i < originalMedia.length; i++) {
+    if (!originalMedia[i].section) {
+      if (count === filteredIndex) return i;
+      count++;
+    }
+  }
+  return 0;
+}
+
+function openModal(project){
+  modal.classList.add("show");
+  document.body.style.overflow = "hidden";
+  
+  // Scroll modal content to top
+  requestAnimationFrame(() => {
+    modal.scrollTop = 0;
+    modalContent.scrollTop = 0;
+  });
+  
+  modalContent.innerHTML=`
+    <h2>${project.title}</h2>
+    <p><em>${project.categories.join(", ")}</em></p>
+    <p>${project.description.replace(/\n/g, '<br>')}</p>
+    <div class="media-grid ${project.media.length===1?'single':''}">
+      ${project.media.map((m,idx)=>{
+        // Skip rendering media-item for section dividers
+        if(m.section) {
+          return `<div class="media-section-divider"><span class="media-section-divider-label">${m.section}</span></div>`;
+        }
+        // Only render actual media items
+        let mediaContent;
+        if(m.type==='image') {
+          mediaContent = `<img loading="lazy" src="${m.src}" alt="${m.title}"/>`;
+        } else if(m.type==='video') {
+          // Check if it's a local video file or an embed
+          if(m.src.endsWith('.mp4') || m.src.endsWith('.webm')) {
+            mediaContent = `<video src="${m.src}" muted loop controls></video>`;
+          } else {
+            mediaContent = `<iframe src="${m.src}" frameborder="0" allowfullscreen title="${m.title}"></iframe>`;
+          }
+        }
+        return `<div class="media-item${m.hero?' hero':''}" data-index="${idx}">${mediaContent}</div>`;
+      }).join("")}
+    </div>
+  `;
+  modalContent.querySelectorAll(".media-item").forEach(el=>{
+    const idx=el.dataset.index; el.addEventListener("click",()=>openZoom(Number(idx),project));
+  });
+}
+
+function openZoom(originalIndex,project){
+  currentProject=project;
+  filteredMediaList = getFilteredMediaList(project);
+  
+  // Find the filtered index from the original index
+  let filteredIndex = 0;
+  for (let i = 0; i < originalIndex; i++) {
+    if (!project.media[i].section) filteredIndex++;
+  }
+  currentMediaIndex = filteredIndex;
+  
+  updateZoomMedia(); zoomOverlay.classList.add("show");
+  document.body.style.overflow = "hidden";
+  zoomOverlay.addEventListener("click",closeZoom);
+}
+
+function updateZoomMedia(){
+  const media = filteredMediaList[currentMediaIndex];
+  if (!media) return;
+  
+  // Unload previous media before clearing
+  zoomContainer.querySelectorAll('video').forEach(video => {
+    video.pause();
+    video.src = "";
+    video.load();
+  });
+  
+  zoomContainer.querySelectorAll('iframe').forEach(iframe => {
+    iframe.src = "about:blank";
+  });
+  
+  zoomContainer.querySelectorAll('img').forEach(img => {
+    img.src = "";
+  });
+  
+  zoomContainer.innerHTML = "";
+
+  // Create media element
+  let el;
+  if (media.type === "image") {
+    el = document.createElement("img");
+    el.src = media.src;
+    el.alt = media.title;
+    el.loading = "lazy";
+  } else if (media.type === "video") {
+    // Check if it's a local video file or an embed
+    if(media.src.endsWith('.mp4') || media.src.endsWith('.webm')) {
+      el = document.createElement("video");
+      el.src = media.src;
+      el.controls = true;
+      el.muted = false;
+      el.loop = true;
+      el.autoplay = true;
+    } else {
+      el = document.createElement("iframe");
+      el.src = media.src;
+      el.title = media.title;
+      el.frameBorder = "0";
+      el.allowFullscreen = true;
+    }
+  }
+
+  // Add media and fade it in
+  zoomContainer.appendChild(el);
+  requestAnimationFrame(() => el.classList.add("show"));
+
+  // Update text
+  zoomTitle.textContent = media.title;
+  zoomDescription.innerHTML = (media.description || '').replace(/\n/g, '<br>');
+
+  // Add arrows *after* media so they layer above it
+  // Remove any previous arrows and add new arrows attached to the overlay so
+  // they reliably appear above media regardless of the container stacking
+  zoomOverlay.querySelectorAll('.zoom-arrow').forEach(n => n.remove());
+  if (filteredMediaList.length > 1) {
+    const left = document.createElement("div");
+    left.className = "zoom-arrow left";
+    left.setAttribute('role','button'); left.setAttribute('aria-label','Previous');
+    left.innerHTML = "&#10094;";
+    left.addEventListener("click", e => {
+      e.stopPropagation();
+      fadeTransition(-1);
+    });
+
+    const right = document.createElement("div");
+    right.className = "zoom-arrow right";
+    right.setAttribute('role','button'); right.setAttribute('aria-label','Next');
+    right.innerHTML = "&#10095;";
+    right.addEventListener("click", e => {
+      e.stopPropagation();
+      fadeTransition(1);
+    });
+
+    zoomOverlay.appendChild(left);
+    zoomOverlay.appendChild(right);
+  }
+}
+
+
+// Add smooth fade transition helper
+function fadeTransition(direction) {
+  const current = zoomContainer.querySelector("img, video, iframe");
+  if(!current) return;
+
+  // Fade out both image and text
+  current.classList.remove("show");
+  const zoomInfo = zoomOverlay.querySelector(".zoom-info");
+  zoomInfo.classList.add("hide");
+  
+  setTimeout(() => {
+    currentMediaIndex = (currentMediaIndex + direction + filteredMediaList.length) % filteredMediaList.length;
+    updateZoomMedia();
+    // Fade text back in
+    setTimeout(() => zoomInfo.classList.remove("hide"), 10);
+  }, 300);
+}
+
+
+
+
+
+function closeZoom(){
+  // Stop all videos before clearing
+  zoomContainer.querySelectorAll('video').forEach(video => {
+    video.pause();
+    video.src = "";
+    video.load();
+  });
+  
+  // Clear iframes
+  zoomContainer.querySelectorAll('iframe').forEach(iframe => {
+    iframe.src = "about:blank";
+  });
+  
+  // Clear images
+  zoomContainer.querySelectorAll('img').forEach(img => {
+    img.src = "";
+  });
+  
+  zoomOverlay.classList.remove("show");
+  document.body.style.overflow = "";
+  zoomContainer.innerHTML = "";
+  // remove any arrow controls so they don't persist after closing
+  zoomOverlay.querySelectorAll('.zoom-arrow').forEach(n => n.remove());
+  zoomTitle.textContent = "";
+  zoomDescription.textContent = "";
+  // Reset zoom state
+  currentMediaIndex = 0;
+  currentProject = null;
+  filteredMediaList = [];
+}
+
+function closeModal(){
+  // Stop all videos in modal
+  modalContent.querySelectorAll('video').forEach(video => {
+    video.pause();
+    video.src = "";
+    video.load();
+  });
+  
+  // Clear iframes
+  modalContent.querySelectorAll('iframe').forEach(iframe => {
+    iframe.src = "about:blank";
+  });
+  
+  // Clear images
+  modalContent.querySelectorAll('img').forEach(img => {
+    img.src = "";
+  });
+  
+  modal.classList.remove("show");
+  document.body.style.overflow = "";
+  
+  // Clear modal content after fade out
+  setTimeout(() => {
+    modalContent.innerHTML = "";
+  }, 300);
+}
+
+modal.addEventListener("click", e=>{ if(e.target===modal) { closeModal(); } });
+
+// Keyboard navigation
+document.addEventListener("keydown", e=>{
+  if(zoomOverlay.classList.contains("show")) {
+    if(e.key==="ArrowLeft"){ fadeTransition(-1); }
+    else if(e.key==="ArrowRight"){ fadeTransition(1); }
+    else if(e.key==="Tab"){ 
+      e.preventDefault();
+      fadeTransition(e.shiftKey ? -1 : 1);
+    }
+    else if(e.key==="Escape"){ closeZoom(); }
+  } else if(modal.classList.contains("show") && e.key==="Escape") {
+    closeModal();
+  }
+});
+
+// Touch/Swipe navigation for mobile
+let touchStartX = 0;
+let touchStartY = 0;
+let touchEndX = 0;
+let touchEndY = 0;
+let isSwiping = false;
+
+zoomOverlay.addEventListener('touchstart', e => {
+  if (!zoomOverlay.classList.contains("show")) return;
+  touchStartX = e.changedTouches[0].screenX;
+  touchStartY = e.changedTouches[0].screenY;
+  isSwiping = true;
+}, { passive: true });
+
+zoomOverlay.addEventListener('touchmove', e => {
+  if (!isSwiping) return;
+  touchEndX = e.changedTouches[0].screenX;
+  touchEndY = e.changedTouches[0].screenY;
+}, { passive: true });
+
+zoomOverlay.addEventListener('touchend', e => {
+  if (!isSwiping || !zoomOverlay.classList.contains("show")) return;
+  isSwiping = false;
+  
+  const deltaX = touchEndX - touchStartX;
+  const deltaY = touchEndY - touchStartY;
+  const minSwipeDistance = 50; // Minimum distance for a swipe
+  
+  // Only register as swipe if horizontal movement is greater than vertical
+  if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > minSwipeDistance) {
+    if (deltaX > 0) {
+      // Swipe right - go to previous
+      fadeTransition(-1);
+    } else {
+      // Swipe left - go to next
+      fadeTransition(1);
+    }
+    e.preventDefault();
+    e.stopPropagation();
+  }
+}, { passive: false });
+
+// Init
+let activeCategory = "all";
+
+// Tab filtering
+document.querySelectorAll(".tab-button").forEach(btn => {
+  btn.addEventListener("click", () => {
+    // Update active tab
+    document.querySelectorAll(".tab-button").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    
+    // Update active category
+    activeCategory = btn.dataset.category;
+    
+    // Re-render projects with filter
+    renderProjects();
+  });
+});
+
+renderProjects();
+
+</script>
 </body>
 </html>
